@@ -1,0 +1,18 @@
+.env
+.DS_Store
+
+.tags
+.tags*
+.idea
+
+*.pyc
+*.bak
+
+# EAGLE
+*.lck
+*.l#?
+*.s#?
+*.b#?
+
+
+*.epf
