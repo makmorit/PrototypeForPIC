@@ -16,3 +16,9 @@
 
 
 *.epf
+
+*/*.X/Makefile
+*/*.X/nbproject
+*/*.X/build
+*/*.X/dist
+*/*.X/debug
