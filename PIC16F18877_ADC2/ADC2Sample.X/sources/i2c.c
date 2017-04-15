@@ -8,8 +8,10 @@ static int collision_check;
 
 static void i2c_idle_check()
 {
+    RA1 = 1;
     // ACKEN, RCEN, PEN, RSEN, SEN, R/W, BFが全て0ならOK
     while ((SSP1CON2 & 0x1F) | (SSP1STAT & 0x5));
+    RA1 = 0;
 }
 
 void i2c_intr(void)
@@ -29,11 +31,6 @@ void i2c_intr(void)
 
 void i2c_init()
 {
-    // 参考：SDA/SCLラインについて
-    //   20MHz以上で使用するときは
-    //   プルアップ抵抗必須
-    //   5V駆動の場合、2.2k を使用
-
     // SMP: 1 = Standard Speed mode(100kHz)
     SSP1STAT= 0b10000000;
 
@@ -44,12 +41,10 @@ void i2c_init()
     // clock = FOSC / (4 * (SSPxADD+1))
     //   32MHz/(4*(79+1))=100KHz
     SSP1ADD = 79;
-    //SSP1ADD = 19;
-    //SSP1STATbits.SMP = 0;
     
     // Use SSPxCLKPPS, SSPxDATPPS, and RxyPPS to select the pins.
-    //SSP1CLKPPS = 0x13; // RC3
-    //SSP1DATPPS = 0x14; // RC4
+    SSP1CLKPPS = 0x13; // RC3
+    SSP1DATPPS = 0x14; // RC4
     
     // SSP(I2C)割り込みを許可
     SSP1IE = 1;

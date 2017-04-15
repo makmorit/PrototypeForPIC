@@ -66,62 +66,6 @@ void i2c_lcd_put_string(const char * s)
     i2c_stop_condition();
 }
 
-void i2c_lcd_icon_disp_area_clear(void)
-{
-    int x;
-
-    // 拡張コマンド開始
-    command(0x39);
-
-    x = i2c_start_condition(ST7032_I2C_ADDR, RW_0);
-    if (x == 0) {
-        // アイコンアドレスを指示
-        i2c_send_byte(0b10000000);
-        i2c_send_byte(0x40);
-        __delay_us(26);
-
-        // アイコンのデータビットを指定
-        i2c_send_byte(0b01000000);
-        for (x=0x40; x<0x50; x++) {
-            i2c_send_byte(0x00);
-            __delay_us(26);
-        }
-    }
-    i2c_stop_condition();
-
-    // 拡張コマンド終了
-    command(function_set_data);
-}
-
-void i2c_lcd_display_icon(int flag, unsigned int dt)
-{
-    int ans;
-
-    // 拡張コマンド開始
-    command(0x39);
-
-    ans = i2c_start_condition(ST7032_I2C_ADDR,RW_0);
-    if (ans == 0) {
-        // アイコンアドレスを指示
-        i2c_send_byte(0b10000000);
-        i2c_send_byte(dt >> 8);
-        __delay_us(26);
-
-        // アイコンのデータビットを指定
-        i2c_send_byte(0b11000000);
-        if (flag == 1) {
-            i2c_send_byte(dt & 0x00FF);
-        } else {
-            i2c_send_byte(0x00);
-        }
-    }
-    i2c_stop_condition();
-    __delay_us(26);
-
-    // 拡張コマンド終了
-    command(function_set_data);
-}
-
 void i2c_lcd_init()
 {
     unsigned int d;

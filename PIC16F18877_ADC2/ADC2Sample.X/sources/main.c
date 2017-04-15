@@ -48,10 +48,6 @@ static void initialize()
     // 全割込み処理を許可する
     PEIE = 1;
     GIE  = 1;
-
-    // TIMER2 on prescale=1
-    // TIMER2スタート（onビットを１）
-    T2CON = 0b100;
 }
 
 //

@@ -27,7 +27,7 @@ void port_init()
     //          76543210
     ANSELC  = 0b00000000;
     TRISC   = 0b00011000; // RC3(SCL1),RC4(SDA1)=入力に設定
-    WPUC    = 0b00011000;
+    WPUC    = 0b00000000;
     PORTC   = 0b00000000;
 
     // Port D
