@@ -44,6 +44,29 @@ void port_init()
 }
 
 //
+// TIMER0の設定
+//
+void timer0_init()
+{
+    // Enables Timer0
+    T0EN = 1;
+    // Timer0 is configured as an 8-bit timer/counter
+    T016BIT = 0;
+
+    // T0CS<2:0>: 010 = FOSC/4
+    // T0ASYNC: 0 = The input to the TMR0 counter is synchronized to FOSC/4
+    // T0CKPS<3:0>: 0101 = 1:32 (Prescaler Rate Select bit)
+    //   1 count = 4us(=1/32MHz*4*32)
+    T0CON1 = 0b01000101;
+
+    // 256カウント（1.024 ms）で割込み発生
+    TMR0 = 0;
+
+    // TMR0割り込み許可
+    TMR0IE = 1;
+}
+
+//
 // ADC2の設定
 //
 void adc2_init()
@@ -67,31 +90,4 @@ void adc2_init()
     // Acquisition time is not included in the data conversion cycle
     ADPRE = 0;
     ADACQ = 0;
-}
-
-//
-// A/D変換ポートから値（０～２５５の値）を取得
-//
-unsigned char adc2_conv() 
-{
-    unsigned char temp;
-
-    // ANポート選択
-    // ADPCH=000000 (ANA0)
-    ADPCH = 0;
-
-    // アクィジション時間
-    // （PIC内蔵のADC用コンデンサー充電完了待ち）
-    // 入力抵抗が 10kΩ 時、約 20us
-    __delay_us(20);
-
-    // 変換スタート
-    GO_nDONE = 1;
-
-    // AD変換中（GO_DONE 1->0）
-    while (GO_nDONE);
-
-    // 変換値を戻す.
-    temp = ADRESH;
-    return temp;
 }

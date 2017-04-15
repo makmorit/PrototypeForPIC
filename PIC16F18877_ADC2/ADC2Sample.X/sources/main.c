@@ -4,6 +4,7 @@
 
 // CONFIG1
 #pragma config FCMEN = OFF
+#pragma config RSTOSC = HFINTPLL
 // CONFIG2
 #pragma config STVREN = ON
 #pragma config BORV = 1
@@ -34,18 +35,8 @@ static void initialize()
     // ピンなどの初期設定を行う
     port_init();
 
-    //
     // タイマー０の設定を行う
-    //   Enables Timer0
-    T0EN = 1;
-    //   Timer0 is configured as an 8-bit timer/counter
-    T016BIT = 0;
-    //   T0CS<2:0>: 010 = FOSC/4
-    //   T0ASYNC: 0 = The input to the TMR0 counter is synchronized to FOSC/4
-    //   T0CKPS<3:0>: 0110 = 1:64
-    //     プリスケーラー=64の場合、
-    //     １カウント=12.8μ秒(=1/20MHz*4*64)
-    T0CON1 = 0b01000110;
+    timer0_init();
     
     // 内部プルアップはすべて無効
     WPUA = 0;
@@ -53,11 +44,6 @@ static void initialize()
     WPUC = 0;
     WPUD = 0;
     WPUE = 0;
-
-    // 256カウント（3.2768 ms）で割込み発生させる
-    TMR0 = 0;
-    // TMR0割り込み許可
-    TMR0IE = 1;
 
     // ADC2設定
     adc2_init();
@@ -76,13 +62,13 @@ static void initialize()
 //
 static void interrupt intr(void)
 {
-    // タイマー０割込み（1ミリ秒ごと）の場合
+    // タイマー０割込みの場合
     if (TMR0IF == 1) {
         // 割込みカウンター
         total_tmr0_cnt_100m++;
         total_tmr0_cnt_1s++;
         tmr0_toggle = 1;
-        // 256カウント（3.2768 ms）で割込み発生させる
+        // 256カウント（1.024ms）で割込み発生させる
         TMR0 = 0;
         // TMR0割り込みクリア
         TMR0IF = 0;
@@ -95,15 +81,15 @@ static void interrupt intr(void)
 static void do_events()
 {
     //
-    // 割込みごとに処理（3.2768 ms）
+    // 割込みごとに処理（1.024ms）
     if (tmr0_toggle == 1) {
         tmr0_toggle = 0;
     }
 
     //
-    // 約 1.0 秒ごとに処理（3.2768ms × 305回）
+    // 約1秒ごとに処理（1.024ms × 977回）
     //
-    if (total_tmr0_cnt_1s > 305) {
+    if (total_tmr0_cnt_1s > 977) {
         // カウンターを初期化
         total_tmr0_cnt_1s = 0;
         // イベントごとの処理を行う

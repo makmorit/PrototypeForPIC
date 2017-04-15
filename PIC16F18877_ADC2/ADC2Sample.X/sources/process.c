@@ -2,7 +2,7 @@
 #include "device.h"
 #include "process.h"
 
-// 約 1.0 秒ごとに処理（3.2768ms × 305回）
+// 約 1.0 秒ごとに処理
 void process_on_one_second()
 {
     // for test: ヘルスチェックLED

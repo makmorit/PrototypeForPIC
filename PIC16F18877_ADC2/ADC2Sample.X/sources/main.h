@@ -1,5 +1,5 @@
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __COMMON_H
+#define __COMMON_H
 
 #include <xc.h>
 #include <stdio.h>
@@ -11,7 +11,9 @@
 //
 #include <htc.h>
 
-#define MHz 000000
-#define _XTAL_FREQ 20MHz
+#ifndef _XTAL_FREQ
+    #define MHz 000000
+    #define _XTAL_FREQ 32MHz
+#endif
 
-#endif // __MAIN_H
+#endif // __COMMON_H
