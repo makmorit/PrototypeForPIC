@@ -1,4 +1,4 @@
-#include "main.h"
+#include "common.h"
 #include "device.h"
 
 //
@@ -12,6 +12,7 @@ void port_init()
     ANSELA  = 0b00000001;
     TRISA   = 0b00000001;
     PORTA   = 0b00000000;
+    WPUA    = 0b00000000;
 
     // Port B
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
@@ -19,12 +20,14 @@ void port_init()
     ANSELB  = 0b00000000;
     TRISB   = 0b00000000;
     PORTB   = 0b00000000;
+    WPUB    = 0b00000000;
 
     // Port C
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
     //          76543210
     ANSELC  = 0b00000000;
-    TRISC   = 0b00000000;
+    TRISC   = 0b00011000; // RC3(SCL1),RC4(SDA1)=入力に設定
+    WPUC    = 0b00011000;
     PORTC   = 0b00000000;
 
     // Port D
@@ -33,6 +36,7 @@ void port_init()
     ANSELD  = 0b00000000;
     TRISD   = 0b00000000;
     PORTD   = 0b00000000;
+    WPUD    = 0b00000000;
 
     // Port E
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
@@ -41,6 +45,7 @@ void port_init()
     ANSELE  = 0b00000000;
     TRISE   = 0b00001000;
     PORTE   = 0b00000000;
+    WPUE    = 0b00000000;
 }
 
 //

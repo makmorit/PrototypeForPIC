@@ -1,15 +1,17 @@
-#include "main.h"
+#include "common.h"
 #include "device.h"
 #include "process.h"
+#include "i2c.h"
 
 // CONFIG1
 #pragma config FCMEN = OFF
-#pragma config RSTOSC = HFINTPLL
+#pragma config CLKOUTEN = OFF
+#pragma config RSTOSC = HFINT32
 // CONFIG2
 #pragma config STVREN = ON
 #pragma config BORV = 1
 #pragma config BOREN = ON
-#pragma config PWRTE = OFF
+#pragma config PWRTE = ON
 #pragma config MCLRE = OFF
 // CONFIG3
 #pragma config WDTE = OFF
@@ -23,7 +25,6 @@
 //
 // タイマーで使用する変数
 //
-static unsigned long total_tmr0_cnt_100m;
 static unsigned long total_tmr0_cnt_1s;
 static unsigned char tmr0_toggle;
 
@@ -37,16 +38,12 @@ static void initialize()
 
     // タイマー０の設定を行う
     timer0_init();
-    
-    // 内部プルアップはすべて無効
-    WPUA = 0;
-    WPUB = 0;
-    WPUC = 0;
-    WPUD = 0;
-    WPUE = 0;
 
     // ADC2設定
     adc2_init();
+
+    // I2C設定
+    i2c_init();
 
     // 全割込み処理を許可する
     PEIE = 1;
@@ -65,7 +62,6 @@ static void interrupt intr(void)
     // タイマー０割込みの場合
     if (TMR0IF == 1) {
         // 割込みカウンター
-        total_tmr0_cnt_100m++;
         total_tmr0_cnt_1s++;
         tmr0_toggle = 1;
         // 256カウント（1.024ms）で割込み発生させる
@@ -73,6 +69,8 @@ static void interrupt intr(void)
         // TMR0割り込みクリア
         TMR0IF = 0;
     }
+    // I2C割込処理
+    i2c_intr();
 }
 
 //
@@ -107,10 +105,9 @@ void main()
 
     // do_events 処理回数カウンター
     //   処理時点での割込みカウンター
-    total_tmr0_cnt_100m = 0;
     total_tmr0_cnt_1s = 0;
 
-    // 手動モードで初期化
+    // 各種初期化処理
     process_init();
 
     while (1) {
