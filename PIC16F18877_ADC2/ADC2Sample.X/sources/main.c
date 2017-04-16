@@ -5,6 +5,7 @@
 
 // CONFIG1
 #pragma config FCMEN = OFF
+#pragma config CSWEN = OFF
 #pragma config CLKOUTEN = OFF
 #pragma config RSTOSC = HFINT32
 // CONFIG2
@@ -29,20 +30,20 @@ static unsigned long total_tmr0_cnt_1s;
 static unsigned char tmr0_toggle;
 
 //
-// 初期化処理
+// 各種設定／初期化処理
 //
-static void initialize()
+static void setup()
 {
-    // ピンなどの初期設定を行う
-    port_init();
+    // 各種設定処理
+    //   ピン設定、タイマー０、I2C、ADC2
+    //   
+    setup_port();
+    setup_timer0();
+    setup_i2c();
+    setup_adc2();
 
-    // タイマー０の設定を行う
-    timer0_init();
-
-    // ADC2設定
-    adc2_init();
-
-    // I2C設定
+    // 初期化処理
+    //   I2C
     i2c_init();
 
     // 全割込み処理を許可する
@@ -78,6 +79,8 @@ static void do_events()
     // 割込みごとに処理（1.024ms）
     if (tmr0_toggle == 1) {
         tmr0_toggle = 0;
+        // ボタン連続押下抑止
+		switch_prevent();
     }
 
     //
@@ -89,6 +92,9 @@ static void do_events()
         // イベントごとの処理を行う
         process_on_one_second();
     }
+
+	// ボタン検知処理
+	switch_detection();
 }
 
 //
@@ -96,8 +102,8 @@ static void do_events()
 //
 void main() 
 {
-    // ピンや機能等の初期化処理
-    initialize();
+    // ピンや機能等の設定処理
+    setup();
 
     // do_events 処理回数カウンター
     //   処理時点での割込みカウンター

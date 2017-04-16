@@ -1,10 +1,11 @@
 #include "common.h"
 #include "device.h"
+#include "i2c.h"
 
 //
 // ピンなどの設定を行う
 //
-void port_init()
+void setup_port()
 {
     // Port A
     //   アナログ入力はANA0を使用
@@ -40,18 +41,45 @@ void port_init()
 
     // Port E
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
-    //   RE3(SW)は入力(10k pull up)
     //          76543210
     ANSELE  = 0b00000000;
-    TRISE   = 0b00001000;
+    TRISE   = 0b00001000; // RE3(SW)は入力(10k pull up)
     PORTE   = 0b00000000;
     WPUE    = 0b00000000;
 }
 
 //
+// I2Cの設定
+//
+void setup_i2c()
+{
+    // Peripheral Pin Select (PPS) module settings
+    // Use SSPxCLKPPS, SSPxDATPPS, and RxyPPS to select the pins.
+    //   RC3 = MSSP1:SCL1(0x14)
+    //   MSSP1:SCL1 = RC3(0x13)
+    RC3PPS = 0x14;
+    SSP1CLKPPS = 0x13;
+    //   RC4 = MSSP1:SCL1(0x15)
+    //   MSSP1:SDA1 = RC4(0x14)
+    RC4PPS = 0x15;
+    SSP1DATPPS = 0x14;
+
+    // SMP: 1 = Standard Speed mode(100kHz)
+    SSP1STAT= 0b10000000;
+
+    // SSPEN: 1 = Enables the serial port and configures the SDA and SCL pins as the source of the serial port pins
+    // SSPM<3:0>: 1000 = I2C Master mode, clock = FOSC / (4 * (SSPxADD+1))
+    SSP1CON1= 0b00101000;
+
+    // clock = FOSC / (4 * (SSPxADD+1))
+    //   32MHz/(4*(79+1))=100KHz
+    SSP1ADD = 79;
+}
+
+//
 // TIMER0の設定
 //
-void timer0_init()
+void setup_timer0()
 {
     // Enables Timer0
     T0EN = 1;
@@ -74,7 +102,7 @@ void timer0_init()
 //
 // ADC2の設定
 //
-void adc2_init()
+void setup_adc2()
 {
     // ADON: 1 = ADC is enabled
     // ADCS: 0 = Clock supplied by FOSC, divided according to ADCLK register
