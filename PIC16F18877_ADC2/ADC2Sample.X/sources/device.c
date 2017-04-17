@@ -8,10 +8,10 @@
 void setup_port()
 {
     // Port A
-    //   アナログ入力はANA0を使用
+    //   アナログを一部使用
     //          76543210
-    ANSELA  = 0b00000001;
-    TRISA   = 0b00000001;
+    ANSELA  = 0b00000001; // アナログ入力はANA0を使用
+    TRISA   = 0b00000001; // RA0=入力に設定
     PORTA   = 0b00000000;
     WPUA    = 0b00000000;
 
@@ -105,19 +105,39 @@ void setup_timer0()
 void setup_adc2()
 {
     // ADON: 1 = ADC is enabled
-    // ADCS: 0 = Clock supplied by FOSC, divided according to ADCLK register
+    // ADCONT: 1 = ADGO is retriggered upon completion of each conversion trigger until ADTIF is set
     // ADFRM0: 0 = ADRES and ADPREV data are left-justified, zero-filled(左寄せ)
-    ADCON0 = 0b10000000;
+    ADCON0bits.ADON = 1;
+    ADCON0bits.ADCONT = 1;
+    ADCON0bits.ADFRM0 = 0;
 
-    // ADCS=FOSC/32
-    ADCLK = 0b001111;
-
+    // チャンネル信号源の設定
+    // ADPCH=000000 (ANA0)
+    ADPCHbits.ADPCH = 0;
+    
+    // 参照電圧源の設定
     // ADNREF=0 (VREF- is connected to AVSS)
     // ADPREF=00 (VREF+ is connected to VDD)
-    ADREF = 0;
+    ADREFbits.ADNREF = 0;
+    ADREFbits.ADPREF = 0b00;
+    
+    // 変換クロックの設定 500KHz(2us毎に変換)
+    // ADCS: 0 = Clock supplied by FOSC, divided according to ADCLK register
+    // ADCCS = FOSC/2*(ADCCS+1) = 32MHz/2*(31+1) = 0.5MHz
+    ADCON0bits.ADCS = 0;
+    ADCLKbits.ADCCS = 0b011111;
+    
+    // 自動変換トリガーの設定
+    // 0x03 = TMR1 (Timer1 overflow condition)
+    //ADACTbits.ADACT = 0x03;
+    // 0x02 = TMR0 (Timer0 overflow condition)
+    ADACTbits.ADACT = 0x02;
 
-    // ADPCH=000000 (ANA0)
-    ADPCH = 0;
+    // 計算モードの設定
+    // ADMD<2:0>: ADC Operating Mode Selection bits
+    // 000 = Basic (Legacy) mode
+    // 010 = Average mode
+    ADCON2bits.ADMD = 0;
 
     // Precharge time is not included in the data conversion cycle
     // Acquisition time is not included in the data conversion cycle

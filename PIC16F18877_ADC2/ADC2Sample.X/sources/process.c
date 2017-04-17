@@ -1,6 +1,7 @@
 #include "common.h"
 #include "device.h"
 #include "i2c_lcd.h"
+#include "adc2.h"
 #include "process.h"
 
 // ディスプレイに表示させるカウンター
@@ -56,17 +57,20 @@ void switch_detection()
 	}
 }
 
-
 // 約 1.0 秒ごとに処理
 void process_on_one_second()
 {
     char c[17];
+    unsigned char adc;
+    
+    // ADC2変換値を取得
+    adc = adc2_conv();
     
     // ヘルスチェックLEDを点滅
     HCHECK_LED = ~HCHECK_LED;
     
     // カウンター表示
-    sprintf(c, "     counter=%3d", cnt);
+    sprintf(c, " ADC=%3d cnt=%3d", adc, cnt);
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
 

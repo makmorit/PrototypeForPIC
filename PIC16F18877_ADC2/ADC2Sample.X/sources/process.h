@@ -12,5 +12,7 @@
 //
 void process_on_one_second();
 void process_init();
+void switch_detection();
+void switch_prevent();
 
 #endif // __PROCESS_H
