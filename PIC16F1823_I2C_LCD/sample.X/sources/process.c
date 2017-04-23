@@ -3,6 +3,7 @@
 #include "process.h"
 #include "timer0.h"
 #include "i2c_lcd.h"
+#include "STTS751.h"
 
 // １秒間当たりの割込み回数（2.048×488）
 #define INT_PER_SEC 488
@@ -12,6 +13,9 @@
 
 // カウントダウン秒数（180秒）
 #define COUNT_DOWN_SEC 180
+
+// 温度計の計測値
+static unsigned char stts751_value;
 
 //
 // 桁数表示用の変数
@@ -82,6 +86,9 @@ static void switch_detection()
 //
 void process_init()
 {
+    // STTS751 初期化
+    STTS751_init();
+
     // I2C LCD DEMO 開始
     i2c_lcd_init(); 
     i2c_lcd_set_cursor(0, 0);
@@ -111,12 +118,16 @@ static void process_on_interval()
 static void process_on_one_second()
 {
     char c[17];
+    char v;
     
     // ヘルスチェックLEDを点滅
-    HCHECK_LED = ~HCHECK_LED;
+    //HCHECK_LED = ~HCHECK_LED;
+    
+    // STTS751の計測値を取得
+    v = STTS751_get_value();
     
     // カウンター表示
-    sprintf(c, "     counter=%3ld", user_sec_count);
+    sprintf(c, "temp=%3u,cnt=%3ld", v, user_sec_count);
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
 }

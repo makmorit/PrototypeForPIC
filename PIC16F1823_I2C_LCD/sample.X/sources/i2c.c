@@ -41,7 +41,10 @@ int i2c_start_condition(int adrs, int rw)
 
     ack_check = 1;
     SSP1BUF = (char)((adrs<<1)+rw);
-    while (ack_check);
+
+    if (rw == RW_0) // for debug
+        while (ack_check);
+
     if (collision_check == 1) {
         return -1;
     }
@@ -79,4 +82,44 @@ int i2c_send_byte(char dt)
     }
 
     return SSP1CON2bits.ACKSTAT;
+}
+
+#if 0
+int i2c_repeated_start_condition(int adrs, int rw)
+{
+    collision_check = 0;
+
+    i2c_idle_check();
+    SSP1CON2bits.RSEN = 1;
+    i2c_idle_check();
+    if (collision_check == 1) {
+        return -1;
+    }
+
+    ack_check = 1;
+    SSP1BUF = (char)((adrs<<1)+rw);
+    while (ack_check);
+    if (collision_check == 1) {
+        return -1;
+    }
+
+    return SSP1CON2bits.ACKSTAT;
+}
+#endif
+
+int i2c_receive_byte(int ack)
+{
+    int dt;
+
+    collision_check = 0;
+    i2c_idle_check();
+    SSP1CON2bits.RCEN = 1;
+    while (RCEN == 1);
+
+    dt = SSP1BUF;
+
+    SSP1CON2bits.ACKDT = ack;
+    SSP1CON2bits.ACKEN = 1;
+
+    return dt;
 }
