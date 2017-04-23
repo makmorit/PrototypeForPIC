@@ -3,11 +3,11 @@
 #include "i2c_lcd.h"
 
 // コントラスト調整
-static int contrast = 48;
+static int contrast = 40;
 
 // LCD電源は5.0Vで使用
 //   3.3Vで使用の場合 1 を指定します
-static int bon = 0;
+static int bon = 1;
 
 // 文字数
 static int lcd_num_column = 16;
@@ -81,7 +81,7 @@ void i2c_lcd_init()
     command(0x14);
 
     // コントラスト調整(下位4ビット)
-    d = 0x70 | (contrast & 0x0F);                
+    d = 0x70 | (contrast & 0x0F);
     command(d);
     // コントラスト調整(上位2ビット)
     d = 0x50 | ((contrast & 0x30) >> 4);

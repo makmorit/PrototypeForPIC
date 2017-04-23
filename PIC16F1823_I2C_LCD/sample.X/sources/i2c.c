@@ -27,30 +27,6 @@ void i2c_intr(void)
     }
 }
 
-void i2c_init()
-{
-    // SMP: 1 = Standard Speed mode(100kHz)
-    SSP1STAT= 0b10000000;
-
-    // SSPEN: 1 = Enables the serial port and configures the SDA and SCL pins as the source of the serial port pins
-    // SSPM<3:0>: 1000 = I2C Master mode, clock = FOSC / (4 * (SSPxADD+1))
-    SSP1CON1= 0b00101000;
-
-    // clock = FOSC / (4 * (SSPxADD+1))
-    //   8MHz/(4*(19+1))=100KHz
-    SSP1ADD = 19;
-
-    // SSP(I2C)割り込みを許可
-    SSP1IE = 1;
-    // MSSP(I2C)バス衝突割り込みを許可
-    BCL1IE = 1;
-
-    // SSP(I2C)割り込みフラグをクリア
-    SSP1IF = 0;
-    // MSSP(I2C)バス衝突割り込みフラグをクリア
-    BCL1IF = 0;
-}
-
 int i2c_start_condition(int adrs, int rw)
 {
     collision_check = 0;
