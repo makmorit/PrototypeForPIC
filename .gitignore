@@ -13,10 +13,27 @@
 *.l#?
 *.s#?
 *.b#?
-
-
 *.epf
 
+# PIC16F1938
+funclist
+*.lst
+*.pre
+*.as
+*.cof
+*.dep
+*.p1
+*.d
+*.map
+*.mcs
+*.obj
+*.rlf
+*.sdb
+*.sym
+*.lnk
+*.hxl
+
+# MPLAB X IDE
 /PIC16F1823_I2C_LCD/sample.X/nbproject/private/
 /PIC16F1823_I2C_LCD/sample.X/dist/default/
 
