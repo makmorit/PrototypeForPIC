@@ -6,5 +6,6 @@
 
 void STTS751_init();
 unsigned char STTS751_get_value();
+unsigned char STTS751_get_decimals();
 
 #endif

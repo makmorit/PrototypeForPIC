@@ -28,13 +28,12 @@ void STTS751_init()
 unsigned char STTS751_get_value()
 {
     int  ans;
-    unsigned char value = 30;
+    unsigned char value = 0;
 
-    RC3=1;
     // Temperature value high byte
     ans = i2c_start_condition(STTS751_I2C_ADDR, RW_0);
     if (ans == 0) {
-        i2c_send_byte(0);
+        i2c_send_byte(0x00);
         i2c_start_condition(STTS751_I2C_ADDR, RW_1);
         value = i2c_receive_byte(NOACK);
     }
@@ -42,4 +41,24 @@ unsigned char STTS751_get_value()
     __delay_us(25);
 
     return value;
+}
+
+unsigned char STTS751_get_decimals()
+{
+    int  ans;
+    unsigned char value = 0;
+
+    // Temperature value low byte
+    ans = i2c_start_condition(STTS751_I2C_ADDR, RW_0);
+    if (ans == 0) {
+        i2c_send_byte(0x02);
+        i2c_start_condition(STTS751_I2C_ADDR, RW_1);
+        value = i2c_receive_byte(NOACK);
+    }
+    i2c_stop_condition();
+    __delay_us(25);
+
+    // 左側の４ビット分を取得
+    // 0-15の値が戻る
+    return value >> 4;
 }

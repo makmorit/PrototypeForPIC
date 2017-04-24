@@ -118,16 +118,22 @@ static void process_on_interval()
 static void process_on_one_second()
 {
     char c[17];
-    char v;
+    unsigned char v, d, dd;
     
     // ヘルスチェックLEDを点滅
-    //HCHECK_LED = ~HCHECK_LED;
+    HCHECK_LED = ~HCHECK_LED;
     
     // STTS751の計測値を取得
     v = STTS751_get_value();
-    
-    // カウンター表示
-    sprintf(c, "temp=%3u,cnt=%3ld", v, user_sec_count);
+    dd = STTS751_get_decimals();
+
+    // 小数点部を、表示できる値に変換
+    // (取得した値を四捨五入します)
+    d = (dd * 10 + 8) / 16;
+
+    // 温度とカウンター表示
+    // (0x02は、度を表すカスタム文字)
+    sprintf(c, " %2d.%1d%c%c cnt=%3ld", v, d, 0x02, 'C', user_sec_count);
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
 }
