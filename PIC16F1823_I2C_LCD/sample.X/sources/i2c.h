@@ -7,9 +7,10 @@
 #define RW_1  1
 
 void i2c_intr();
-void i2c_init();
 int i2c_start_condition(int adrs, int rw);
 int i2c_stop_condition();
 int i2c_send_byte(char dt);
+int i2c_repeated_start_condition(int adrs, int rw);
+int i2c_receive_byte(int ack);
 
 #endif

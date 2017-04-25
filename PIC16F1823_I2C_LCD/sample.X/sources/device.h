@@ -2,8 +2,8 @@
 #define __DEVICE_H
 
 // 関数
-void port_init();
-void timer0_init();
-void adc2_init();
+void setup_port();
+void setup_timer0();
+void setup_i2c();
 
 #endif // __DEVICE_H
