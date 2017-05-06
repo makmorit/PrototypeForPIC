@@ -11,5 +11,6 @@ void setup_timer0();
 void setup_timer2();
 void setup_uart();
 void setup_i2c();
+void setup_spi();
 
 #endif // __DEVICE_H

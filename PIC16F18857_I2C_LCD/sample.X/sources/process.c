@@ -5,6 +5,7 @@
 #include "uart.h"
 #include "timer0.h"
 #include "STTS751.h"
+#include "M25PX16.h"
 
 // １秒間当たりの割込み回数（1.024ms × 977回）
 #define INT_PER_SEC 977
@@ -108,6 +109,45 @@ void process_init()
     
     // カウンターの初期化
     user_sec_count = 0;
+
+    // for debug start
+    char c[17];
+    m25px16_identification_t p;
+
+    M25PX16_init();
+    M25PX16_get_id(&p);
+
+    __delay_ms(2500);
+
+    sprintf(c, "M25PX16 Manu=%3d", p.manufacturer);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
+    __delay_ms(2500);
+
+    sprintf(c, "M25PX16 Type=%3d", p.memory_type);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
+    __delay_ms(2500);
+
+    sprintf(c, "M25PX16 Capa=%3d", p.memory_capacity);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
+    __delay_ms(2500);
+
+    sprintf(c, "M25PX16 Leng=%3d", p.cfd_length);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
+    __delay_ms(2500);
+
+    sprintf(c, "%4d%4d%4d%4d", 
+            p.cfd_content[0],
+            p.cfd_content[1],
+            p.cfd_content[2],
+            p.cfd_content[3]
+            );
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
+    // for debug end
 }
 
 // 割込みごとに処理（1.024 ms）
