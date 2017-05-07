@@ -53,8 +53,7 @@ static void interrupt intr(void)
 {
     uart_intr();
     timer0_intr();
-    i2c_intr();
-    spi_intr();
+    mssp_intr();
 }
 
 //

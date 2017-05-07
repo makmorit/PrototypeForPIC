@@ -9,9 +9,10 @@ typedef struct {
     unsigned char cfd_content[17];
 } m25px16_identification_t;
 
-void M25PX16_init();
 void M25PX16_get_id(m25px16_identification_t *p);
-
-void spi_intr();
+void M25PX16_page_program(unsigned long addr, unsigned char *buf, size_t size);
+void M25PX16_read_data_bytes(unsigned long addr, unsigned char *buf, size_t size);
+void M25PX16_subsector_erase(unsigned long addr);
+void M25PX16_sector_erase(unsigned long addr);
 
 #endif

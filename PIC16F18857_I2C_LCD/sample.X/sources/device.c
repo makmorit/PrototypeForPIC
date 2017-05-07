@@ -18,7 +18,7 @@ void setup_port()
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
     //          76543210
     ANSELB  = 0b00000000;
-    TRISB   = 0b00000100; // RB2(SDI2)
+    TRISB   = 0b00010100; // RB2(SDI2),RB4(SW)=入力に設定
     PORTB   = 0b00000000;
     WPUB    = 0b00000000;
 
@@ -31,9 +31,8 @@ void setup_port()
     PORTC   = 0b00000000;
 
     // Port E
-    //   RE3(SW)は入力(10k pull up)
     //          76543210
-    PORTE   = 0b00000000;
+    PORTE   = 0b00000000; // RE3(SW)は入力(10k pull up)
     WPUE    = 0b00000000;
 }
 
