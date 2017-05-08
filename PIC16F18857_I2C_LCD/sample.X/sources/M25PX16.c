@@ -31,25 +31,6 @@ static unsigned char spi_transmit(unsigned char c)
     return d;
 }
 
-void M25PX16_get_id(m25px16_identification_t *p)
-{
-    int i;
-    spi_set_ss(SPI_SS_ON);
-
-    spi_transmit(CMD_READ_IDENTIFICATION);
-
-    memset(p, 0, sizeof(m25px16_identification_t));
-    p->manufacturer = spi_transmit(0);
-    p->memory_type = spi_transmit(0);
-    p->memory_capacity = spi_transmit(0);
-    p->cfd_length = spi_transmit(0);
-    for (i = 0; i < p->cfd_length; i++) {
-        p->cfd_content[i] = spi_transmit(0);
-    }
-
-    spi_set_ss(SPI_SS_OFF);
-}
-
 static unsigned char M25PX16_read_status_register()
 {
     unsigned char sreg;
@@ -123,6 +104,8 @@ void M25PX16_read_data_bytes(unsigned long addr, unsigned char *buf, size_t size
 {
     unsigned long i;
 
+    M25PX16_wait_in_progress();
+
     spi_set_ss(SPI_SS_ON);
 
     spi_transmit(CMD_READ_DATA_BYTES);
@@ -134,22 +117,6 @@ void M25PX16_read_data_bytes(unsigned long addr, unsigned char *buf, size_t size
     }
 
     spi_set_ss(SPI_SS_OFF);
-}
-
-void M25PX16_subsector_erase(unsigned long addr)
-{
-    M25PX16_write_enable();
- 
-    spi_set_ss(SPI_SS_ON);
-
-    spi_transmit(CMD_SUBSECTOR_ERASE);
-    spi_transmit(addr >> 16);
-    spi_transmit(addr >>  8);
-    spi_transmit(addr >>  0);
-
-    spi_set_ss(SPI_SS_OFF);
-
-    M25PX16_write_disable();
 }
 
 void M25PX16_sector_erase(unsigned long addr)

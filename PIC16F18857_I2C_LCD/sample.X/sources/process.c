@@ -24,98 +24,57 @@ static unsigned long user_sec_count;
 static unsigned long cnt_int_per_sec;
 
 //
-// フラッシュメモリー評価用処理群
+// フラッシュメモリー用処理群
 //
+#define TEMP_DATA_RECLEN 16
 static unsigned long mem_write_cnt;
 
-static void M25PX16_initialize()
+static void initialize_flash_mem()
 {
     // フラッシュメモリー書込み位置の初期化
     mem_write_cnt = 0;
 
     // フラッシュメモリー初期化
     M25PX16_sector_erase(0);
-    __delay_ms(100);
 }
 
-static void M25PX16_info_print()
+static int read_temperature_record(unsigned long addr)
 {
-    char c[17];
-    m25px16_identification_t p;
-
-    //
-    // フラッシュメモリーの工場出荷情報をプリント
-    //
-    M25PX16_get_id(&p);
-
-    sprintf(c, "M25PX16 init    ", p.manufacturer);
-    i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string(c); 
-
-    sprintf(c, "    Manufact=%3d", p.manufacturer);
-    i2c_lcd_set_cursor(1, 0);
-    i2c_lcd_put_string(c); 
-
-    __delay_ms(1000);
-
-    i2c_lcd_clear_display();
-
-    sprintf(c, "M25PX16 Type=%3d", p.memory_type);
-    i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string(c);
-
-    sprintf(c, "        Capa=%3d", p.memory_capacity);
-    i2c_lcd_set_cursor(1, 0);
-    i2c_lcd_put_string(c);
-
-    __delay_ms(1000);
-}
-
-static int M25PX16_data_test_read(unsigned long addr)
-{
-    unsigned char c[17];
+    unsigned char c[TEMP_DATA_RECLEN+1];
 
     memset(c, 0, sizeof(c));
-    M25PX16_read_data_bytes(addr * 16, c, 16);
+    M25PX16_read_data_bytes(addr * TEMP_DATA_RECLEN, c, TEMP_DATA_RECLEN);
 
     if (c[0] > 223) {
         // 表示不能文字の場合はブランクデータと判断して処理終了
         return -1;
     }
-
-    i2c_lcd_set_cursor(1, 0);
-    i2c_lcd_put_string("                ");
-
-    i2c_lcd_set_cursor(1, 0);
-    i2c_lcd_put_string(c);
     
+    // uartに出力
+    printf("%s\r\n", c);
     return 0;
 }
 
-static void M25PX16_test_read()
+static void print_temperature_data()
 {
-    int i;
-
-    // フラッシュメモリー情報のプリント
-    M25PX16_info_print();
-
     // フラッシュメモリーに格納された
-    // データのテストプリント開始
+    // データのプリント開始
     i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string("Data print      ");
+    i2c_lcd_put_string("Reading tempdata");
+    i2c_lcd_set_cursor(1, 0);
+    i2c_lcd_put_string("  Please wait...");
 
-    for (i = 0; i < 255; i++) {
-        if (M25PX16_data_test_read(i) < 0) {
+    for (int i = 0; i < 255; i++) {
+        if (read_temperature_record(i) < 0) {
             break;
         }
-        __delay_ms(500);
     }
 
     // ディスプレイをクリア
     i2c_lcd_clear_display();
 
     // セクターを初期化
-    M25PX16_initialize();
+    initialize_flash_mem();
 
     // 最初のプロンプトを表示
     i2c_lcd_set_cursor(0, 0);
@@ -123,22 +82,22 @@ static void M25PX16_test_read()
 }
 
 // フラッシュメモリーに温度情報を出力
-static void M25PX16_output_temparature(unsigned char value, unsigned char decimals)
+static void save_temperature_data(unsigned char value, unsigned char decimals)
 {
-    char c[17];
+    char c[TEMP_DATA_RECLEN+1];
 
     // 秒数カウンターと温度をカンマ区切りで出力
     memset(c, 0, sizeof(c));
     sprintf(c, "%ld,%2d.%1d", mem_write_cnt, value, decimals);
 
     // フラッシュメモリーに書込み
-    M25PX16_page_program(mem_write_cnt * 16, c, 16);
+    M25PX16_page_program(mem_write_cnt * TEMP_DATA_RECLEN, c, TEMP_DATA_RECLEN);
 
     // 次の書込み位置に移動
     mem_write_cnt++;
     if (mem_write_cnt == 3600) {
-        // セクターを初期化
-        M25PX16_initialize();
+        // 1時間経過ごとにセクターを初期化
+        initialize_flash_mem();
     }
 }
 
@@ -177,9 +136,9 @@ static int process_on_button_press()
 
     } else if (BUTTON_1 == 0) { // プルアップされているので Low 判定
         //
-        // フラッシュメモリーのテストアクセス
+        // 気温計測データをUARTへ出力
         //
-        M25PX16_test_read();
+        print_temperature_data();
 
     } else {
         ret = 0;
@@ -234,7 +193,7 @@ void process_init()
     user_sec_count = 0;
 
     // フラッシュメモリー初期化
-    M25PX16_initialize();
+    initialize_flash_mem();
 
     // 最初のプロンプトを表示
     i2c_lcd_set_cursor(0, 0);
@@ -277,7 +236,7 @@ static void process_on_one_second()
     i2c_lcd_put_string(c);
     
     // フラッシュメモリーに温度出力
-    M25PX16_output_temparature(v, d);
+    save_temperature_data(v, d);
 }
 
 //
