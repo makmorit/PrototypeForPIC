@@ -5,6 +5,7 @@
 #include "uart.h"
 #include "timer0.h"
 #include "STTS751.h"
+#include "M25PX16.h"
 
 // １秒間当たりの割込み回数（1.024ms × 977回）
 #define INT_PER_SEC 977
@@ -21,6 +22,84 @@ static unsigned char stts751_value;
 // カウンターとして使用する変数
 static unsigned long user_sec_count;
 static unsigned long cnt_int_per_sec;
+
+//
+// フラッシュメモリー用処理群
+//
+#define TEMP_DATA_RECLEN 16
+static unsigned long mem_write_cnt;
+
+static void initialize_flash_mem()
+{
+    // フラッシュメモリー書込み位置の初期化
+    mem_write_cnt = 0;
+
+    // フラッシュメモリー初期化
+    M25PX16_sector_erase(0);
+}
+
+static int read_temperature_record(unsigned long addr)
+{
+    unsigned char c[TEMP_DATA_RECLEN+1];
+
+    memset(c, 0, sizeof(c));
+    M25PX16_read_data_bytes(addr * TEMP_DATA_RECLEN, c, TEMP_DATA_RECLEN);
+
+    if (c[0] > 223) {
+        // 表示不能文字の場合はブランクデータと判断して処理終了
+        return -1;
+    }
+    
+    // uartに出力
+    printf("%s\r\n", c);
+    return 0;
+}
+
+static void print_temperature_data()
+{
+    // フラッシュメモリーに格納された
+    // データのプリント開始
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string("Reading tempdata");
+    i2c_lcd_set_cursor(1, 0);
+    i2c_lcd_put_string("  Please wait...");
+
+    for (int i = 0; i < 255; i++) {
+        if (read_temperature_record(i) < 0) {
+            break;
+        }
+    }
+
+    // ディスプレイをクリア
+    i2c_lcd_clear_display();
+
+    // セクターを初期化
+    initialize_flash_mem();
+
+    // 最初のプロンプトを表示
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string("PIC16F18857 DEMO");
+}
+
+// フラッシュメモリーに温度情報を出力
+static void save_temperature_data(unsigned char value, unsigned char decimals)
+{
+    char c[TEMP_DATA_RECLEN+1];
+
+    // 秒数カウンターと温度をカンマ区切りで出力
+    memset(c, 0, sizeof(c));
+    sprintf(c, "%ld,%2d.%1d", mem_write_cnt, value, decimals);
+
+    // フラッシュメモリーに書込み
+    M25PX16_page_program(mem_write_cnt * TEMP_DATA_RECLEN, c, TEMP_DATA_RECLEN);
+
+    // 次の書込み位置に移動
+    mem_write_cnt++;
+    if (mem_write_cnt == 3600) {
+        // 1時間経過ごとにセクターを初期化
+        initialize_flash_mem();
+    }
+}
 
 //
 // UARTに入力された内容を解析する
@@ -54,6 +133,12 @@ static int process_on_button_press()
         //
         user_sec_count = COUNT_DOWN_SEC;
         cnt_int_per_sec = INT_PER_SEC;
+
+    } else if (BUTTON_1 == 0) { // プルアップされているので Low 判定
+        //
+        // 気温計測データをUARTへ出力
+        //
+        print_temperature_data();
 
     } else {
         ret = 0;
@@ -103,11 +188,16 @@ void process_init()
 
     // I2C LCD DEMO 開始
     i2c_lcd_init(); 
-    i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string("PIC16F18857 DEMO");
     
     // カウンターの初期化
     user_sec_count = 0;
+
+    // フラッシュメモリー初期化
+    initialize_flash_mem();
+
+    // 最初のプロンプトを表示
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string("PIC16F18857 DEMO");
 }
 
 // 割込みごとに処理（1.024 ms）
@@ -145,8 +235,8 @@ static void process_on_one_second()
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
     
-    // uartにも温度出力
-    printf("Temperature: %2d.%1d%c%c\r\n", v, d, 0x02, 'C');
+    // フラッシュメモリーに温度出力
+    save_temperature_data(v, d);
 }
 
 //

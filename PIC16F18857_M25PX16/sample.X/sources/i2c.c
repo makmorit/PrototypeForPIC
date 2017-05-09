@@ -4,13 +4,7 @@
 // バス衝突検出
 static char collision_check;
 
-static void i2c_idle_check()
-{
-    // ACKEN, RCEN, PEN, RSEN, SEN, R/W, BFが全て0ならOK
-    while ((SSP1CON2 & 0x1F) | (SSP1STAT & 0x5));
-}
-
-void i2c_intr(void)
+void mssp_intr(void)
 {
     if (SSP1IF == 1) {
         SSP1IF = 0;
@@ -20,6 +14,19 @@ void i2c_intr(void)
         collision_check = 1;
         BCL1IF = 0;
     }
+
+    if (SSP2IF == 1) {
+        SSP2IF = 0;
+    }
+    if (BCL2IF == 1) {
+        BCL2IF = 0;
+    }
+}
+
+static void i2c_idle_check()
+{
+    // ACKEN, RCEN, PEN, RSEN, SEN, R/W, BFが全て0ならOK
+    while ((SSP1CON2 & 0x1F) | (SSP1STAT & 0x5));
 }
 
 int i2c_start_condition(int adrs, int rw)

@@ -6,6 +6,8 @@
 #include "i2c.h"
 #include "i2c_lcd.h"
 
+#include "M25PX16.h"
+
 // CONFIG1
 #pragma config FCMEN = OFF
 #pragma config CSWEN = OFF
@@ -28,7 +30,7 @@
 
 //
 // 各種設定
-//   ピン設定, TIME 0, UART, I2C
+//   ピン設定, TIME 0, UART, I2C, SPI
 //
 static void setup()
 {
@@ -36,6 +38,7 @@ static void setup()
     setup_timer0();
     setup_i2c();
     setup_uart();
+    setup_spi();
 
     // 全割込み処理を許可
     PEIE = 1;
@@ -50,7 +53,7 @@ static void interrupt intr(void)
 {
     uart_intr();
     timer0_intr();
-    i2c_intr();
+    mssp_intr();
 }
 
 //

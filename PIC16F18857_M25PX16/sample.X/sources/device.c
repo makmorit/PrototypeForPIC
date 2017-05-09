@@ -18,7 +18,7 @@ void setup_port()
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
     //          76543210
     ANSELB  = 0b00000000;
-    TRISB   = 0b00000000;
+    TRISB   = 0b00010100; // RB2(SDI2),RB4(SW)=入力に設定
     PORTB   = 0b00000000;
     WPUB    = 0b00000000;
 
@@ -31,9 +31,8 @@ void setup_port()
     PORTC   = 0b00000000;
 
     // Port E
-    //   RE3(SW)は入力(10k pull up)
     //          76543210
-    PORTE   = 0b00000000;
+    PORTE   = 0b00000000; // RE3(SW)は入力(10k pull up)
     WPUE    = 0b00000000;
 }
 
@@ -134,4 +133,41 @@ void setup_i2c()
     SSP1IF = 0;
     // MSSP(I2C)バス衝突割り込みフラグをクリア
     BCL1IF = 0;
+}
+
+//
+// SPIの設定
+//
+void setup_spi()
+{
+    // Peripheral Pin Select (PPS) module settings
+    //   RB1 = SCK2(0x16) for output
+    RB1PPS = 0x16;
+    //   RB3 = SDO2(0x17) for output
+    RB3PPS = 0x17;
+
+    // Clock Polarity Select bit
+    //   In SPI mode: 0 = Idle state for clock is a low level
+    SSP2CON1bits.CKP = 0;
+    
+    // SPI Clock Edge Select bit
+    //   0 = Transmit occurs on transition from Idle to active clock state
+    SSP2STATbits.CKE = 1;
+    
+    // SPI Data Input Sample bit
+    //   SPI Master mode: 
+    //   0 = Input data sampled at middle of data output time
+    SSP2STATbits.SMP = 0;
+
+    // Enables serial port and configures 
+    // SCK, SDO, SDI and SS as the source of the serial port pins
+    SSP2CON1bits.SSPEN = 1;
+    
+    // 0010 = SPI Master mode, clock = FOSC/64
+    //   (32MHz / 64 = 500kHz)
+    SSP2CON1bits.SSPM = 0b0010;
+    
+    // 割込み許可／割込みフラグクリア
+    SSP2IE = 1;
+    SSP2IF = 0;
 }
