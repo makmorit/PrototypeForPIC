@@ -1,7 +1,5 @@
-#include <xc.h>
-#include <stdio.h>
-#include <string.h>
-
+#include "common.h"
+#include "device.h"
 #include "sdcard.h"
 
 #define SECTOR_BYTE_NUM 512
@@ -69,22 +67,6 @@ struct DIRECTORY_ENTRY_INFO {
     unsigned int  FirstClusterLow;    // データ格納先のFAT番号下位２バイト
     unsigned long FileSize;           // ファイルのサイズ
 };
-
-
-static unsigned char spi_transmit(unsigned char dt)
-{
-    SSPBUF = dt;
-    while(SSPIF == 0);
-    SSPIF = 0;
-
-    return SSPBUF;
-}
-
-static void spi_ss_select(unsigned char flag)
-{
-    LATCbits.LATC2 = flag;
-    spi_transmit(0xff);
-}
 
 static int ready_check()
 {

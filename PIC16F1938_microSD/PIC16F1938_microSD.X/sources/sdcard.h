@@ -1,10 +1,6 @@
 #ifndef _SDCARD_H_
 #define _SDCARD_H_
 
-#ifndef _XTAL_FREQ
-    #define _XTAL_FREQ 8000000
-#endif
-
 #define OP_READ_ONLY  0b0001
 #define OP_READ_WRITE 0b0010
 #define OP_APPEND     0b0100
