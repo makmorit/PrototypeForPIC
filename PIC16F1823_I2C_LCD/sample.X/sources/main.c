@@ -1,6 +1,7 @@
 #include "common.h"
 #include "device.h"
 #include "process.h"
+#include "timer0.h"
 #include "i2c.h"
 
 // CONFIG1
@@ -23,96 +24,50 @@
 #pragma config LVP = OFF
 
 //
-// タイマーで使用する変数
+// 各種設定
+//   ピン設定, TIME 0, I2C
 //
-static unsigned long total_tmr0_cnt_1s;
-static unsigned char tmr0_toggle;
-
-//
-// 初期化処理
-//
-static void initialize()
+static void setup()
 {
     // 内部クロック = 8MHz
     OSCCON  = 0b01110010;
 
-    // ピンなどの初期設定を行う
-    port_init();
+    setup_port();
+    setup_timer0();
+    setup_i2c();
 
-    // タイマー０の設定を行う
-    timer0_init();
-
-    // I2C設定
-    i2c_init();
-
-    // 全割込み処理を許可する
+    // 全割込み処理を許可
     PEIE = 1;
     GIE  = 1;
 }
 
 //
 // 割込み処理
+//   I2C, TIMER 0
 //
 static void interrupt intr(void)
 {
-    // タイマー０割込みの場合
-    if (TMR0IF == 1) {
-        // 割込みカウンター
-        total_tmr0_cnt_1s++;
-        tmr0_toggle = 1;
-        // 256カウント（2.048ms）で割込み発生させる
-        TMR0 = 0;
-        // TMR0割り込みクリア
-        TMR0IF = 0;
-    }
-    // I2C割込処理
+    timer0_intr();
     i2c_intr();
-}
-
-//
-// イベント処理
-//
-static void do_events()
-{
-    //
-    // 割込みごとに処理（2.048ms）
-    if (tmr0_toggle == 1) {
-        tmr0_toggle = 0;
-        // ボタン連続押下抑止
-		switch_prevent();
-    }
-
-    //
-    // 約1秒ごとに処理（2.048ms × 488回）
-    //
-    if (total_tmr0_cnt_1s > 488) {
-        // カウンターを初期化
-        total_tmr0_cnt_1s = 0;
-        // イベントごとの処理を行う
-        process_on_one_second();
-    }
-
-	// ボタン検知処理
-	switch_detection();
 }
 
 //
 // メインルーチン
 //
-void main() 
+void main()
 {
-    // ピンや機能等の初期化処理
-    initialize();
+    // ピンや機能等の設定処理
+    setup();
 
-    // do_events 処理回数カウンター
-    //   処理時点での割込みカウンター
-    total_tmr0_cnt_1s = 0;
-
-    // 各種初期化処理
+    // 初期化処理
+    //   TIMER 0
+    timer0_init();
+    
+    // 主処理ループで使用される変数の初期化
     process_init();
 
+    // 主処理ループ
     while (1) {
-        // イベント処理
-        do_events();
+        process();
     }
 }
