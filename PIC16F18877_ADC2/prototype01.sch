@@ -1239,14 +1239,14 @@ grid 5 mm(200MIL)</description>
 </net>
 <net name="HCK_LED" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="RA1"/>
-<wire x1="109.22" y1="129.54" x2="96.52" y2="129.54" width="0.1524" layer="91"/>
-<label x="96.52" y="129.54" size="1.778" layer="95"/>
-</segment>
-<segment>
 <wire x1="195.58" y1="111.76" x2="195.58" y2="127" width="0.1524" layer="91"/>
 <label x="195.58" y="114.3" size="1.778" layer="95" rot="R90"/>
 <pinref part="D1" gate="G$1" pin="A"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="RD2"/>
+<wire x1="152.4" y1="86.36" x2="167.64" y2="86.36" width="0.1524" layer="91"/>
+<label x="154.94" y="86.36" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
