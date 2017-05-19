@@ -151,6 +151,12 @@ void setup_adc2()
     // 011 = Burst Average mode
     ADCON2bits.ADMD = 0b011;
 
+    // サンプル収集数の指定
+    // (平均化モード選択時に有効)
+    // The accumulated value is right-shifted by ADCRS
+    // 0b100: divided by 2^4(=16)
+    ADCON2bits.ADCRS = 0b100;
+    
     // Precharge time is not included in the data conversion cycle
     // Acquisition time is not included in the data conversion cycle
     ADPRE = 0;
