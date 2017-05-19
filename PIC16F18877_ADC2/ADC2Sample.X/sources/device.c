@@ -148,8 +148,8 @@ void setup_adc2()
     // 計算モードの設定
     // ADMD<2:0>: ADC Operating Mode Selection bits
     // 000 = Basic (Legacy) mode
-    // 010 = Average mode
-    ADCON2bits.ADMD = 0;
+    // 011 = Burst Average mode
+    ADCON2bits.ADMD = 0b011;
 
     // Precharge time is not included in the data conversion cycle
     // Acquisition time is not included in the data conversion cycle
