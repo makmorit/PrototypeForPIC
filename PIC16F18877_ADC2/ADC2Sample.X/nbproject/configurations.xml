@@ -10,6 +10,7 @@
       <itemPath>sources/i2c_lcd.h</itemPath>
       <itemPath>sources/common.h</itemPath>
       <itemPath>sources/adc2.h</itemPath>
+      <itemPath>sources/timer0.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,6 +25,7 @@
       <itemPath>sources/i2c.c</itemPath>
       <itemPath>sources/i2c_lcd.c</itemPath>
       <itemPath>sources/adc2.c</itemPath>
+      <itemPath>sources/timer0.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -178,7 +180,7 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="5.0"/>
+        <property key="voltagevalue" value="3.375"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>
