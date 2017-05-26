@@ -1,6 +1,7 @@
 #include "common.h"
 #include "device.h"
 #include "process.h"
+#include "uart.h"
 #include "timer0.h"
 #include "i2c.h"
 
@@ -36,6 +37,8 @@ static void setup()
     setup_timer0();
     setup_i2c();
     setup_adc2();
+    setup_uart();
+    setup_spi();
 
     // 全割込み処理を許可する
     PEIE = 1;
@@ -47,6 +50,7 @@ static void setup()
 //
 static void interrupt intr(void)
 {
+    uart_intr();
     timer0_intr();
     i2c_intr();
 }
@@ -60,8 +64,8 @@ void main()
     setup();
 
     // 初期化処理
-    //   TIMER 0
     timer0_init();
+    uart_init();
 
     // 各種初期化処理
     process_init();

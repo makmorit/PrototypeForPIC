@@ -11,6 +11,9 @@
       <itemPath>sources/common.h</itemPath>
       <itemPath>sources/adc2.h</itemPath>
       <itemPath>sources/timer0.h</itemPath>
+      <itemPath>sources/uart.h</itemPath>
+      <itemPath>sources/sdcard.h</itemPath>
+      <itemPath>sources/sdcard_test.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -26,6 +29,9 @@
       <itemPath>sources/i2c_lcd.c</itemPath>
       <itemPath>sources/adc2.c</itemPath>
       <itemPath>sources/timer0.c</itemPath>
+      <itemPath>sources/uart.c</itemPath>
+      <itemPath>sources/sdcard.c</itemPath>
+      <itemPath>sources/sdcard_test.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -148,6 +154,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

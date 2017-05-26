@@ -18,7 +18,7 @@ void setup_port()
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
     //          76543210
     ANSELB  = 0b00000000;
-    TRISB   = 0b00000000;
+    TRISB   = 0b00000100; // RB2(SDI2)=入力に設定
     PORTB   = 0b00000000;
     WPUB    = 0b00000000;
 
@@ -26,7 +26,7 @@ void setup_port()
     //   アナログは使用しない（すべてデジタルI/Oに割当てる）
     //          76543210
     ANSELC  = 0b00000000;
-    TRISC   = 0b00011000; // RC3(SCL1),RC4(SDA1)=入力に設定
+    TRISC   = 0b10011000; // RC3(SCL1),RC4(SDA1),RC7(RX)=入力に設定
     WPUC    = 0b00000000;
     PORTC   = 0b00000000;
 
@@ -70,6 +70,41 @@ void setup_timer0()
 
     // TMR0割り込み許可
     TMR0IE = 1;
+}
+
+//
+// UARTの設定
+//
+void setup_uart()
+{
+    // Peripheral Pin Select (PPS) module settings
+    //   RC6 = TX/CK(0x10) for output
+    RC6PPS = 0x10;
+    //   RX = RC7(0x17) for input
+    RXPPS = 0x17;
+
+    // 送信情報設定
+    // 非同期モード(SYNC=0),8bit(TX9=0),ノンパリティ(TX9D=0)
+    TX1STAbits.TXEN = 1;
+    TX1STAbits.SYNC = 0;
+    TX1STAbits.TX9 = 0;
+    TX1STAbits.TX9D = 0;
+
+    // 受信情報設定
+    RC1STAbits.SPEN = 1;
+    RC1STAbits.CREN = 1;
+    RC1STAbits.RX9 = 0;
+    RC1STAbits.RX9D = 0;
+
+    // 19200 の場合（Fosc=32MHz）
+    //   SYNC = 0, BRGH = 0, BRG16 = 1
+    //   SPBRG = 103 (32,000,000/(16 * 19,200) - 1)
+    TX1STAbits.BRGH = 0;
+    BAUD1CONbits.BRG16 = 1;
+    SP1BRG = 103;
+
+    // ＵＳＡＲＴ割込み受信フラグの初期化
+    RCIF  = 0;
 }
 
 //
@@ -161,4 +196,57 @@ void setup_adc2()
     // Acquisition time is not included in the data conversion cycle
     ADPRE = 0;
     ADACQ = 0;
+}
+
+//
+// SPIの設定
+//
+void setup_spi()
+{
+    // Peripheral Pin Select (PPS) module settings
+    //   RB1 = SCK2(0x16) for output
+    RB1PPS = 0x16;
+    //   RB3 = SDO2(0x17) for output
+    RB3PPS = 0x17;
+
+    // Clock Polarity Select bit
+    //   In SPI mode: 0 = Idle state for clock is a low level
+    SSP2CON1bits.CKP = 1;
+    
+    // SPI Clock Edge Select bit
+    //   0 = Transmit occurs on transition from Idle to active clock state
+    SSP2STATbits.CKE = 0;
+    
+    // SPI Data Input Sample bit
+    //   SPI Master mode: 
+    //   0 = Input data sampled at middle of data output time
+    SSP2STATbits.SMP = 0;
+
+    // Enables serial port and configures 
+    // SCK, SDO, SDI and SS as the source of the serial port pins
+    SSP2CON1bits.SSPEN = 1;
+    
+    // 0010 = SPI Master mode, clock = FOSC/64
+    //   (32MHz / 64 = 500kHz)
+    SSP2CON1bits.SSPM = 0b0010;
+    
+    // 割込みフラグクリア
+    SSP2IF = 0;
+}
+
+unsigned char spi_transmit(unsigned char dt)
+{
+    // SPI送受信
+    SSP2BUF = dt;
+    while(SSP2IF == 0);
+    SSP2IF = 0;
+
+    return SSP2BUF;
+}
+
+void spi_ss_select(unsigned char flag)
+{
+    // SPI SS選択 (RB0)
+    LATBbits.LATB0 = flag;
+    spi_transmit(0xff);
 }
