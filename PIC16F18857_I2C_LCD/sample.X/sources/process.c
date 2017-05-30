@@ -39,6 +39,56 @@ static void get_stts751_temperature()
     stts751_decimals = (dd * 10 + 8) / 16;
 }
 
+// UARTに現在時刻と気温を出力
+static void print_time_and_temperature()
+{
+    printf("Current time: 20%02d/%02d/%02d %02d:%02d:%02d, Temperature: %1d.%1d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds,
+            stts751_value, stts751_decimals);
+}
+
+// 時刻アジャスト
+static unsigned char uart_input_buff[32];
+static void rtcc_adjust_from_uart()
+{
+    // セットしたい時刻をUARTから入力させる
+    printf("Please input current time:\r\n");
+    printf(">");
+    memset(uart_input_buff, 0, sizeof(uart_input_buff));
+    gets(uart_input_buff);
+    printf("\r\n");
+    
+    // 入力文字列が不正な場合は終了
+    if (strlen(uart_input_buff) != 19) {
+        printf("Cannot adjust: Invalid format [%s]\r\n", uart_input_buff);
+        return;
+    }
+    
+    // uart_input_buffにおける、時刻各要素の添え字
+    //   2017/05/30 10:00:00 形式で入力した場合、
+    //   年=2-3 月=5-6 日=8-9 時=11-12 分=14-15 秒=17-18
+    //   それぞれの要素の境界に NULL 文字を入れて
+    //   トークン化しておきます
+    uart_input_buff[4] = 0;
+    uart_input_buff[7] = 0;
+    uart_input_buff[10] = 0;
+    uart_input_buff[13] = 0;
+    uart_input_buff[16] = 0;
+    rtcc_years = atoi(uart_input_buff + 2);
+    rtcc_months = atoi(uart_input_buff + 5);
+    rtcc_days = atoi(uart_input_buff + 8);
+    rtcc_hours = atoi(uart_input_buff + 11);
+    rtcc_minutes = atoi(uart_input_buff + 14);
+    rtcc_seconds = atoi(uart_input_buff + 17);
+    
+    // 時刻を合わせる
+    i2c_rtcc_set_time();
+    printf("Current time adjusted: 20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds);
+}
+
 //
 // UARTに入力された内容を解析する
 //
@@ -48,9 +98,13 @@ static void parse_uart_input()
     if (rc_buff == NULL) {
         return;
     }
-    
-    // TODO: 以下に入力された文字に対する処理を記述
+    if (rc_buff[0] == 'A') {
+        // 'A' が入力された場合は
+        // 時刻アジャスト処理に入る
+        rtcc_adjust_from_uart();
+    }
 }
+
 
 //
 // ボタン押下検知処理
@@ -71,10 +125,7 @@ static int process_on_button_press()
         cnt_int_per_sec = INT_PER_SEC;
 
         // UARTに現在時刻と気温を出力
-        printf("Current time: 20%02d/%02d/%02d %02d:%02d:%02d, Temperature: %1d.%1d\r\n", 
-                rtcc_years, rtcc_months, rtcc_days,
-                rtcc_hours, rtcc_minutes, rtcc_seconds,
-                stts751_value, stts751_decimals);
+        print_time_and_temperature();
 
     } else {
         ret = 0;

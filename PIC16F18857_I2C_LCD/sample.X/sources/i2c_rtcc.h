@@ -15,5 +15,6 @@ unsigned char rtcc_seconds;
 
 int i2c_rtcc_init();
 void i2c_rtcc_read_time();
+void i2c_rtcc_set_time();
 
 #endif // _I2C_RTCC_H_

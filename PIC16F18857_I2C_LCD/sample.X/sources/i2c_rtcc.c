@@ -115,3 +115,40 @@ void i2c_rtcc_read_time()
     }
     i2c_stop_condition();
 }
+
+void i2c_rtcc_set_time()
+{
+    int ans ;
+
+    ans = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+    if (ans == 0) {
+        // Control 1, STOP=1（計時停止）
+        i2c_send_byte(0x00);
+        i2c_send_byte(0x20);
+
+        i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+        // Address=02-05: 時計・カレンダー
+        i2c_send_byte(0x02);
+        i2c_send_byte((char)bin2bcd(rtcc_seconds));
+        i2c_send_byte((char)bin2bcd(rtcc_minutes));
+        i2c_send_byte((char)bin2bcd(rtcc_hours));
+        i2c_send_byte((char)bin2bcd(rtcc_days));
+
+        // Address=07-08: 時計・カレンダー
+        i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+        i2c_send_byte(0x07);
+        i2c_send_byte((char)bin2bcd(rtcc_months));
+        i2c_send_byte((char)bin2bcd(rtcc_years));
+
+        i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+        // Control 1, STOP=0（計時開始）
+        i2c_send_byte(0x00);
+        i2c_send_byte(0x00);
+        i2c_stop_condition();
+
+        __delay_ms(1000);
+
+    } else {
+        i2c_stop_condition();
+    }
+}
