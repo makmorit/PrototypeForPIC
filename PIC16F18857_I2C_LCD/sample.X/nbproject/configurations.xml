@@ -12,6 +12,7 @@
       <itemPath>sources/timer0.h</itemPath>
       <itemPath>sources/uart.h</itemPath>
       <itemPath>sources/STTS751.h</itemPath>
+      <itemPath>sources/i2c_rtcc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>sources/timer0.c</itemPath>
       <itemPath>sources/uart.c</itemPath>
       <itemPath>sources/STTS751.c</itemPath>
+      <itemPath>sources/i2c_rtcc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -60,7 +62,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>false</parseOnProdLoad>
+          <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -150,7 +152,6 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

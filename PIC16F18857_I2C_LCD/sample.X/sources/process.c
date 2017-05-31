@@ -6,6 +6,8 @@
 #include "timer0.h"
 #include "STTS751.h"
 
+#include "i2c_rtcc.h"
+
 // １秒間当たりの割込み回数（1.024ms × 977回）
 #define INT_PER_SEC 977
 
@@ -15,27 +17,100 @@
 // カウントダウン秒数（180秒）
 #define COUNT_DOWN_SEC 180
 
-// 温度計の計測値
-static unsigned char stts751_value;
-
 // カウンターとして使用する変数
 static unsigned long user_sec_count;
 static unsigned long cnt_int_per_sec;
+
+//
+// STTS751から気温計測値を取得
+//
+static unsigned char stts751_value;
+static unsigned char stts751_decimals;
+static void get_stts751_temperature()
+{
+    unsigned char dd;
+
+    // STTS751の計測値を取得
+    stts751_value = STTS751_get_value();
+    dd = STTS751_get_decimals();
+
+    // 小数点部を、表示できる値に変換
+    // (取得した値を四捨五入します)
+    stts751_decimals = (dd * 10 + 8) / 16;
+}
+
+// UARTに現在時刻と気温を出力
+static void print_time_and_temperature()
+{
+    printf("Current time: 20%02d/%02d/%02d %02d:%02d:%02d, Temperature: %1d.%1d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds,
+            stts751_value, stts751_decimals);
+}
+
+// 時刻アジャスト
+static unsigned char uart_input_buff[32];
+static void rtcc_adjust_from_uart()
+{
+    // RTCCが使用可能でない場合は終了
+    if (rtcc_available == 0) {
+        printf("Cannot adjust: RTCC is not available\r\n");
+        return;
+    }
+
+    // セットしたい時刻をUARTから入力させる
+    printf("Please input current time:\r\n");
+    printf(">");
+    memset(uart_input_buff, 0, sizeof(uart_input_buff));
+    gets(uart_input_buff);
+    printf("\r\n");
+    
+    // 入力文字列が不正な場合は終了
+    if (strlen(uart_input_buff) != 19) {
+        printf("Cannot adjust: Invalid format [%s]\r\n", uart_input_buff);
+        return;
+    }
+    
+    // uart_input_buffにおける、時刻各要素の添え字
+    //   2017/05/30 10:00:00 形式で入力した場合、
+    //   年=2-3 月=5-6 日=8-9 時=11-12 分=14-15 秒=17-18
+    //   それぞれの要素の境界に NULL 文字を入れて
+    //   トークン化しておきます
+    uart_input_buff[4] = 0;
+    uart_input_buff[7] = 0;
+    uart_input_buff[10] = 0;
+    uart_input_buff[13] = 0;
+    uart_input_buff[16] = 0;
+    rtcc_years = atoi(uart_input_buff + 2);
+    rtcc_months = atoi(uart_input_buff + 5);
+    rtcc_days = atoi(uart_input_buff + 8);
+    rtcc_hours = atoi(uart_input_buff + 11);
+    rtcc_minutes = atoi(uart_input_buff + 14);
+    rtcc_seconds = atoi(uart_input_buff + 17);
+    
+    // 時刻を合わせる
+    i2c_rtcc_set_time();
+    printf("Current time adjusted: 20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds);
+}
 
 //
 // UARTに入力された内容を解析する
 //
 static void parse_uart_input()
 {
-    unsigned char c;
-
     unsigned char *rc_buff = get_uart_recv_buff();
     if (rc_buff == NULL) {
         return;
     }
-    
-    // TODO: 以下に入力された文字に対する処理を記述
+    if (rc_buff[0] == 'A') {
+        // 'A' が入力された場合は
+        // 時刻アジャスト処理に入る
+        rtcc_adjust_from_uart();
+    }
 }
+
 
 //
 // ボタン押下検知処理
@@ -54,6 +129,9 @@ static int process_on_button_press()
         //
         user_sec_count = COUNT_DOWN_SEC;
         cnt_int_per_sec = INT_PER_SEC;
+
+        // UARTに現在時刻と気温を出力
+        print_time_and_temperature();
 
     } else {
         ret = 0;
@@ -100,7 +178,12 @@ void process_init()
 
     // STTS751 初期化
     STTS751_init();
-
+	
+	// I2C RTCC 初期化
+    //   初めての起動時は、2017/1/1 0:00:00 で
+    //   時刻を初期化します    
+    i2c_rtcc_init();
+	
     // I2C LCD DEMO 開始
     i2c_lcd_init(); 
     i2c_lcd_set_cursor(0, 0);
@@ -129,24 +212,23 @@ static void process_on_interval()
 static void process_on_one_second()
 {
     char c[17];
-    unsigned char v, d, dd;
-    
-    // STTS751の計測値を取得
-    v = STTS751_get_value();
-    dd = STTS751_get_decimals();
 
-    // 小数点部を、表示できる値に変換
-    // (取得した値を四捨五入します)
-    d = (dd * 10 + 8) / 16;
+    // 現在時刻を取得し表示 2017/05/28 11:45 形式
+    i2c_rtcc_read_time();
+    sprintf(c, "20%02d/%02d/%02d %02d:%02d", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
 
+    // STTS751の計測値を取得し、
     // 温度とカウンター表示
     // (0x02は、度を表すカスタム文字)
-    sprintf(c, " %2d.%1d%c%c cnt=%3ld", v, d, 0x02, 'C', user_sec_count);
+    get_stts751_temperature();
+    sprintf(c, " %2d.%1d%c%c cnt=%3ld", 
+            stts751_value, stts751_decimals, 0x02, 'C', user_sec_count);
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
-    
-    // uartにも温度出力
-    printf("Temperature: %2d.%1d%c%c\r\n", v, d, 0x02, 'C');
 }
 
 //

@@ -2,7 +2,6 @@
 #define __DEVICE_H
 
 // スイッチ入力
-//   ボタン０
 #define BUTTON_0    RE3
 
 // 関数
