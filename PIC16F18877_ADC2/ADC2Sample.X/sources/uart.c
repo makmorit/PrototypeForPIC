@@ -18,8 +18,9 @@ void uart_intr()
     if (RCIF != 1) {
         return;
     }
-
     uart_recv_char = RCREG;
+    // 入力文字をエコーバック
+    putch(uart_recv_char);
     // 改行文字が入力されたら
     if (uart_recv_char == '\n' || uart_recv_char == '\r') {
         if (uart_recv_cnt < 1) {
@@ -71,4 +72,19 @@ void putch(unsigned char byte)
         continue;
     }
     TXREG = byte;
+}
+
+unsigned char getch() {
+	while (!RCIF) {
+		continue;
+    }
+	return RCREG;
+}
+
+unsigned char getche(void) {
+	unsigned char c;
+
+    RCIE = 0;
+	putch(c = getch());
+	return c;
 }
