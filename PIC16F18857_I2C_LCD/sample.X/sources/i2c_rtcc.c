@@ -18,30 +18,30 @@ unsigned char bin2bcd(unsigned int num)
     return (unsigned char)number;
 }
 
-int i2c_rtcc_init()
+void i2c_rtcc_init()
 {
-    unsigned char reg_01, reg_02;
-    int ans;
+    unsigned char reg = 0;
+    int ack;
 
+    // RTCC使用可能フラグを初期化
+    rtcc_available = 0;
     __delay_ms(1000);
 
-    ans = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
-    if (ans != 0) {
+    // VLビットを読み出すために、
+    // アドレス0x02のSecondsレジスターを読込む
+    ack = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+    if (ack == 0) {
+        i2c_send_byte(0x02);
+        i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_1);
+        reg = i2c_receive_byte(NOACK);
+
+    } else {
         i2c_stop_condition();
-        return ans;
+        return;
     }
-    i2c_send_byte(0x01);
-    ans = i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_1);
-    if (ans != 0) {
-        // すでに開始している場合は処理終了
-        i2c_stop_condition();
-        return ans;
-    }
-    reg_01 = i2c_receive_byte(ACK);
-    reg_02 = i2c_receive_byte(NOACK);
 
     // VLビットが1の場合は全データの初期化を行う
-    if (reg_02 & 0x80) {
+    if (reg & 0x80) {
         i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
         // Control 1, STOP=1（計時停止）
         i2c_send_byte(0x00);
@@ -81,7 +81,6 @@ int i2c_rtcc_init()
         i2c_send_byte(0x00);
         i2c_send_byte(0x00);
 
-        
         i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
         // Control 1, STOP=0（計時開始）
         i2c_send_byte(0x00);
@@ -93,15 +92,17 @@ int i2c_rtcc_init()
     } else {
         i2c_stop_condition();
     }
-    return ans;
+
+    // RTCC使用可能フラグを設定
+    rtcc_available = 1;
 }
 
 void i2c_rtcc_read_time()
 {
-    int ans;
+    int ack;
 
-    ans = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
-    if (ans == 0) {
+    ack = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+    if (ack == 0) {
         i2c_send_byte(0x02);
         i2c_repeated_start_condition(RTC_8564NB_I2C_ADDR, RW_1);
 
@@ -118,10 +119,10 @@ void i2c_rtcc_read_time()
 
 void i2c_rtcc_set_time()
 {
-    int ans ;
+    int ack ;
 
-    ans = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
-    if (ans == 0) {
+    ack = i2c_start_condition(RTC_8564NB_I2C_ADDR, RW_0);
+    if (ack == 0) {
         // Control 1, STOP=1（計時停止）
         i2c_send_byte(0x00);
         i2c_send_byte(0x20);

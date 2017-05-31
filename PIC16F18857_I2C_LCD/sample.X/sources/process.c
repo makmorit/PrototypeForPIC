@@ -52,6 +52,12 @@ static void print_time_and_temperature()
 static unsigned char uart_input_buff[32];
 static void rtcc_adjust_from_uart()
 {
+    // RTCCが使用可能でない場合は終了
+    if (rtcc_available == 0) {
+        printf("Cannot adjust: RTCC is not available\r\n");
+        return;
+    }
+
     // セットしたい時刻をUARTから入力させる
     printf("Please input current time:\r\n");
     printf(">");
