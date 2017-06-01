@@ -36,6 +36,7 @@
       <itemPath>sources/sdcard_test.c</itemPath>
       <itemPath>sources/fatfs_ff.c</itemPath>
       <itemPath>sources/fatfs_mmc_pic24f.c</itemPath>
+      <itemPath>sources/fatfs_ffunicode.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
