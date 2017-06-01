@@ -233,20 +233,3 @@ void setup_spi()
     // 割込みフラグクリア
     SSP2IF = 0;
 }
-
-unsigned char spi_transmit(unsigned char dt)
-{
-    // SPI送受信
-    SSP2BUF = dt;
-    while(SSP2IF == 0);
-    SSP2IF = 0;
-
-    return SSP2BUF;
-}
-
-void spi_ss_select(unsigned char flag)
-{
-    // SPI SS選択 (RB0)
-    LATBbits.LATB0 = flag;
-    spi_transmit(0xff);
-}

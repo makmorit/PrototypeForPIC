@@ -48,11 +48,16 @@ static void setup()
 //
 // 割込み処理
 //
+// for disk_timerproc
+#include "fatfs_diskio.h" 
 static void interrupt intr(void)
 {
     uart_intr();
     timer0_intr();
     i2c_intr();
+    
+    // fatfs用の割込み
+    disk_timerproc();
 }
 
 //

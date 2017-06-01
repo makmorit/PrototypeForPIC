@@ -12,8 +12,11 @@
       <itemPath>sources/adc2.h</itemPath>
       <itemPath>sources/timer0.h</itemPath>
       <itemPath>sources/uart.h</itemPath>
-      <itemPath>sources/sdcard.h</itemPath>
       <itemPath>sources/sdcard_test.h</itemPath>
+      <itemPath>sources/fatfs_diskio.h</itemPath>
+      <itemPath>sources/fatfs_ff.h</itemPath>
+      <itemPath>sources/fatfs_ffconf.h</itemPath>
+      <itemPath>sources/fatfs_integer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -30,8 +33,9 @@
       <itemPath>sources/adc2.c</itemPath>
       <itemPath>sources/timer0.c</itemPath>
       <itemPath>sources/uart.c</itemPath>
-      <itemPath>sources/sdcard.c</itemPath>
       <itemPath>sources/sdcard_test.c</itemPath>
+      <itemPath>sources/fatfs_ff.c</itemPath>
+      <itemPath>sources/fatfs_mmc_pic24f.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

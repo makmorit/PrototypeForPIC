@@ -5,7 +5,7 @@
 #include "process.h"
 #include "timer0.h"
 
-#include "sdcard.h"
+// for FatFs test
 #include "sdcard_test.h"
 
 // １秒間当たりの割込み回数（1.024ms × 977回）
@@ -38,6 +38,9 @@ static int process_on_button_press()
         //
         user_sec_count = COUNT_DOWN_SEC;
         cnt_int_per_sec = INT_PER_SEC;
+
+        // FatFs のテストを実行
+        fatfs_test();
 
     } else {
         ret = 0;
@@ -90,19 +93,6 @@ void process_init()
     i2c_lcd_set_cursor(0, 0);
     i2c_lcd_put_string("PIC16F18877 DEMO");
     i2c_lcd_set_cursor(1, 0);
-    i2c_lcd_put_string(" init microSD...");
-    
-    // microSD 初期化
-    __delay_ms(1000);
-    int ans = sdcard_initialize();
-    if (ans == 0) {
-        sdcard_test();
-    }
-
-    // 次のプロンプトを表示
-    i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string("PIC16F18877     ");
-    i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string("  ADC2 Evaluator");
 
     // 3秒まつ
@@ -146,9 +136,6 @@ void process_on_one_second()
     sprintf(c, " ADC=%3d cnt=%3ld", adc, user_sec_count);
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string(c);
-
-    // uart
-    printf("%s\r\n", c);
 }
 
 //
