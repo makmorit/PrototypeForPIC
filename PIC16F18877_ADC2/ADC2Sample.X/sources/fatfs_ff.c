@@ -531,6 +531,33 @@ static const BYTE DbcTbl[] = MKCVTBL(TBL_DC, FF_CODE_PAGE);
 #endif
 
 
+/*---------------------------------------------------------*/
+/* User Provided RTC Function for FatFs module             */
+/*---------------------------------------------------------*/
+/* This is a real time clock service to be called from     */
+/* FatFs module. Any valid time must be returned even if   */
+/* the system does not support an RTC.                     */
+/* This function is not required in read-only cfg.         */
+
+volatile WORD rtcYear = 2017;
+volatile BYTE rtcMon = 5, rtcMday = 14, rtcHour, rtcMin, rtcSec;
+DWORD get_fattime (void)
+{
+	DWORD tmr;
+
+
+	//_DI();
+	/* Pack date and time into a DWORD variable */
+	tmr =	  (((DWORD)rtcYear - 1980) << 25)
+			| ((DWORD)rtcMon << 21)
+			| ((DWORD)rtcMday << 16)
+			| (WORD)(rtcHour << 11)
+			| (WORD)(rtcMin << 5)
+			| (WORD)(rtcSec >> 1);
+	//_EI();
+
+	return tmr;
+}
 
 
 /*--------------------------------------------------------------------------
