@@ -12,16 +12,15 @@
 /-------------------------------------------------------------------------*/
 
 
-//#include <p24FJ64GA002.h>
 #include "common.h"
 #include "fatfs_diskio.h"
 
 
 /* Socket controls  (Platform dependent) */
-#define CS_LOW()	_LATB15 = 0	/* MMC CS = L */
-#define CS_HIGH()	_LATB15 = 1	/* MMC CS = H */
-#define MMC_CD		(!_RB11)	/* Card detected   (yes:true, no:false, default:true) */
-#define MMC_WP		(_RB10)		/* Write protected (yes:true, no:false, default:false) */
+#define CS_LOW()	LATBbits.LATB0=0	/* MMC CS = L */
+#define CS_HIGH()	LATBbits.LATB0=1	/* MMC CS = H */
+//#define MMC_CD		(!_RB11)	/* Card detected   (yes:true, no:false, default:true) */
+//#define MMC_WP		(_RB10)		/* Write protected (yes:true, no:false, default:false) */
 
 /* SPI bit rate controls */
 #define	FCLK_SLOW()			/* Set slow clock for card initialization (100k-400k) */
@@ -38,7 +37,7 @@
 /* Definitions for MMC/SDC command */
 #define CMD0   (0)			/* GO_IDLE_STATE */
 #define CMD1   (1)			/* SEND_OP_COND */
-#define ACMD41 (41|0x80)	/* SEND_OP_COND (SDC) */
+#define ACMD41 (41)         /* SEND_OP_COND (SDC) */
 #define CMD8   (8)			/* SEND_IF_COND */
 #define CMD9   (9)			/* SEND_CSD */
 #define CMD10  (10)			/* SEND_CID */
@@ -77,17 +76,11 @@ static
 void power_on (void)
 {
 	;					/* Turn socket power on, delay >1ms (Nothing to do) */
-
-	SPI1CON1 = 0x013B;	/* Enable SPI1 */
-	SPI1CON2 = 0x0000;
-	_SPIEN = 1;
 }
 
 static
 void power_off (void)
 {
-	_SPIEN = 0;			/* Disable SPI1 */
-
 	;					/* Turn socket power off (Nothing to do) */
 }
 
@@ -101,9 +94,10 @@ void power_off (void)
 static
 BYTE xchg_spi (BYTE dat)
 {
-	SPI1BUF = dat;			/* Initiate an SPI transaction */
-	while (!_SPIRBF) ;		/* Wait for end of the SPI transaction */
-	return (BYTE)SPI1BUF;	/* Get received byte */
+	SSP2BUF = dat;			/* Initiate an SPI transaction */
+	while (!SSP2IF) ;		/* Wait for end of the SPI transaction */
+    SSP2IF = 0;
+	return (BYTE)SSP2BUF;	/* Get received byte */
 }
 
 
@@ -115,12 +109,14 @@ void xmit_spi_multi (
 )
 {
 	do {
-		SPI1BUF = *buff++;	/* Initiate an SPI transaction */
-		while (!_SPIRBF) ;	/* Wait for end of the SPI transaction */
-		SPI1BUF;			/* Discard received byte */
-		SPI1BUF = *buff++;
-		while (!_SPIRBF) ;
-		SPI1BUF;
+		SSP2BUF = *buff++;	/* Initiate an SPI transaction */
+		while (!SSP2IF) ;	/* Wait for end of the SPI transaction */
+        SSP2IF = 0;
+		SSP2BUF;			/* Discard received byte */
+		SSP2BUF = *buff++;
+		while (!SSP2IF) ;
+        SSP2IF = 0;
+		SSP2BUF;
 	} while (cnt -= 2);
 }
 
@@ -133,12 +129,14 @@ void rcvr_spi_multi (
 )
 {
 	do {
-		SPI1BUF = 0xFF;		/* Initiate an SPI transaction */
-		while (!_SPIRBF) ;	/* Wait for end of the SPI transaction */
-		*buff++ = SPI1BUF;	/* Get received byte */
-		SPI1BUF = 0xFF;
-		while (!_SPIRBF) ;
-		*buff++ = SPI1BUF;
+		SSP2BUF = 0xFF;		/* Initiate an SPI transaction */
+		while (!SSP2IF) ;	/* Wait for end of the SPI transaction */
+        SSP2IF = 0;
+		*buff++ = SSP2BUF;	/* Get received byte */
+		SSP2BUF = 0xFF;
+		while (!SSP2IF) ;
+        SSP2IF = 0;
+		*buff++ = SSP2BUF;
 	} while (cnt -= 2);
 }
 
@@ -266,12 +264,11 @@ BYTE send_cmd (
 {
 	BYTE n, res;
 
-
-	if (cmd & 0x80) {	/* ACMD<n> is the command sequense of CMD55-CMD<n> */
-		cmd &= 0x7F;
-		res = send_cmd(CMD55, 0);
-		if (res > 1) return res;
-	}
+	//if (cmd & 0x80) {	/* ACMD<n> is the command sequense of CMD55-CMD<n> */
+	//	cmd &= 0x7F;
+	//	res = send_cmd(CMD55, 0);
+	//	if (res > 1) return res;
+	//}
 
 	/* Select the card and wait for ready except to stop multiple block read */
 	if (cmd != CMD12) {
@@ -348,7 +345,15 @@ DSTATUS disk_initialize (
 		if (send_cmd(CMD8, 0x1AA) == 1) {	/* SDv2? */
 			for (n = 0; n < 4; n++) ocr[n] = xchg_spi(0xFF);			/* Get trailing return value of R7 resp */
 			if (ocr[2] == 0x01 && ocr[3] == 0xAA) {				/* The card can work at vdd range of 2.7-3.6V */
-				while (Timer1 && send_cmd(ACMD41, 0x40000000));	/* Wait for leaving idle state (ACMD41 with HCS bit) */
+                while (Timer1) {
+                    /* Wait for leaving idle state (ACMD41 with HCS bit) */
+                    if (send_cmd(CMD55, 0) > 1) {
+                        continue;
+                    }
+                    if (send_cmd(ACMD41, 0x40000000) == 0) {
+                        break;
+                    }
+                }
 				if (Timer1 && send_cmd(CMD58, 0) == 0) {			/* Check CCS bit in the OCR */
 					for (n = 0; n < 4; n++) ocr[n] = xchg_spi(0xFF);
 					ty = (ocr[0] & 0x40) ? CT_SD2|CT_BLOCK : CT_SD2;	/* SDv2+ */
@@ -587,8 +592,7 @@ void disk_timerproc (void)
 	if (n) Timer2 = --n;
 
 
-	/* Update socket status */
-
+	/* Update socket status
 	s = Stat;
 	if (MMC_WP) {
 		s |= STA_PROTECT;
@@ -601,5 +605,6 @@ void disk_timerproc (void)
 		s |= (STA_NODISK | STA_NOINIT);
 	}
 	Stat = s;
+     */
 }
 
