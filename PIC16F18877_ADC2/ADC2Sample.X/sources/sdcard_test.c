@@ -10,26 +10,30 @@ FIL Fil;
 void fatfs_test()
 {
 	UINT bw;
+    const char *words = "It works!\r\n";
+    const char *file_name = "test0601.txt";
+    int length;
 
     printf("fatfs_test: start \r\n");
 
 	FRESULT res = f_mount(&FatFs, "", 0);
     if (res != FR_OK) {
-        printf("fatfs_test: f_mount failed %d \r\n", res);
+        printf("fatfs_test: f_mount failed : result=%d\r\n", res);
         return;
     }
-    printf("fatfs_test: f_mount done %d \r\n", res);
+    printf("fatfs_test: f_mount done: result=%d\r\n", res);
 
-	if (f_open(&Fil, "test0601.txt", FA_WRITE | FA_CREATE_ALWAYS) == FR_OK) {
-
-		f_write(&Fil, "It works!\r\n", 11, &bw);
+	if (f_open(&Fil, file_name, FA_WRITE | FA_CREATE_ALWAYS) == FR_OK) {
+        length = strlen(words);
+		f_write(&Fil, words, length, &bw);
 		f_close(&Fil);
-        // If data written well
-		if (bw == 11) {
-            printf("fatfs_test: f_write success \r\n");
+
+		if (bw == length) {
+            printf("fatfs_test: f_write success: length=%d\r\n", length);
 		} else {
-            printf("fatfs_test: f_write failed \r\n");
+            printf("fatfs_test: f_write failed\r\n");
         }
+
 	} else {
         printf("fatfs_test: f_open failed \r\n");
     }
