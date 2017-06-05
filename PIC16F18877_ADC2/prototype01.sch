@@ -822,12 +822,6 @@ TOROID, INDUCTOR, etc...</description>
 <text x="-1.905" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="0V" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
 </symbol>
-<symbol name="+5V">
-<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
-<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="+5V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-</symbol>
 <symbol name="+3V3">
 <wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
 <wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
@@ -840,19 +834,6 @@ TOROID, INDUCTOR, etc...</description>
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="1" symbol="0V" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="+5V" prefix="P+">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="1" symbol="+5V" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -1012,29 +993,6 @@ TOROID, INDUCTOR, etc...</description>
 <text x="-5.08" y="-1.27" size="1.016" layer="21">GND</text>
 <text x="9.398" y="-1.27" size="1.016" layer="21">+V</text>
 </package>
-<package name="SDCARD_SLOT">
-<description>&lt;b&gt;PIN HEADER for SDCARD SLOT&lt;/b&gt;</description>
-<pad name="1" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="2" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="3" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="4" x="10.16" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<text x="-1.27" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-1.27" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
-<rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-<rectangle x1="9.906" y1="-0.254" x2="10.414" y2="0.254" layer="51"/>
-<pad name="5" x="12.7" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="6" x="15.24" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="7" x="17.78" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="8" x="20.32" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<rectangle x1="17.526" y1="-0.254" x2="18.034" y2="0.254" layer="51"/>
-<rectangle x1="14.986" y1="-0.254" x2="15.494" y2="0.254" layer="51"/>
-<rectangle x1="12.446" y1="-0.254" x2="12.954" y2="0.254" layer="51"/>
-<rectangle x1="20.066" y1="-0.254" x2="20.574" y2="0.254" layer="51"/>
-<pad name="9" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-</package>
 <package name="UART_IF_3PIN">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
 <pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
@@ -1048,6 +1006,31 @@ TOROID, INDUCTOR, etc...</description>
 <text x="-1.27" y="-2.8575" size="0.8128" layer="21">GND</text>
 <text x="1.905" y="-2.8575" size="0.8128" layer="21">RX</text>
 <text x="4.445" y="-2.8575" size="0.8128" layer="21">TX</text>
+</package>
+<package name="AE-MICRO-SD-DIP">
+<description>&lt;b&gt;PIN HEADER for SDCARD SLOT&lt;/b&gt;</description>
+<pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="3" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="4" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<text x="-1.27" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.27" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
+<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
+<rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
+<pad name="5" x="10.16" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="6" x="12.7" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="7" x="15.24" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="8" x="17.78" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<rectangle x1="14.986" y1="-0.254" x2="15.494" y2="0.254" layer="51"/>
+<rectangle x1="12.446" y1="-0.254" x2="12.954" y2="0.254" layer="51"/>
+<rectangle x1="9.906" y1="-0.254" x2="10.414" y2="0.254" layer="51"/>
+<rectangle x1="17.526" y1="-0.254" x2="18.034" y2="0.254" layer="51"/>
+<pad name="9" x="20.32" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<rectangle x1="20.066" y1="-0.254" x2="20.574" y2="0.254" layer="51"/>
+<pad name="10" x="22.86" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<rectangle x1="22.606" y1="-0.254" x2="23.114" y2="0.254" layer="51"/>
 </package>
 </packages>
 <symbols>
@@ -1070,33 +1053,6 @@ TOROID, INDUCTOR, etc...</description>
 <pin name="SDA" x="0" y="-2.54" length="middle" swaplevel="1"/>
 <text x="2.54" y="3.81" size="1.778" layer="95">&gt;NAME</text>
 </symbol>
-<symbol name="SDCARD_SLOT">
-<description>&lt;b&gt;SDカードスロット&lt;/b&gt;&lt;p&gt;</description>
-<wire x1="15.24" y1="-22.86" x2="3.175" y2="-22.86" width="0.4064" layer="94"/>
-<wire x1="3.81" y1="-5.08" x2="5.08" y2="-5.08" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-7.62" x2="5.08" y2="-7.62" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="0" x2="5.08" y2="0" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-2.54" x2="5.08" y2="-2.54" width="0.6096" layer="94"/>
-<wire x1="3.175" y1="2.54" x2="3.175" y2="-22.86" width="0.4064" layer="94"/>
-<wire x1="15.24" y1="-22.86" x2="15.24" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="3.175" y1="2.54" x2="15.24" y2="2.54" width="0.4064" layer="94"/>
-<text x="2.54" y="-25.4" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="VSS1" x="0" y="-7.62" length="middle" direction="pas" swaplevel="1"/>
-<pin name="DAT2" x="0" y="0" length="middle" swaplevel="1"/>
-<pin name="DI" x="0" y="-5.08" length="middle" swaplevel="1"/>
-<pin name="CS" x="0" y="-2.54" length="middle" swaplevel="1"/>
-<text x="2.54" y="3.81" size="1.778" layer="95">&gt;NAME</text>
-<wire x1="3.81" y1="-10.16" x2="5.08" y2="-10.16" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-12.7" x2="5.08" y2="-12.7" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-15.24" x2="5.08" y2="-15.24" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-17.78" x2="5.08" y2="-17.78" width="0.6096" layer="94"/>
-<wire x1="3.81" y1="-20.32" x2="5.08" y2="-20.32" width="0.6096" layer="94"/>
-<pin name="VCC" x="0" y="-10.16" length="middle" direction="pas" swaplevel="1"/>
-<pin name="CLK" x="0" y="-12.7" length="middle" swaplevel="1"/>
-<pin name="VSS2" x="0" y="-15.24" length="middle" direction="pas" swaplevel="1"/>
-<pin name="DO" x="0" y="-17.78" length="middle" swaplevel="1"/>
-<pin name="DAT1" x="0" y="-20.32" length="middle" swaplevel="1"/>
-</symbol>
 <symbol name="UART_IF_3PIN">
 <description>&lt;b&gt;I2C インターフェース&lt;/b&gt;&lt;p&gt;</description>
 <wire x1="15.24" y1="-7.62" x2="3.175" y2="-7.62" width="0.4064" layer="94"/>
@@ -1111,6 +1067,38 @@ TOROID, INDUCTOR, etc...</description>
 <pin name="TX" x="0" y="-5.08" length="middle" swaplevel="1"/>
 <pin name="RX" x="0" y="-2.54" length="middle" swaplevel="1"/>
 <text x="2.54" y="3.81" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
+<symbol name="AE-MICRO-SD-DIP">
+<description>&lt;b&gt;マイクロＳＤカードスロットＤＩＰ化キット&lt;/b&gt;&lt;p&gt;
+ヒロセ電機のｍｉｃｒｏＳＤカードスロットを&lt;br&gt;
+ブレッドボードやユニバーサル基板に&lt;br&gt;
+取り付けられるようにするセットです。</description>
+<wire x1="17.78" y1="-25.4" x2="3.175" y2="-25.4" width="0.4064" layer="94"/>
+<wire x1="3.81" y1="-5.08" x2="5.08" y2="-5.08" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-7.62" x2="5.08" y2="-7.62" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="0" x2="5.08" y2="0" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-2.54" x2="5.08" y2="-2.54" width="0.6096" layer="94"/>
+<wire x1="3.175" y1="2.54" x2="3.175" y2="-25.4" width="0.4064" layer="94"/>
+<wire x1="17.78" y1="-25.4" x2="17.78" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="3.175" y1="2.54" x2="17.78" y2="2.54" width="0.4064" layer="94"/>
+<text x="2.54" y="-27.94" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="VDD" x="0" y="-7.62" length="middle" direction="pas" swaplevel="1"/>
+<pin name="DAT2" x="0" y="0" length="middle" swaplevel="1"/>
+<pin name="CMD" x="0" y="-5.08" length="middle" swaplevel="1"/>
+<pin name="CD/DAT3" x="0" y="-2.54" length="middle" swaplevel="1"/>
+<text x="2.54" y="3.81" size="1.778" layer="95">&gt;NAME</text>
+<wire x1="3.81" y1="-10.16" x2="5.08" y2="-10.16" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-12.7" x2="5.08" y2="-12.7" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-15.24" x2="5.08" y2="-15.24" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-17.78" x2="5.08" y2="-17.78" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-20.32" x2="5.08" y2="-20.32" width="0.6096" layer="94"/>
+<pin name="CLK" x="0" y="-10.16" length="middle" swaplevel="1"/>
+<pin name="VSS" x="0" y="-12.7" length="middle" direction="pas" swaplevel="1"/>
+<pin name="DAT0" x="0" y="-15.24" length="middle" swaplevel="1"/>
+<pin name="DAT1" x="0" y="-17.78" length="middle" swaplevel="1"/>
+<pin name="SWB" x="0" y="-20.32" length="middle" swaplevel="1"/>
+<pin name="SWA" x="0" y="-22.86" length="middle" swaplevel="1"/>
+<wire x1="3.81" y1="-22.86" x2="5.08" y2="-22.86" width="0.6096" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1138,30 +1126,6 @@ TOROID, INDUCTOR, etc...</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SDCARD_SLOT" prefix="CN">
-<description>&lt;b&gt;SDカードスロット&lt;/b&gt;&lt;p&gt;</description>
-<gates>
-<gate name="G$1" symbol="SDCARD_SLOT" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SDCARD_SLOT">
-<connects>
-<connect gate="G$1" pin="CLK" pad="5"/>
-<connect gate="G$1" pin="CS" pad="1"/>
-<connect gate="G$1" pin="DAT1" pad="8"/>
-<connect gate="G$1" pin="DAT2" pad="9"/>
-<connect gate="G$1" pin="DI" pad="2"/>
-<connect gate="G$1" pin="DO" pad="7"/>
-<connect gate="G$1" pin="VCC" pad="4"/>
-<connect gate="G$1" pin="VSS1" pad="3"/>
-<connect gate="G$1" pin="VSS2" pad="6"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="UART_IF" prefix="CN">
 <description>&lt;b&gt;UART インターフェース&lt;/b&gt;&lt;p&gt;</description>
 <gates>
@@ -1173,6 +1137,34 @@ TOROID, INDUCTOR, etc...</description>
 <connect gate="G$1" pin="GND" pad="1"/>
 <connect gate="G$1" pin="RX" pad="2"/>
 <connect gate="G$1" pin="TX" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="AE-MICRO-SD-DIP" prefix="CN">
+<description>&lt;b&gt;マイクロＳＤカードスロットＤＩＰ化キット&lt;/b&gt;&lt;p&gt;
+ヒロセ電機のｍｉｃｒｏＳＤカードスロットを&lt;br&gt;
+ブレッドボードやユニバーサル基板に&lt;br&gt;
+取り付けられるようにするセットです。</description>
+<gates>
+<gate name="G$1" symbol="AE-MICRO-SD-DIP" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="AE-MICRO-SD-DIP">
+<connects>
+<connect gate="G$1" pin="CD/DAT3" pad="2"/>
+<connect gate="G$1" pin="CLK" pad="5"/>
+<connect gate="G$1" pin="CMD" pad="3"/>
+<connect gate="G$1" pin="DAT0" pad="7"/>
+<connect gate="G$1" pin="DAT1" pad="8"/>
+<connect gate="G$1" pin="DAT2" pad="1"/>
+<connect gate="G$1" pin="SWA" pad="10"/>
+<connect gate="G$1" pin="SWB" pad="9"/>
+<connect gate="G$1" pin="VDD" pad="4"/>
+<connect gate="G$1" pin="VSS" pad="6"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1197,7 +1189,6 @@ TOROID, INDUCTOR, etc...</description>
 <part name="R1" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
 <part name="CN1" library="Connectors" deviceset="PIC_CN" device="_H"/>
 <part name="GND5" library="Supply" deviceset="0V" device=""/>
-<part name="P+5" library="Supply" deviceset="+5V" device=""/>
 <part name="C2" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
 <part name="SW1" library="Parts" deviceset="10-XX" device=""/>
 <part name="GND1" library="Supply" deviceset="0V" device=""/>
@@ -1209,25 +1200,26 @@ TOROID, INDUCTOR, etc...</description>
 <part name="H4" library="Generic" deviceset="MOUNT_HOLE" device="_3.2"/>
 <part name="U2" library="PartsForProto" deviceset="AE-AQM1602A" device=""/>
 <part name="GND4" library="Supply" deviceset="0V" device=""/>
-<part name="P+3" library="Supply" deviceset="+5V" device=""/>
+<part name="R4" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
 <part name="R3" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
-<part name="R2" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
 <part name="GND3" library="Supply" deviceset="0V" device=""/>
 <part name="D1" library="Parts" deviceset="LED" device="_5MM"/>
-<part name="R4" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
-<part name="CN3" library="PartsForProto" deviceset="SDCARD_SLOT" device=""/>
+<part name="R2" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
 <part name="L1" library="Parts" deviceset="TC5026-22UH-060" device="" value="47uH"/>
 <part name="+3V3" library="Supply" deviceset="+3V3" device=""/>
 <part name="GND6" library="Supply" deviceset="0V" device=""/>
-<part name="C4" library="Parts" deviceset="CAP" device="_200MIL" value="10uF"/>
-<part name="R5" library="Parts" deviceset="RESISTOR" device="_300MIL" value="47k"/>
+<part name="C3" library="Parts" deviceset="CAP" device="_200MIL" value="10uF"/>
 <part name="R6" library="Parts" deviceset="RESISTOR" device="_300MIL" value="47k"/>
-<part name="R7" library="Parts" deviceset="RESISTOR" device="_300MIL" value="100k"/>
+<part name="R7" library="Parts" deviceset="RESISTOR" device="_300MIL" value="47k"/>
+<part name="R5" library="Parts" deviceset="RESISTOR" device="_300MIL" value="100k"/>
 <part name="R8" library="Parts" deviceset="RESISTOR" device="_300MIL" value="100k"/>
-<part name="C3" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
-<part name="CN4" library="PartsForProto" deviceset="UART_IF" device=""/>
+<part name="C4" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
+<part name="CN3" library="PartsForProto" deviceset="UART_IF" device=""/>
 <part name="GND7" library="Supply" deviceset="0V" device=""/>
 <part name="FRAME1" library="Generic" deviceset="A4L-LOC" device=""/>
+<part name="CN4" library="PartsForProto" deviceset="AE-MICRO-SD-DIP" device=""/>
+<part name="+3V1" library="Supply" deviceset="+3V3" device=""/>
+<part name="+3V2" library="Supply" deviceset="+3V3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1239,7 +1231,6 @@ TOROID, INDUCTOR, etc...</description>
 <instance part="R1" gate="G$1" x="27.94" y="137.16" rot="R90"/>
 <instance part="CN1" gate="G$1" x="134.62" y="134.62"/>
 <instance part="GND5" gate="1" x="129.54" y="86.36"/>
-<instance part="P+5" gate="1" x="27.94" y="157.48"/>
 <instance part="C2" gate="G$1" x="137.16" y="101.6"/>
 <instance part="SW1" gate="1" x="27.94" y="106.68"/>
 <instance part="GND1" gate="1" x="27.94" y="73.66"/>
@@ -1249,27 +1240,28 @@ TOROID, INDUCTOR, etc...</description>
 <instance part="H2" gate="G$1" x="96.52" y="12.7"/>
 <instance part="H3" gate="G$1" x="134.62" y="20.32"/>
 <instance part="H4" gate="G$1" x="134.62" y="12.7"/>
-<instance part="U2" gate="G$1" x="165.1" y="60.96"/>
-<instance part="GND4" gate="1" x="160.02" y="48.26"/>
-<instance part="P+3" gate="1" x="144.78" y="81.28"/>
-<instance part="R3" gate="G$1" x="149.86" y="60.96" rot="R90"/>
-<instance part="R2" gate="G$1" x="139.7" y="60.96" rot="R90"/>
-<instance part="GND3" gate="1" x="228.6" y="45.72"/>
-<instance part="D1" gate="G$1" x="228.6" y="73.66"/>
-<instance part="R4" gate="G$1" x="228.6" y="53.34" rot="R90"/>
-<instance part="CN3" gate="G$1" x="218.44" y="121.92"/>
+<instance part="U2" gate="G$1" x="210.82" y="55.88"/>
+<instance part="GND4" gate="1" x="205.74" y="43.18"/>
+<instance part="R4" gate="G$1" x="195.58" y="55.88" rot="R90"/>
+<instance part="R3" gate="G$1" x="185.42" y="55.88" rot="R90"/>
+<instance part="GND3" gate="1" x="129.54" y="43.18"/>
+<instance part="D1" gate="G$1" x="129.54" y="71.12"/>
+<instance part="R2" gate="G$1" x="129.54" y="50.8" rot="R90"/>
 <instance part="L1" gate="G$1" x="167.64" y="142.24" rot="R90"/>
 <instance part="+3V3" gate="G$1" x="167.64" y="162.56"/>
 <instance part="GND6" gate="1" x="203.2" y="83.82"/>
-<instance part="C4" gate="G$1" x="167.64" y="132.08"/>
-<instance part="R5" gate="G$1" x="195.58" y="124.46" rot="R90"/>
-<instance part="R6" gate="G$1" x="203.2" y="124.46" rot="R90"/>
-<instance part="R7" gate="G$1" x="187.96" y="124.46" rot="R90"/>
-<instance part="R8" gate="G$1" x="180.34" y="124.46" rot="R90"/>
-<instance part="C3" gate="G$1" x="210.82" y="101.6"/>
-<instance part="CN4" gate="G$1" x="88.9" y="60.96"/>
+<instance part="C3" gate="G$1" x="167.64" y="132.08"/>
+<instance part="R6" gate="G$1" x="187.96" y="124.46" rot="R90"/>
+<instance part="R7" gate="G$1" x="195.58" y="124.46" rot="R90"/>
+<instance part="R5" gate="G$1" x="180.34" y="124.46" rot="R90"/>
+<instance part="R8" gate="G$1" x="203.2" y="124.46" rot="R90"/>
+<instance part="C4" gate="G$1" x="210.82" y="101.6"/>
+<instance part="CN3" gate="G$1" x="88.9" y="60.96"/>
 <instance part="GND7" gate="1" x="83.82" y="48.26"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
+<instance part="CN4" gate="G$1" x="218.44" y="121.92"/>
+<instance part="+3V1" gate="G$1" x="27.94" y="162.56"/>
+<instance part="+3V2" gate="G$1" x="203.2" y="76.2"/>
 </instances>
 <busses>
 </busses>
@@ -1304,34 +1296,30 @@ TOROID, INDUCTOR, etc...</description>
 <segment>
 <pinref part="U2" gate="G$1" pin="GND"/>
 <pinref part="GND4" gate="1" pin="0V"/>
-<wire x1="165.1" y1="60.96" x2="160.02" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="160.02" y1="60.96" x2="160.02" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="55.88" x2="205.74" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="55.88" x2="205.74" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R4" gate="G$1" pin="1"/>
+<pinref part="R2" gate="G$1" pin="1"/>
 <pinref part="GND3" gate="1" pin="0V"/>
-<wire x1="228.6" y1="53.34" x2="228.6" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="50.8" x2="129.54" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN3" gate="G$1" pin="VSS2"/>
 <pinref part="GND6" gate="1" pin="0V"/>
-<wire x1="218.44" y1="106.68" x2="203.2" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="106.68" x2="203.2" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="109.22" x2="203.2" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="203.2" y1="91.44" x2="203.2" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="106.68" x2="203.2" y2="114.3" width="0.1524" layer="91"/>
-<junction x="203.2" y="106.68"/>
-<pinref part="CN3" gate="G$1" pin="VSS1"/>
-<wire x1="203.2" y1="114.3" x2="218.44" y2="114.3" width="0.1524" layer="91"/>
 <junction x="203.2" y="91.44"/>
-<pinref part="C3" gate="G$1" pin="2"/>
+<pinref part="C4" gate="G$1" pin="2"/>
 <wire x1="210.82" y1="93.98" x2="210.82" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="210.82" y1="91.44" x2="203.2" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="C4" gate="G$1" pin="2"/>
+<pinref part="C3" gate="G$1" pin="2"/>
 <wire x1="167.64" y1="124.46" x2="167.64" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="91.44" x2="203.2" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="CN4" gate="G$1" pin="VSS"/>
+<wire x1="218.44" y1="109.22" x2="203.2" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN4" gate="G$1" pin="GND"/>
+<pinref part="CN3" gate="G$1" pin="GND"/>
 <pinref part="GND7" gate="1" pin="0V"/>
 <wire x1="88.9" y1="60.96" x2="83.82" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="83.82" y1="60.96" x2="83.82" y2="50.8" width="0.1524" layer="91"/>
@@ -1350,38 +1338,6 @@ TOROID, INDUCTOR, etc...</description>
 <wire x1="137.16" y1="93.98" x2="137.16" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="91.44" x2="129.54" y2="91.44" width="0.1524" layer="91"/>
 <junction x="129.54" y="91.44"/>
-</segment>
-</net>
-<net name="+5V" class="0">
-<segment>
-<pinref part="R1" gate="G$1" pin="2"/>
-<pinref part="P+5" gate="1" pin="+5V"/>
-<wire x1="27.94" y1="147.32" x2="27.94" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="149.86" x2="27.94" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="149.86" x2="40.64" y2="149.86" width="0.1524" layer="91"/>
-<junction x="27.94" y="149.86"/>
-<wire x1="40.64" y1="149.86" x2="40.64" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="101.6" x2="40.64" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="C1" gate="G$1" pin="1"/>
-<pinref part="U1" gate="G$1" pin="VDD"/>
-<wire x1="40.64" y1="101.6" x2="63.5" y2="101.6" width="0.1524" layer="91"/>
-<junction x="40.64" y="101.6"/>
-</segment>
-<segment>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="139.7" y1="71.12" x2="139.7" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="73.66" x2="144.78" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="144.78" y1="73.66" x2="149.86" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="73.66" x2="149.86" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="P+3" gate="1" pin="+5V"/>
-<wire x1="144.78" y1="73.66" x2="144.78" y2="78.74" width="0.1524" layer="91"/>
-<junction x="144.78" y="73.66"/>
-<pinref part="U2" gate="G$1" pin="V+"/>
-<wire x1="165.1" y1="53.34" x2="157.48" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="53.34" x2="157.48" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="73.66" x2="149.86" y2="73.66" width="0.1524" layer="91"/>
-<junction x="149.86" y="73.66"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -1442,12 +1398,12 @@ TOROID, INDUCTOR, etc...</description>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="SCL"/>
-<wire x1="165.1" y1="55.88" x2="139.7" y2="55.88" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="139.7" y1="55.88" x2="139.7" y2="60.96" width="0.1524" layer="91"/>
-<wire x1="127" y1="55.88" x2="139.7" y2="55.88" width="0.1524" layer="91"/>
-<junction x="139.7" y="55.88"/>
-<label x="127" y="55.88" size="1.778" layer="95"/>
+<wire x1="210.82" y1="50.8" x2="185.42" y2="50.8" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="1"/>
+<wire x1="185.42" y1="50.8" x2="185.42" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="172.72" y1="50.8" x2="185.42" y2="50.8" width="0.1524" layer="91"/>
+<junction x="185.42" y="50.8"/>
+<label x="172.72" y="50.8" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA1" class="0">
@@ -1457,77 +1413,65 @@ TOROID, INDUCTOR, etc...</description>
 <label x="114.3" y="83.82" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R3" gate="G$1" pin="1"/>
-<wire x1="149.86" y1="60.96" x2="149.86" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="1"/>
+<wire x1="195.58" y1="55.88" x2="195.58" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="SDA"/>
-<wire x1="149.86" y1="58.42" x2="165.1" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="149.86" y1="58.42" x2="127" y2="58.42" width="0.1524" layer="91"/>
-<junction x="149.86" y="58.42"/>
-<label x="127" y="58.42" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="HCK_LED" class="0">
-<segment>
-<wire x1="228.6" y1="76.2" x2="228.6" y2="91.44" width="0.1524" layer="91"/>
-<label x="228.6" y="78.74" size="1.778" layer="95" rot="R90"/>
-<pinref part="D1" gate="G$1" pin="A"/>
-</segment>
-<segment>
-<pinref part="U1" gate="G$1" pin="RD2"/>
-<wire x1="106.68" y1="78.74" x2="121.92" y2="78.74" width="0.1524" layer="91"/>
-<label x="109.22" y="78.74" size="1.778" layer="95"/>
+<wire x1="195.58" y1="53.34" x2="210.82" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="53.34" x2="172.72" y2="53.34" width="0.1524" layer="91"/>
+<junction x="195.58" y="53.34"/>
+<label x="172.72" y="53.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
 <segment>
 <pinref part="D1" gate="G$1" pin="C"/>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="228.6" y1="68.58" x2="228.6" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="129.54" y1="66.04" x2="129.54" y2="60.96" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
 <segment>
-<pinref part="CN3" gate="G$1" pin="CS"/>
-<wire x1="134.62" y1="119.38" x2="180.34" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="180.34" y1="119.38" x2="218.44" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="R8" gate="G$1" pin="1"/>
-<wire x1="180.34" y1="124.46" x2="180.34" y2="119.38" width="0.1524" layer="91"/>
-<junction x="180.34" y="119.38"/>
+<wire x1="134.62" y1="119.38" x2="203.2" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="134.62" y1="119.38" x2="134.62" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="RB0"/>
 <wire x1="134.62" y1="109.22" x2="106.68" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<wire x1="203.2" y1="124.46" x2="203.2" y2="119.38" width="0.1524" layer="91"/>
+<pinref part="CN4" gate="G$1" pin="CD/DAT3"/>
+<wire x1="218.44" y1="119.38" x2="203.2" y2="119.38" width="0.1524" layer="91"/>
+<junction x="203.2" y="119.38"/>
 </segment>
 </net>
 <net name="N$9" class="0">
 <segment>
-<pinref part="R5" gate="G$1" pin="2"/>
-<wire x1="195.58" y1="139.7" x2="195.58" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="195.58" y1="139.7" x2="203.2" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="139.7" x2="203.2" y2="134.62" width="0.1524" layer="91"/>
-<junction x="195.58" y="139.7"/>
-<wire x1="195.58" y1="139.7" x2="187.96" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="139.7" x2="180.34" y2="139.7" width="0.1524" layer="91"/>
-<pinref part="R8" gate="G$1" pin="2"/>
-<wire x1="180.34" y1="139.7" x2="180.34" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="139.7" x2="187.96" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="R7" gate="G$1" pin="2"/>
-<wire x1="187.96" y1="134.62" x2="187.96" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="139.7" x2="195.58" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="139.7" x2="195.58" y2="134.62" width="0.1524" layer="91"/>
 <junction x="187.96" y="139.7"/>
+<wire x1="187.96" y1="139.7" x2="180.34" y2="139.7" width="0.1524" layer="91"/>
+<pinref part="R5" gate="G$1" pin="2"/>
+<wire x1="180.34" y1="134.62" x2="180.34" y2="139.7" width="0.1524" layer="91"/>
+<junction x="180.34" y="139.7"/>
 <pinref part="L1" gate="G$1" pin="1"/>
 <wire x1="167.64" y1="142.24" x2="167.64" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="139.7" x2="180.34" y2="139.7" width="0.1524" layer="91"/>
-<junction x="180.34" y="139.7"/>
-<pinref part="C4" gate="G$1" pin="1"/>
+<pinref part="C3" gate="G$1" pin="1"/>
 <wire x1="167.64" y1="139.7" x2="167.64" y2="132.08" width="0.1524" layer="91"/>
 <junction x="167.64" y="139.7"/>
+<wire x1="195.58" y1="139.7" x2="203.2" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="203.2" y1="139.7" x2="210.82" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="139.7" x2="210.82" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="139.7" x2="210.82" y2="114.3" width="0.1524" layer="91"/>
+<junction x="195.58" y="139.7"/>
+<pinref part="C4" gate="G$1" pin="1"/>
+<pinref part="CN4" gate="G$1" pin="VDD"/>
+<wire x1="210.82" y1="114.3" x2="210.82" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="218.44" y1="114.3" x2="210.82" y2="114.3" width="0.1524" layer="91"/>
+<junction x="210.82" y="114.3"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="203.2" y1="134.62" x2="203.2" y2="139.7" width="0.1524" layer="91"/>
 <junction x="203.2" y="139.7"/>
-<pinref part="CN3" gate="G$1" pin="VCC"/>
-<wire x1="210.82" y1="111.76" x2="218.44" y2="111.76" width="0.1524" layer="91"/>
-<pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="111.76" x2="210.82" y2="101.6" width="0.1524" layer="91"/>
-<junction x="210.82" y="111.76"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -1546,48 +1490,40 @@ TOROID, INDUCTOR, etc...</description>
 <net name="N$12" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="RB3"/>
-<pinref part="CN3" gate="G$1" pin="DI"/>
-<wire x1="218.44" y1="116.84" x2="203.2" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="R6" gate="G$1" pin="1"/>
-<wire x1="203.2" y1="124.46" x2="203.2" y2="116.84" width="0.1524" layer="91"/>
-<junction x="203.2" y="116.84"/>
-<wire x1="106.68" y1="116.84" x2="203.2" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="195.58" y1="124.46" x2="195.58" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="116.84" x2="195.58" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="CN4" gate="G$1" pin="CMD"/>
+<wire x1="218.44" y1="116.84" x2="195.58" y2="116.84" width="0.1524" layer="91"/>
+<junction x="195.58" y="116.84"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
-<pinref part="CN3" gate="G$1" pin="CLK"/>
-<wire x1="218.44" y1="109.22" x2="187.96" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="RB1"/>
-<wire x1="187.96" y1="111.76" x2="106.68" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="109.22" x2="187.96" y2="111.76" width="0.1524" layer="91"/>
-<pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="187.96" y1="111.76" x2="187.96" y2="124.46" width="0.1524" layer="91"/>
-<junction x="187.96" y="111.76"/>
+<wire x1="180.34" y1="111.76" x2="106.68" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="R5" gate="G$1" pin="1"/>
+<wire x1="180.34" y1="111.76" x2="180.34" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="CN4" gate="G$1" pin="CLK"/>
+<wire x1="180.34" y1="111.76" x2="218.44" y2="111.76" width="0.1524" layer="91"/>
+<junction x="180.34" y="111.76"/>
 </segment>
 </net>
 <net name="N$8" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="RB2"/>
-<pinref part="CN3" gate="G$1" pin="DO"/>
-<pinref part="R5" gate="G$1" pin="1"/>
-<wire x1="195.58" y1="104.14" x2="218.44" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="124.46" x2="195.58" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="114.3" x2="195.58" y2="104.14" width="0.1524" layer="91"/>
-<wire x1="106.68" y1="114.3" x2="195.58" y2="114.3" width="0.1524" layer="91"/>
-<junction x="195.58" y="114.3"/>
-</segment>
-</net>
-<net name="+3V3" class="0">
-<segment>
-<pinref part="+3V3" gate="G$1" pin="+3V3"/>
-<pinref part="L1" gate="G$1" pin="2"/>
-<wire x1="167.64" y1="160.02" x2="167.64" y2="154.94" width="0.1524" layer="91"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="187.96" y1="124.46" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="114.3" x2="187.96" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="114.3" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
+<junction x="187.96" y="114.3"/>
+<pinref part="CN4" gate="G$1" pin="DAT0"/>
+<wire x1="218.44" y1="106.68" x2="187.96" y2="106.68" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="UART_RX" class="0">
 <segment>
-<pinref part="CN4" gate="G$1" pin="RX"/>
+<pinref part="CN3" gate="G$1" pin="RX"/>
 <wire x1="88.9" y1="58.42" x2="68.58" y2="58.42" width="0.1524" layer="91"/>
 <label x="68.58" y="58.42" size="1.778" layer="95"/>
 </segment>
@@ -1599,7 +1535,7 @@ TOROID, INDUCTOR, etc...</description>
 </net>
 <net name="UART_TX" class="0">
 <segment>
-<pinref part="CN4" gate="G$1" pin="TX"/>
+<pinref part="CN3" gate="G$1" pin="TX"/>
 <wire x1="88.9" y1="55.88" x2="68.58" y2="55.88" width="0.1524" layer="91"/>
 <label x="68.58" y="55.88" size="1.778" layer="95"/>
 </segment>
@@ -1607,6 +1543,50 @@ TOROID, INDUCTOR, etc...</description>
 <pinref part="U1" gate="G$1" pin="RC6"/>
 <wire x1="106.68" y1="88.9" x2="121.92" y2="88.9" width="0.1524" layer="91"/>
 <label x="109.22" y="88.9" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="+3V3" class="0">
+<segment>
+<pinref part="L1" gate="G$1" pin="2"/>
+<pinref part="+3V3" gate="G$1" pin="+3V3"/>
+<wire x1="167.64" y1="154.94" x2="167.64" y2="160.02" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R3" gate="G$1" pin="2"/>
+<wire x1="185.42" y1="66.04" x2="185.42" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="2"/>
+<wire x1="185.42" y1="68.58" x2="195.58" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="68.58" x2="195.58" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="V+"/>
+<wire x1="210.82" y1="48.26" x2="203.2" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="48.26" x2="203.2" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="68.58" x2="195.58" y2="68.58" width="0.1524" layer="91"/>
+<junction x="195.58" y="68.58"/>
+<pinref part="+3V2" gate="G$1" pin="+3V3"/>
+<wire x1="203.2" y1="73.66" x2="203.2" y2="68.58" width="0.1524" layer="91"/>
+<junction x="203.2" y="68.58"/>
+</segment>
+<segment>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="27.94" y1="147.32" x2="27.94" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="149.86" x2="40.64" y2="149.86" width="0.1524" layer="91"/>
+<junction x="27.94" y="149.86"/>
+<wire x1="40.64" y1="149.86" x2="40.64" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="101.6" x2="40.64" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="C1" gate="G$1" pin="1"/>
+<pinref part="U1" gate="G$1" pin="VDD"/>
+<wire x1="40.64" y1="101.6" x2="63.5" y2="101.6" width="0.1524" layer="91"/>
+<junction x="40.64" y="101.6"/>
+<pinref part="+3V1" gate="G$1" pin="+3V3"/>
+<wire x1="27.94" y1="160.02" x2="27.94" y2="149.86" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="RD2"/>
+<pinref part="D1" gate="G$1" pin="A"/>
+<wire x1="106.68" y1="78.74" x2="129.54" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="129.54" y1="78.74" x2="129.54" y2="73.66" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
