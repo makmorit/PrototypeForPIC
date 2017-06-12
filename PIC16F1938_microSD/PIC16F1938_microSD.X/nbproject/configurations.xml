@@ -4,15 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>sources/sdcard.h</itemPath>
+      <itemPath>sources/sdcard_test.h</itemPath>
       <itemPath>sources/common.h</itemPath>
       <itemPath>sources/device.h</itemPath>
-      <itemPath>sources/i2c.h</itemPath>
-      <itemPath>sources/i2c_lcd.h</itemPath>
-      <itemPath>sources/process.h</itemPath>
-      <itemPath>sources/timer0.h</itemPath>
-      <itemPath>sources/uart.h</itemPath>
-      <itemPath>sources/STTS751.h</itemPath>
-      <itemPath>sources/i2c_rtcc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,15 +16,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>sources/device.c</itemPath>
-      <itemPath>sources/i2c.c</itemPath>
-      <itemPath>sources/i2c_lcd.c</itemPath>
       <itemPath>sources/main.c</itemPath>
-      <itemPath>sources/process.c</itemPath>
-      <itemPath>sources/timer0.c</itemPath>
-      <itemPath>sources/uart.c</itemPath>
-      <itemPath>sources/STTS751.c</itemPath>
-      <itemPath>sources/i2c_rtcc.c</itemPath>
+      <itemPath>sources/sdcard.c</itemPath>
+      <itemPath>sources/sdcard_test.c</itemPath>
+      <itemPath>sources/device.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -45,7 +35,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC16F18857</targetDevice>
+        <targetDevice>PIC16F1938</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
@@ -62,7 +52,7 @@
         </archiverTool>
         <loading>
           <useAlternateLoadableFile>false</useAlternateLoadableFile>
-          <parseOnProdLoad>true</parseOnProdLoad>
+          <parseOnProdLoad>false</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
         <subordinates>
@@ -152,6 +142,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -165,7 +156,7 @@
         <property key="memories.instruction.ram.ranges"
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
-        <property key="memories.programmemory.ranges" value="0-7fff"/>
+        <property key="memories.programmemory.ranges" value="0-3fff"/>
         <property key="poweroptions.powerenable" value="true"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
