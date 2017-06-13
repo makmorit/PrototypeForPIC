@@ -541,12 +541,23 @@ static const BYTE DbcTbl[] = MKCVTBL(TBL_DC, FF_CODE_PAGE);
 
 volatile WORD rtcYear = 2017;
 volatile BYTE rtcMon = 5, rtcMday = 14, rtcHour, rtcMin, rtcSec;
+
+// for i2c_rtcc_read_time()
+#include "i2c_rtcc.h"
+
 DWORD get_fattime (void)
 {
 	DWORD tmr;
 
+    // Retrieve current timestamp from RTCC
+    i2c_rtcc_read_time();
+    rtcYear = 2000 + rtcc_years;
+    rtcMon = rtcc_months;
+    rtcMday = rtcc_days;
+    rtcHour = rtcc_hours;
+    rtcMin = rtcc_minutes;
+    rtcSec = rtcc_seconds;
 
-	//_DI();
 	/* Pack date and time into a DWORD variable */
 	tmr =	  (((DWORD)rtcYear - 1980) << 25)
 			| ((DWORD)rtcMon << 21)
@@ -554,7 +565,6 @@ DWORD get_fattime (void)
 			| (WORD)(rtcHour << 11)
 			| (WORD)(rtcMin << 5)
 			| (WORD)(rtcSec >> 1);
-	//_EI();
 
 	return tmr;
 }

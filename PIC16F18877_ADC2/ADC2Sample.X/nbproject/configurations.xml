@@ -17,6 +17,7 @@
       <itemPath>sources/fatfs_ff.h</itemPath>
       <itemPath>sources/fatfs_ffconf.h</itemPath>
       <itemPath>sources/fatfs_integer.h</itemPath>
+      <itemPath>sources/i2c_rtcc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -37,6 +38,7 @@
       <itemPath>sources/fatfs_ff.c</itemPath>
       <itemPath>sources/fatfs_mmc_pic24f.c</itemPath>
       <itemPath>sources/fatfs_ffunicode.c</itemPath>
+      <itemPath>sources/i2c_rtcc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "device.h"
 #include "i2c_lcd.h"
+#include "i2c_rtcc.h"
 #include "adc2.h"
 #include "process.h"
 #include "timer0.h"
@@ -82,6 +83,11 @@ void process_init()
 {
     // ローカル変数の初期化
     btn_push_prevent_cnt = 0;
+	
+	// I2C RTCC 初期化
+    //   初めての起動時は、2017/1/1 0:00:00 で
+    //   時刻を初期化します    
+    i2c_rtcc_init();
 
     // I2C LCD DEMO 開始
     i2c_lcd_init(); 
@@ -128,6 +134,14 @@ void process_on_one_second()
 {
     char c[17];
     unsigned char adc;
+
+    // 現在時刻を取得し表示 2017/05/28 11:45 形式
+    i2c_rtcc_read_time();
+    sprintf(c, "20%02d/%02d/%02d %02d:%02d", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
     
     // ADC2変換値を取得
     adc = adc2_conv();

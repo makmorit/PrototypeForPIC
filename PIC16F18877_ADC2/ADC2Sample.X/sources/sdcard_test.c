@@ -1,4 +1,5 @@
 #include "common.h"
+#include "i2c_rtcc.h"
 
 // for FatFs
 #include "fatfs_diskio.h"
@@ -38,5 +39,5 @@ void fatfs_test()
         printf("fatfs_test: f_open failed \r\n");
     }
 
-    printf("fatfs_test: end \r\n");
+    printf("fatfs_test: end at %s\r\n", get_timestamp_str());
 }
