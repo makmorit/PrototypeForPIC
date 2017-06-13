@@ -23,6 +23,71 @@ static unsigned long user_sec_count;
 static unsigned long cnt_int_per_sec;
 
 //
+// 時刻アジャスト
+//
+static unsigned char uart_input_buff[32];
+static void rtcc_adjust_from_uart()
+{
+    // RTCCが使用可能でない場合は終了
+    if (rtcc_available == 0) {
+        printf("Cannot adjust: RTCC is not available\r\n");
+        return;
+    }
+
+    // セットしたい時刻をUARTから入力させる
+    printf("Please input current time:\r\n");
+    printf(">");
+    memset(uart_input_buff, 0, sizeof(uart_input_buff));
+    gets(uart_input_buff);
+    printf("\r\n");
+    
+    // 入力文字列が不正な場合は終了
+    if (strlen(uart_input_buff) != 19) {
+        printf("Cannot adjust: Invalid format [%s]\r\n", uart_input_buff);
+        return;
+    }
+    
+    // uart_input_buffにおける、時刻各要素の添え字
+    //   2017/05/30 10:00:00 形式で入力した場合、
+    //   年=2-3 月=5-6 日=8-9 時=11-12 分=14-15 秒=17-18
+    //   それぞれの要素の境界に NULL 文字を入れて
+    //   トークン化しておきます
+    uart_input_buff[4] = 0;
+    uart_input_buff[7] = 0;
+    uart_input_buff[10] = 0;
+    uart_input_buff[13] = 0;
+    uart_input_buff[16] = 0;
+    rtcc_years = atoi(uart_input_buff + 2);
+    rtcc_months = atoi(uart_input_buff + 5);
+    rtcc_days = atoi(uart_input_buff + 8);
+    rtcc_hours = atoi(uart_input_buff + 11);
+    rtcc_minutes = atoi(uart_input_buff + 14);
+    rtcc_seconds = atoi(uart_input_buff + 17);
+    
+    // 時刻を合わせる
+    i2c_rtcc_set_time();
+    printf("Current time adjusted: 20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds);
+}
+
+//
+// UARTに入力された内容を解析する
+//
+static void parse_uart_input()
+{
+    unsigned char *rc_buff = get_uart_recv_buff();
+    if (rc_buff == NULL) {
+        return;
+    }
+    if (rc_buff[0] == 'A') {
+        // 'A' が入力された場合は
+        // 時刻アジャスト処理に入る
+        rtcc_adjust_from_uart();
+    }
+}
+
+//
 // ボタン押下検知処理
 //
 static unsigned long btn_push_prevent_cnt;
@@ -157,6 +222,9 @@ void process_on_one_second()
 //
 void process()
 {
+    // UART入力を優先させる
+    parse_uart_input();
+
     // 割込みごとに処理（1.024 ms）
     if (tmr0_toggle == 1) {
         process_on_interval();
