@@ -1521,7 +1521,7 @@ package type P</description>
 <part name="R7" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
 <part name="GND3" library="Supply" deviceset="0V" device=""/>
 <part name="D1" library="Parts" deviceset="LED" device="_5MM"/>
-<part name="R2" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
+<part name="R2" library="Parts" deviceset="RESISTOR" device="_300MIL" value="330"/>
 <part name="L1" library="Parts" deviceset="TC5026-22UH-060" device="" value="47uH"/>
 <part name="+3V3" library="Supply" deviceset="+3V3" device=""/>
 <part name="GND6" library="Supply" deviceset="0V" device=""/>
