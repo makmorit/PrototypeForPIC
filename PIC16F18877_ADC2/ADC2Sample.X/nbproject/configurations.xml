@@ -11,6 +11,13 @@
       <itemPath>sources/common.h</itemPath>
       <itemPath>sources/adc2.h</itemPath>
       <itemPath>sources/timer0.h</itemPath>
+      <itemPath>sources/uart.h</itemPath>
+      <itemPath>sources/sdcard_test.h</itemPath>
+      <itemPath>sources/fatfs_diskio.h</itemPath>
+      <itemPath>sources/fatfs_ff.h</itemPath>
+      <itemPath>sources/fatfs_ffconf.h</itemPath>
+      <itemPath>sources/fatfs_integer.h</itemPath>
+      <itemPath>sources/i2c_rtcc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -26,6 +33,12 @@
       <itemPath>sources/i2c_lcd.c</itemPath>
       <itemPath>sources/adc2.c</itemPath>
       <itemPath>sources/timer0.c</itemPath>
+      <itemPath>sources/uart.c</itemPath>
+      <itemPath>sources/sdcard_test.c</itemPath>
+      <itemPath>sources/fatfs_ff.c</itemPath>
+      <itemPath>sources/fatfs_mmc_pic24f.c</itemPath>
+      <itemPath>sources/fatfs_ffunicode.c</itemPath>
+      <itemPath>sources/i2c_rtcc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -148,6 +161,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

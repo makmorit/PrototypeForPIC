@@ -11,7 +11,12 @@
 // 関数
 void setup_port();
 void setup_timer0();
+void setup_uart();
 void setup_i2c();
 void setup_adc2();
+void setup_spi();
+
+unsigned char spi_transmit(unsigned char dt);
+void spi_ss_select(unsigned char flag);
 
 #endif // __DEVICE_H

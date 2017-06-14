@@ -1,9 +1,13 @@
 #include "common.h"
 #include "device.h"
 #include "i2c_lcd.h"
+#include "i2c_rtcc.h"
 #include "adc2.h"
 #include "process.h"
 #include "timer0.h"
+
+// for FatFs test
+#include "sdcard_test.h"
 
 // １秒間当たりの割込み回数（1.024ms × 977回）
 #define INT_PER_SEC 977
@@ -17,6 +21,71 @@
 // カウンターとして使用する変数
 static unsigned long user_sec_count;
 static unsigned long cnt_int_per_sec;
+
+//
+// 時刻アジャスト
+//
+static unsigned char uart_input_buff[32];
+static void rtcc_adjust_from_uart()
+{
+    // RTCCが使用可能でない場合は終了
+    if (rtcc_available == 0) {
+        printf("Cannot adjust: RTCC is not available\r\n");
+        return;
+    }
+
+    // セットしたい時刻をUARTから入力させる
+    printf("Please input current time:\r\n");
+    printf(">");
+    memset(uart_input_buff, 0, sizeof(uart_input_buff));
+    gets(uart_input_buff);
+    printf("\r\n");
+    
+    // 入力文字列が不正な場合は終了
+    if (strlen(uart_input_buff) != 19) {
+        printf("Cannot adjust: Invalid format [%s]\r\n", uart_input_buff);
+        return;
+    }
+    
+    // uart_input_buffにおける、時刻各要素の添え字
+    //   2017/05/30 10:00:00 形式で入力した場合、
+    //   年=2-3 月=5-6 日=8-9 時=11-12 分=14-15 秒=17-18
+    //   それぞれの要素の境界に NULL 文字を入れて
+    //   トークン化しておきます
+    uart_input_buff[4] = 0;
+    uart_input_buff[7] = 0;
+    uart_input_buff[10] = 0;
+    uart_input_buff[13] = 0;
+    uart_input_buff[16] = 0;
+    rtcc_years = atoi(uart_input_buff + 2);
+    rtcc_months = atoi(uart_input_buff + 5);
+    rtcc_days = atoi(uart_input_buff + 8);
+    rtcc_hours = atoi(uart_input_buff + 11);
+    rtcc_minutes = atoi(uart_input_buff + 14);
+    rtcc_seconds = atoi(uart_input_buff + 17);
+    
+    // 時刻を合わせる
+    i2c_rtcc_set_time();
+    printf("Current time adjusted: 20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes, rtcc_seconds);
+}
+
+//
+// UARTに入力された内容を解析する
+//
+static void parse_uart_input()
+{
+    unsigned char *rc_buff = get_uart_recv_buff();
+    if (rc_buff == NULL) {
+        return;
+    }
+    if (rc_buff[0] == 'A') {
+        // 'A' が入力された場合は
+        // 時刻アジャスト処理に入る
+        rtcc_adjust_from_uart();
+    }
+}
 
 //
 // ボタン押下検知処理
@@ -35,6 +104,9 @@ static int process_on_button_press()
         //
         user_sec_count = COUNT_DOWN_SEC;
         cnt_int_per_sec = INT_PER_SEC;
+
+        // FatFs のテストを実行
+        fatfs_test();
 
     } else {
         ret = 0;
@@ -76,6 +148,11 @@ void process_init()
 {
     // ローカル変数の初期化
     btn_push_prevent_cnt = 0;
+	
+	// I2C RTCC 初期化
+    //   初めての起動時は、2017/1/1 0:00:00 で
+    //   時刻を初期化します    
+    i2c_rtcc_init();
 
     // I2C LCD DEMO 開始
     i2c_lcd_init(); 
@@ -85,7 +162,7 @@ void process_init()
 
     // 最初のプロンプトを表示
     i2c_lcd_set_cursor(0, 0);
-    i2c_lcd_put_string("PIC16F18877     ");
+    i2c_lcd_put_string("PIC16F18877 DEMO");
     i2c_lcd_set_cursor(1, 0);
     i2c_lcd_put_string("  ADC2 Evaluator");
 
@@ -122,6 +199,14 @@ void process_on_one_second()
 {
     char c[17];
     unsigned char adc;
+
+    // 現在時刻を取得し表示 2017/05/28 11:45 形式
+    i2c_rtcc_read_time();
+    sprintf(c, "20%02d/%02d/%02d %02d:%02d", 
+            rtcc_years, rtcc_months, rtcc_days,
+            rtcc_hours, rtcc_minutes);
+    i2c_lcd_set_cursor(0, 0);
+    i2c_lcd_put_string(c);
     
     // ADC2変換値を取得
     adc = adc2_conv();
@@ -137,6 +222,9 @@ void process_on_one_second()
 //
 void process()
 {
+    // UART入力を優先させる
+    parse_uart_input();
+
     // 割込みごとに処理（1.024 ms）
     if (tmr0_toggle == 1) {
         process_on_interval();

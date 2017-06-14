@@ -46,6 +46,30 @@ int i2c_start_condition(int adrs, int rw)
     return SSP1CON2bits.ACKSTAT;
 }
 
+int i2c_repeated_start_condition(int adrs, int rw)
+{
+    collision_check = 0;
+
+    i2c_idle_check();
+    if (collision_check == 1) {
+        return -1;
+    }
+
+    SSP1CON2bits.RSEN = 1;
+    i2c_idle_check();
+    if (collision_check == 1) {
+        return -1;
+    }
+
+    SSP1BUF = (char)((adrs<<1)+rw);
+    while (SSP1STATbits.R_nW == 1);
+    if (collision_check == 1) {
+        return -1;
+    }
+
+    return SSP1CON2bits.ACKSTAT;
+}
+
 int i2c_stop_condition()
 {
     collision_check = 0;
