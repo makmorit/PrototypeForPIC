@@ -542,6 +542,45 @@ grid 5.08 mm(200MIL)</description>
 <text x="0.635" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="0.635" y="-3.683" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
+<package name="ELECAP_D5_100MIL">
+<circle x="0" y="0" radius="2.667" width="0.1524" layer="21"/>
+<pad name="-" x="1.27" y="0" drill="0.8" diameter="1.4" shape="long" rot="R90"/>
+<pad name="+" x="-1.27" y="0" drill="0.8" diameter="1.4" shape="long" rot="R90"/>
+<text x="2.8575" y="1.5875" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="2.413" y="-2.413" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<wire x1="-3.1465" y1="2.0875" x2="-2.6385" y2="2.0875" width="0.3048" layer="21"/>
+<wire x1="-2.6385" y1="1.5795" x2="-2.6385" y2="2.0875" width="0.3048" layer="21"/>
+<wire x1="-2.6385" y1="2.0875" x2="-2.1305" y2="2.0875" width="0.3048" layer="21"/>
+<wire x1="-2.6385" y1="2.0875" x2="-2.6385" y2="2.5955" width="0.3048" layer="21"/>
+</package>
+<package name="RESISTOR_0204_200MIL">
+<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
+type 0204, grid 5 mm</description>
+<wire x1="2.54" y1="0" x2="2.032" y2="0" width="0.508" layer="51"/>
+<wire x1="-2.54" y1="0" x2="-2.032" y2="0" width="0.508" layer="51"/>
+<wire x1="-1.778" y1="0.635" x2="-1.524" y2="0.889" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-1.778" y1="-0.635" x2="-1.524" y2="-0.889" width="0.1524" layer="21" curve="90"/>
+<wire x1="1.524" y1="-0.889" x2="1.778" y2="-0.635" width="0.1524" layer="21" curve="90"/>
+<wire x1="1.524" y1="0.889" x2="1.778" y2="0.635" width="0.1524" layer="21" curve="-90"/>
+<wire x1="-1.778" y1="-0.635" x2="-1.778" y2="0.635" width="0.1524" layer="51"/>
+<wire x1="-1.524" y1="0.889" x2="-1.27" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="0.762" x2="-1.27" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="-0.889" x2="-1.27" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="-1.143" y1="-0.762" x2="-1.27" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="0.762" x2="1.27" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="0.762" x2="-1.143" y2="0.762" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="-0.762" x2="1.27" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.143" y1="-0.762" x2="-1.143" y2="-0.762" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="0.889" x2="1.27" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-0.889" x2="1.27" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.778" y1="-0.635" x2="1.778" y2="0.635" width="0.1524" layer="51"/>
+<pad name="1" x="-2.54" y="0" drill="0.7" diameter="1.3"/>
+<pad name="2" x="2.54" y="0" drill="0.7" diameter="1.3"/>
+<text x="-2.54" y="1.27" size="0.9906" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-2.54" size="0.9906" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-2.032" y1="-0.254" x2="-1.778" y2="0.254" layer="51"/>
+<rectangle x1="1.778" y1="-0.254" x2="2.032" y2="0.254" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="PIC16F18877">
@@ -825,6 +864,15 @@ TOROID, INDUCTOR, etc...</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="_200MIL" package="RESISTOR_0204_200MIL">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 </devices>
 </deviceset>
 <deviceset name="CAP" prefix="C" uservalue="yes">
@@ -1000,6 +1048,15 @@ TOROID, INDUCTOR, etc...</description>
 </technologies>
 </device>
 <device name="_200MIL" package="ELECAP_200MIL">
+<connects>
+<connect gate="G$1" pin="+" pad="+"/>
+<connect gate="G$1" pin="-" pad="-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="_D5_100MIL" package="ELECAP_D5_100MIL">
 <connects>
 <connect gate="G$1" pin="+" pad="+"/>
 <connect gate="G$1" pin="-" pad="-"/>
@@ -1502,11 +1559,11 @@ package type P</description>
 </classes>
 <parts>
 <part name="U2" library="Parts" deviceset="PIC16F18877*" device="-I/P"/>
-<part name="C4" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
-<part name="R1" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
+<part name="C4" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
+<part name="R1" library="Parts" deviceset="RESISTOR" device="_200MIL" value="10k"/>
 <part name="CN4" library="Connectors" deviceset="PIC_CN" device="_H"/>
 <part name="GND5" library="Supply" deviceset="0V" device=""/>
-<part name="C5" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
+<part name="C5" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
 <part name="SW1" library="Parts" deviceset="10-XX" device=""/>
 <part name="GND1" library="Supply" deviceset="0V" device=""/>
 <part name="CN2" library="Connectors" deviceset="CONN_2PIN" device="-L" value="ADC_IN"/>
@@ -1517,28 +1574,28 @@ package type P</description>
 <part name="H4" library="Generic" deviceset="MOUNT_HOLE" device="_3.2"/>
 <part name="U3" library="PartsForProto" deviceset="AE-AQM1602A" device=""/>
 <part name="GND4" library="Supply" deviceset="0V" device=""/>
-<part name="R8" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
-<part name="R7" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
+<part name="R8" library="Parts" deviceset="RESISTOR" device="_200MIL" value="10k"/>
+<part name="R7" library="Parts" deviceset="RESISTOR" device="_200MIL" value="10k"/>
 <part name="GND3" library="Supply" deviceset="0V" device=""/>
 <part name="D1" library="Parts" deviceset="LED" device="_5MM"/>
-<part name="R2" library="Parts" deviceset="RESISTOR" device="_300MIL" value="330"/>
+<part name="R2" library="Parts" deviceset="RESISTOR" device="_200MIL" value="330"/>
 <part name="L1" library="Parts" deviceset="TC5026-22UH-060" device="" value="47uH"/>
 <part name="+3V3" library="Supply" deviceset="+3V3" device=""/>
 <part name="GND6" library="Supply" deviceset="0V" device=""/>
-<part name="C6" library="Parts" deviceset="CAP" device="_200MIL" value="10uF"/>
-<part name="R4" library="Parts" deviceset="RESISTOR" device="_300MIL" value="47k"/>
-<part name="R5" library="Parts" deviceset="RESISTOR" device="_300MIL" value="47k"/>
-<part name="R3" library="Parts" deviceset="RESISTOR" device="_300MIL" value="100k"/>
-<part name="R6" library="Parts" deviceset="RESISTOR" device="_300MIL" value="100k"/>
-<part name="C7" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
+<part name="C6" library="Parts" deviceset="CAP" device="_100MIL" value="10uF"/>
+<part name="R4" library="Parts" deviceset="RESISTOR" device="_200MIL" value="47k"/>
+<part name="R5" library="Parts" deviceset="RESISTOR" device="_200MIL" value="47k"/>
+<part name="R3" library="Parts" deviceset="RESISTOR" device="_200MIL" value="100k"/>
+<part name="R6" library="Parts" deviceset="RESISTOR" device="_200MIL" value="100k"/>
+<part name="C7" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
 <part name="CN3" library="PartsForProto" deviceset="UART_IF" device=""/>
 <part name="GND7" library="Supply" deviceset="0V" device=""/>
 <part name="CN5" library="PartsForProto" deviceset="AE-MICRO-SD-DIP" device=""/>
 <part name="+3V1" library="Supply" deviceset="+3V3" device=""/>
 <part name="+3V2" library="Supply" deviceset="+3V3" device=""/>
 <part name="U1" library="Parts" deviceset="XC6202*" device="P332TH" value="XC6202P332TH"/>
-<part name="C1" library="Parts" deviceset="CAP" device="_200MIL" value="1uF"/>
-<part name="C2" library="Parts" deviceset="CAP" device="_200MIL" value="1uF"/>
+<part name="C1" library="Parts" deviceset="CAP" device="_100MIL" value="1uF"/>
+<part name="C2" library="Parts" deviceset="CAP" device="_100MIL" value="1uF"/>
 <part name="P+6" library="Supply" deviceset="+12V" device="" value="6V〜12V"/>
 <part name="GND8" library="Supply" deviceset="0V" device=""/>
 <part name="GND10" library="Supply" deviceset="0V" device=""/>
@@ -1546,14 +1603,14 @@ package type P</description>
 <part name="CN1" library="Connectors" deviceset="CONN_2PIN" device="-L" value="12V_IN"/>
 <part name="+3V4" library="Supply" deviceset="+3V3" device=""/>
 <part name="U4" library="PartsForProto" deviceset="AE-RTC-8564NB" device=""/>
-<part name="C8" library="Parts" deviceset="CAP" device="_200MIL" value="0.1uF"/>
-<part name="R9" library="Parts" deviceset="RESISTOR" device="_300MIL" value="10k"/>
+<part name="C8" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
+<part name="R9" library="Parts" deviceset="RESISTOR" device="_200MIL" value="10k"/>
 <part name="GND14" library="Supply" deviceset="0V" device=""/>
 <part name="GND15" library="Supply" deviceset="0V" device=""/>
 <part name="+3V7" library="Supply" deviceset="+3V" device=""/>
 <part name="+3V8" library="Supply" deviceset="+3V" device=""/>
 <part name="G1" library="Parts" deviceset="CR2032H" device=""/>
-<part name="C3" library="Parts" deviceset="ELECAP" device="_200MIL" value="10uF"/>
+<part name="C3" library="Parts" deviceset="ELECAP" device="_D5_100MIL" value="10uF"/>
 <part name="FRAME1" library="Generic" deviceset="A3L-LOC" device=""/>
 <part name="GND9" library="Supply" deviceset="0V" device=""/>
 </parts>
