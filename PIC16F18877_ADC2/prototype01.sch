@@ -452,21 +452,33 @@ grid 5 mm(200MIL)</description>
 <text x="3.175" y="0.5334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="3.2004" y="-1.8034" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
-<package name="TOROID_COIL-300MIL">
-<description>&lt;B&gt;TOROID COIL &lt;/B&gt;&lt;p&gt;
-
-TC5026&lt;br&gt;
-vertical, grid 7.62 mm</description>
-<pad name="1" x="-3.81" y="0" drill="0.8128" shape="long" rot="R90"/>
-<pad name="2" x="3.81" y="0" drill="0.8128" shape="long" rot="R90"/>
-<text x="-3.1035" y="8.2225" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.1035" y="-9.6195" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-<wire x1="3.5" y1="2" x2="3.5" y2="7.5" width="0.127" layer="21"/>
-<wire x1="3.5" y1="7.5" x2="-3" y2="7.5" width="0.127" layer="21"/>
-<wire x1="-3" y1="7.5" x2="-3" y2="2" width="0.127" layer="21"/>
-<wire x1="3.5" y1="-7.5" x2="-3" y2="-7.5" width="0.127" layer="21"/>
-<wire x1="-3" y1="-2" x2="-3" y2="-7.5" width="0.127" layer="21"/>
-<wire x1="3.5" y1="-7.5" x2="3.5" y2="-2" width="0.127" layer="21"/>
+<package name="INDUCTOR_0207_300MIL">
+<description>&lt;b&gt;LEAD INDUCTOR&lt;/b&gt;&lt;p&gt;
+type 0207, grid 7.5 mm (300MIL)</description>
+<wire x1="0" y1="0" x2="0.381" y2="0" width="0.6096" layer="51"/>
+<wire x1="0.635" y1="0.889" x2="0.889" y2="1.143" width="0.1524" layer="51" curve="-90" cap="flat"/>
+<wire x1="0.635" y1="-0.889" x2="0.889" y2="-1.143" width="0.1524" layer="51" curve="90" cap="flat"/>
+<wire x1="6.731" y1="-1.143" x2="6.985" y2="-0.889" width="0.1524" layer="51" curve="90" cap="flat"/>
+<wire x1="6.731" y1="1.143" x2="6.985" y2="0.889" width="0.1524" layer="51" curve="-90" cap="flat"/>
+<wire x1="0.635" y1="-0.889" x2="0.635" y2="0.889" width="0.1524" layer="51"/>
+<wire x1="0.889" y1="1.143" x2="1.27" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="1.016" x2="1.27" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="-1.143" x2="1.27" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="1.397" y1="-1.016" x2="1.27" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="6.223" y1="1.016" x2="6.35" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="6.223" y1="1.016" x2="1.397" y2="1.016" width="0.1524" layer="21"/>
+<wire x1="6.223" y1="-1.016" x2="6.35" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="6.223" y1="-1.016" x2="1.397" y2="-1.016" width="0.1524" layer="21"/>
+<wire x1="6.731" y1="1.143" x2="6.35" y2="1.143" width="0.1524" layer="21"/>
+<wire x1="6.731" y1="-1.143" x2="6.35" y2="-1.143" width="0.1524" layer="21"/>
+<wire x1="6.985" y1="-0.889" x2="6.985" y2="0.889" width="0.1524" layer="51"/>
+<wire x1="7.239" y1="0" x2="7.62" y2="0" width="0.6096" layer="51"/>
+<pad name="1" x="0" y="0" drill="0.8" diameter="1.4" shape="long"/>
+<pad name="2" x="7.62" y="0" drill="0.8" diameter="1.4" shape="long"/>
+<text x="1.27" y="1.397" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="1.524" y="-0.5588" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="0.381" y1="-0.3048" x2="0.635" y2="0.3048" layer="51"/>
+<rectangle x1="6.985" y1="-0.3048" x2="7.239" y2="0.3048" layer="51"/>
 </package>
 <package name="TO92-LINE">
 <description>&lt;b&gt;TO-92&lt;/b&gt;&lt;p&gt;
@@ -955,19 +967,13 @@ TOROID, INDUCTOR, etc...</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="TC5026-22UH-060" prefix="L" uservalue="yes">
-<description>&lt;b&gt;電力用インダクタ&lt;/b&gt;&lt;p&gt;
-
-公称インダクタンス：22μH±10％&lt;br&gt;
-（＠1KHz/0.25V）&lt;br&gt;
-直流抵抗：650mΩ&lt;br&gt;
-定格電流：6A&lt;br&gt;
-寸法：φD=15、H=6.5、φd=0.6、L=8（単位：mm）</description>
+<deviceset name="LEAD_INDUCTOR" prefix="L" uservalue="yes">
+<description>&lt;b&gt;LEAD INDUCTOR&lt;/b&gt;</description>
 <gates>
-<gate name="G$1" symbol="INDUCTOR" x="0" y="-7.62"/>
+<gate name="G$1" symbol="INDUCTOR" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="TOROID_COIL-300MIL">
+<device name="" package="INDUCTOR_0207_300MIL">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -1579,7 +1585,7 @@ package type P</description>
 <part name="GND3" library="Supply" deviceset="0V" device=""/>
 <part name="D1" library="Parts" deviceset="LED" device="_5MM"/>
 <part name="R2" library="Parts" deviceset="RESISTOR" device="_200MIL" value="330"/>
-<part name="L1" library="Parts" deviceset="TC5026-22UH-060" device="" value="47uH"/>
+<part name="L1" library="Parts" deviceset="LEAD_INDUCTOR" device="" value="47uH"/>
 <part name="+3V3" library="Supply" deviceset="+3V3" device=""/>
 <part name="GND6" library="Supply" deviceset="0V" device=""/>
 <part name="C6" library="Parts" deviceset="CAP" device="_100MIL" value="10uF"/>
