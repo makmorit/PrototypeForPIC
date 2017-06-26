@@ -499,30 +499,6 @@ grid 5.08 mm</description>
 <wire x1="0.47625" y1="1.5875" x2="4.7625" y2="1.5875" width="0.127" layer="21" curve="-109.731614"/>
 <text x="-2.54" y="-1.27" size="1.27" layer="21">1</text>
 </package>
-<package name="CR2032H">
-<description>&lt;b&gt;LI BATTERY&lt;/b&gt; Varta</description>
-<wire x1="-0.635" y1="8.255" x2="0.635" y2="8.255" width="0.254" layer="21"/>
-<wire x1="0" y1="8.89" x2="0" y2="7.62" width="0.254" layer="21"/>
-<wire x1="-0.635" y1="-8.89" x2="0.635" y2="-8.89" width="0.254" layer="21"/>
-<wire x1="-3.556" y1="11.049" x2="-6.604" y2="11.049" width="0.1524" layer="51"/>
-<wire x1="-6.604" y1="11.049" x2="-6.604" y2="-2.54" width="0.1524" layer="21"/>
-<wire x1="6.604" y1="-2.54" x2="6.604" y2="11.049" width="0.1524" layer="21"/>
-<wire x1="-6.604" y1="-2.54" x2="-1.27" y2="-2.54" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="3.175" x2="-1.27" y2="-2.54" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="3.175" x2="1.27" y2="3.175" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="-2.54" x2="1.27" y2="3.175" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="-2.54" x2="6.604" y2="-2.54" width="0.1524" layer="21"/>
-<wire x1="-6.698" y1="7.5979" x2="10.033" y2="0" width="0.1524" layer="21" curve="227.397154"/>
-<wire x1="3.556" y1="11.049" x2="-3.556" y2="11.049" width="0.1524" layer="21"/>
-<wire x1="6.477" y1="11.049" x2="3.556" y2="11.049" width="0.1524" layer="51"/>
-<wire x1="6.6203" y1="7.6668" x2="10.0331" y2="0" width="0.1524" layer="21" curve="-49.440271"/>
-<pad name="+@1" x="-5.08" y="10.795" drill="1.1176" diameter="2.54" shape="octagon"/>
-<pad name="+" x="5.08" y="10.795" drill="1.1176" diameter="2.54" shape="octagon"/>
-<pad name="-" x="0" y="-6.985" drill="1.1176" diameter="2.54" shape="octagon"/>
-<text x="-2.54" y="11.43" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="5.08" y="-1.905" size="1.27" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
-<text x="-2.921" y="-5.08" size="1.27" layer="21" ratio="10">Lit.3V</text>
-</package>
 <package name="ELECAP_300MIL">
 <description>&lt;b&gt;ELECTROLYTIC CAPACITOR&lt;/b&gt;&lt;p&gt;
 grid 7.62 mm(300MIL)</description>
@@ -592,6 +568,29 @@ type 0204, grid 5 mm</description>
 <text x="-2.54" y="-2.54" size="0.9906" layer="27" ratio="10">&gt;VALUE</text>
 <rectangle x1="-2.032" y1="-0.254" x2="-1.778" y2="0.254" layer="51"/>
 <rectangle x1="1.778" y1="-0.254" x2="2.032" y2="0.254" layer="51"/>
+</package>
+<package name="CH25-2032LF">
+<description>&lt;b&gt;ボタン電池基板取付用ホルダー&lt;/b&gt;&lt;p&gt;
+ＣＲ２０３２リチウム電池用のホルダーです。&lt;br&gt;
+■サイズ：２９ｘ２３ｍｍ&lt;br&gt;
+■高さ：基板高約８．５ｍｍ（電池入れると約１０ｍｍ）&lt;br&gt;
+■＋足と－足の間隔：２０ｍｍ&lt;br&gt;</description>
+<wire x1="-1.365" y1="-12.255" x2="-2.635" y2="-12.255" width="0.254" layer="21"/>
+<wire x1="-2" y1="-12.89" x2="-2" y2="-11.62" width="0.254" layer="21"/>
+<wire x1="0.635" y1="8.89" x2="-0.635" y2="8.89" width="0.254" layer="21"/>
+<pad name="+" x="0" y="-14" drill="1.1176" rot="R180"/>
+<pad name="-" x="0" y="6" drill="1.1176" rot="R180"/>
+<text x="4.43" y="-12.7" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="4.08" y="-14.495" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-1.809" y="-7.46" size="1.27" layer="21" ratio="10">Lit.3V</text>
+<circle x="0" y="0" radius="11" width="0.127" layer="21"/>
+<wire x1="3.3" y1="-16.8" x2="-3.3" y2="-16.8" width="0.127" layer="21"/>
+<wire x1="3.3" y1="-16.8" x2="3.3" y2="-10.5" width="0.127" layer="21"/>
+<wire x1="-3.3" y1="-16.8" x2="-3.3" y2="-10.5" width="0.127" layer="21"/>
+<circle x="0" y="0" radius="3.25" width="0.127" layer="21"/>
+<hole x="9.6" y="0" drill="1.5"/>
+<hole x="-4.4" y="-8.1" drill="1.5"/>
+<hole x="-4.4" y="8.1" drill="1.5"/>
 </package>
 </packages>
 <symbols>
@@ -745,19 +744,6 @@ TOROID, INDUCTOR, etc...</description>
 <text x="-1.27" y="5.08" size="1.27" layer="96" ratio="10">&gt;VALUE</text>
 <text x="-8.89" y="5.08" size="1.27" layer="95" ratio="10">&gt;NAME</text>
 </symbol>
-<symbol name="1V2+2">
-<wire x1="-1.905" y1="0.635" x2="-1.905" y2="0" width="0.4064" layer="94"/>
-<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
-<wire x1="-1.905" y1="0" x2="-1.905" y2="-0.635" width="0.4064" layer="94"/>
-<wire x1="-0.635" y1="2.54" x2="-0.635" y2="0" width="0.4064" layer="94"/>
-<wire x1="-0.635" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
-<wire x1="-0.635" y1="0" x2="-0.635" y2="-2.54" width="0.4064" layer="94"/>
-<text x="-2.54" y="3.175" size="1.778" layer="95">&gt;NAME</text>
-<text x="-2.54" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="+" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
-<pin name="-" x="-5.08" y="0" visible="pad" length="short" direction="pas"/>
-<pin name="+@1" x="2.54" y="0" visible="off" length="point" direction="pas" rot="R180"/>
-</symbol>
 <symbol name="CPOL">
 <wire x1="-1.524" y1="-3.429" x2="1.524" y2="-3.429" width="0.254" layer="94"/>
 <wire x1="1.524" y1="-3.429" x2="1.524" y2="-2.54" width="0.254" layer="94"/>
@@ -769,6 +755,18 @@ TOROID, INDUCTOR, etc...</description>
 <rectangle x1="-1.651" y1="-5.08" x2="1.651" y2="-4.191" layer="94"/>
 <pin name="-" x="0" y="-7.62" visible="off" length="short" direction="pas" rot="R90"/>
 <pin name="+" x="0" y="0" visible="off" length="short" direction="pas" rot="R270"/>
+</symbol>
+<symbol name="BATTERY">
+<wire x1="-1.905" y1="0.635" x2="-1.905" y2="0" width="0.4064" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-1.905" y2="0" width="0.1524" layer="94"/>
+<wire x1="-1.905" y1="0" x2="-1.905" y2="-0.635" width="0.4064" layer="94"/>
+<wire x1="-0.635" y1="2.54" x2="-0.635" y2="0" width="0.4064" layer="94"/>
+<wire x1="-0.635" y1="0" x2="0" y2="0" width="0.1524" layer="94"/>
+<wire x1="-0.635" y1="0" x2="-0.635" y2="-2.54" width="0.4064" layer="94"/>
+<text x="-2.54" y="3.175" size="1.778" layer="95">&gt;NAME</text>
+<text x="-2.54" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="+" x="2.54" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="-" x="-5.08" y="0" visible="pad" length="short" direction="pas"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1020,24 +1018,6 @@ TOROID, INDUCTOR, etc...</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="CR2032H" prefix="G">
-<description>&lt;b&gt;LI BATTERY&lt;/b&gt; Varta</description>
-<gates>
-<gate name="1" symbol="1V2+2" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="CR2032H">
-<connects>
-<connect gate="1" pin="+" pad="+"/>
-<connect gate="1" pin="+@1" pad="+@1"/>
-<connect gate="1" pin="-" pad="-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="ELECAP" prefix="C" uservalue="yes">
 <description>&lt;b&gt;電解コンデンサー&lt;/b&gt;</description>
 <gates>
@@ -1063,6 +1043,27 @@ TOROID, INDUCTOR, etc...</description>
 </technologies>
 </device>
 <device name="_D5_100MIL" package="ELECAP_D5_100MIL">
+<connects>
+<connect gate="G$1" pin="+" pad="+"/>
+<connect gate="G$1" pin="-" pad="-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CH25-2032LF" prefix="G">
+<description>&lt;b&gt;ボタン電池基板取付用ホルダー&lt;/b&gt;&lt;p&gt;
+ＣＲ２０３２リチウム電池用のホルダーです。&lt;br&gt;
+■サイズ：２９ｘ２３ｍｍ&lt;br&gt;
+■高さ：基板高約８．５ｍｍ（電池入れると約１０ｍｍ）&lt;br&gt;
+■＋足と－足の間隔：２０ｍｍ&lt;br&gt;</description>
+<gates>
+<gate name="G$1" symbol="BATTERY" x="5.08" y="0"/>
+</gates>
+<devices>
+<device name="" package="CH25-2032LF">
 <connects>
 <connect gate="G$1" pin="+" pad="+"/>
 <connect gate="G$1" pin="-" pad="-"/>
@@ -1615,10 +1616,10 @@ package type P</description>
 <part name="GND15" library="Supply" deviceset="0V" device=""/>
 <part name="+3V7" library="Supply" deviceset="+3V" device=""/>
 <part name="+3V8" library="Supply" deviceset="+3V" device=""/>
-<part name="G1" library="Parts" deviceset="CR2032H" device=""/>
 <part name="C3" library="Parts" deviceset="ELECAP" device="_D5_100MIL" value="10uF"/>
 <part name="FRAME1" library="Generic" deviceset="A3L-LOC" device=""/>
 <part name="GND9" library="Supply" deviceset="0V" device=""/>
+<part name="G1" library="Parts" deviceset="CH25-2032LF" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1726,10 +1727,10 @@ package type P</description>
 <instance part="GND15" gate="1" x="50.8" y="93.98"/>
 <instance part="+3V7" gate="G$1" x="327.66" y="93.98"/>
 <instance part="+3V8" gate="G$1" x="50.8" y="124.46"/>
-<instance part="G1" gate="1" x="50.8" y="109.22" rot="R90"/>
 <instance part="C3" gate="G$1" x="53.34" y="157.48"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="GND9" gate="1" x="327.66" y="58.42"/>
+<instance part="G1" gate="G$1" x="50.8" y="109.22" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -1843,14 +1844,14 @@ package type P</description>
 <wire x1="281.94" y1="66.04" x2="281.94" y2="76.2" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND15" gate="1" pin="0V"/>
-<pinref part="G1" gate="1" pin="-"/>
-<wire x1="50.8" y1="96.52" x2="50.8" y2="104.14" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="C8" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="0V"/>
 <wire x1="327.66" y1="66.04" x2="327.66" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND15" gate="1" pin="0V"/>
+<pinref part="G1" gate="G$1" pin="-"/>
+<wire x1="50.8" y1="96.52" x2="50.8" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -2162,9 +2163,9 @@ package type P</description>
 <junction x="327.66" y="83.82"/>
 </segment>
 <segment>
-<pinref part="G1" gate="1" pin="+"/>
 <pinref part="+3V8" gate="G$1" pin="+3V"/>
-<wire x1="50.8" y1="114.3" x2="50.8" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="G1" gate="G$1" pin="+"/>
+<wire x1="50.8" y1="121.92" x2="50.8" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
