@@ -1317,7 +1317,7 @@ TOROID, INDUCTOR, etc...</description>
 <pad name="3" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
 <pad name="4" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
 <text x="-1.27" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-1.27" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
+<text x="16.51" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
 <rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
@@ -1334,6 +1334,16 @@ TOROID, INDUCTOR, etc...</description>
 <rectangle x1="20.066" y1="-0.254" x2="20.574" y2="0.254" layer="51"/>
 <pad name="10" x="22.86" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
 <rectangle x1="22.606" y1="-0.254" x2="23.114" y2="0.254" layer="51"/>
+<text x="-0.1905" y="-2.8575" size="0.8128" layer="21">1</text>
+<text x="15.113" y="-2.8575" size="0.8128" layer="21">7</text>
+<text x="17.653" y="-2.8575" size="0.8128" layer="21">8</text>
+<text x="2.3495" y="-2.8575" size="0.8128" layer="21">2</text>
+<text x="4.8895" y="-2.8575" size="0.8128" layer="21">3</text>
+<text x="7.4295" y="-2.8575" size="0.8128" layer="21">4</text>
+<text x="9.9695" y="-2.8575" size="0.8128" layer="21">5</text>
+<text x="12.5095" y="-2.8575" size="0.8128" layer="21">6</text>
+<text x="20.1295" y="-2.8575" size="0.8128" layer="21">9</text>
+<text x="22.352" y="-2.8575" size="0.8128" layer="21">10</text>
 </package>
 <package name="DIL8_AE-RTC-8564NB">
 <description>&lt;B&gt;Dual In Line&lt;/B&gt;&lt;p&gt;
@@ -1356,6 +1366,23 @@ package type P</description>
 <text x="1.5875" y="-2.54" size="0.7112" layer="21">CLO</text>
 <text x="4.445" y="-2.54" size="0.7112" layer="21">INT</text>
 <text x="1.905" y="9.525" size="0.7112" layer="21">NC</text>
+</package>
+<package name="I2C_IF_4PIN">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="3" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="4" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<text x="0" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="0" y="-4.7625" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
+<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
+<rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
+<text x="-1.905" y="-2.8575" size="0.8128" layer="21">GND</text>
+<text x="6.858" y="-2.8575" size="0.8128" layer="21">VDD</text>
+<text x="1.27" y="-2.8575" size="0.8128" layer="21">SDA</text>
+<text x="4.1275" y="-2.8575" size="0.8128" layer="21">SCL</text>
 </package>
 </packages>
 <symbols>
@@ -1453,6 +1480,23 @@ package type P</description>
 <wire x1="22.86" y1="-2.54" x2="24.13" y2="-2.54" width="0.6096" layer="94"/>
 <wire x1="22.86" y1="0" x2="24.13" y2="0" width="0.6096" layer="94"/>
 <pin name="VDD" x="27.94" y="0" length="middle" direction="pas" swaplevel="1" rot="R180"/>
+</symbol>
+<symbol name="I2C_IF_4PIN">
+<description>&lt;b&gt;I2C インターフェース&lt;/b&gt;&lt;p&gt;</description>
+<wire x1="15.24" y1="-10.16" x2="3.175" y2="-10.16" width="0.4064" layer="94"/>
+<wire x1="3.81" y1="-5.08" x2="5.08" y2="-5.08" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-7.62" x2="5.08" y2="-7.62" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="0" x2="5.08" y2="0" width="0.6096" layer="94"/>
+<wire x1="3.81" y1="-2.54" x2="5.08" y2="-2.54" width="0.6096" layer="94"/>
+<wire x1="3.175" y1="2.54" x2="3.175" y2="-10.16" width="0.4064" layer="94"/>
+<wire x1="15.24" y1="-10.16" x2="15.24" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="3.175" y1="2.54" x2="15.24" y2="2.54" width="0.4064" layer="94"/>
+<text x="2.54" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="VDD" x="0" y="-7.62" length="middle" direction="pas" swaplevel="1"/>
+<pin name="GND" x="0" y="0" length="middle" direction="pas" swaplevel="1"/>
+<pin name="SCL" x="0" y="-5.08" length="middle" swaplevel="1"/>
+<pin name="SDA" x="0" y="-2.54" length="middle" swaplevel="1"/>
+<text x="2.54" y="3.81" size="1.778" layer="95">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1553,6 +1597,25 @@ package type P</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="I2C_IF" prefix="CN">
+<description>&lt;b&gt;I2C インターフェース&lt;/b&gt;&lt;p&gt;</description>
+<gates>
+<gate name="G$1" symbol="I2C_IF_4PIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="I2C_IF_4PIN">
+<connects>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="SCL" pad="3"/>
+<connect gate="G$1" pin="SDA" pad="2"/>
+<connect gate="G$1" pin="VDD" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1620,6 +1683,9 @@ package type P</description>
 <part name="FRAME1" library="Generic" deviceset="A3L-LOC" device=""/>
 <part name="GND9" library="Supply" deviceset="0V" device=""/>
 <part name="G1" library="Parts" deviceset="CH25-2032LF" device=""/>
+<part name="CN6" library="PartsForProto" deviceset="I2C_IF" device=""/>
+<part name="+3V5" library="Supply" deviceset="+3V3" device=""/>
+<part name="GND11" library="Supply" deviceset="0V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1731,6 +1797,9 @@ package type P</description>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="GND9" gate="1" x="327.66" y="58.42"/>
 <instance part="G1" gate="G$1" x="50.8" y="109.22" rot="R90"/>
+<instance part="CN6" gate="G$1" x="246.38" y="73.66" rot="R180"/>
+<instance part="+3V5" gate="G$1" x="254" y="93.98"/>
+<instance part="GND11" gate="1" x="254" y="58.42"/>
 </instances>
 <busses>
 </busses>
@@ -1853,6 +1922,12 @@ package type P</description>
 <pinref part="G1" gate="G$1" pin="-"/>
 <wire x1="50.8" y1="96.52" x2="50.8" y2="104.14" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="CN6" gate="G$1" pin="GND"/>
+<pinref part="GND11" gate="1" pin="0V"/>
+<wire x1="246.38" y1="73.66" x2="254" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="254" y1="73.66" x2="254" y2="60.96" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$3" class="0">
 <segment>
@@ -1924,6 +1999,11 @@ package type P</description>
 <wire x1="314.96" y1="78.74" x2="325.12" y2="78.74" width="0.1524" layer="91"/>
 <label x="317.5" y="78.74" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="CN6" gate="G$1" pin="SCL"/>
+<wire x1="246.38" y1="78.74" x2="259.08" y2="78.74" width="0.1524" layer="91"/>
+<label x="251.46" y="78.74" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDA1" class="0">
 <segment>
@@ -1944,6 +2024,11 @@ package type P</description>
 <pinref part="U4" gate="G$1" pin="SDA"/>
 <wire x1="314.96" y1="76.2" x2="325.12" y2="76.2" width="0.1524" layer="91"/>
 <label x="317.5" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="CN6" gate="G$1" pin="SDA"/>
+<wire x1="246.38" y1="76.2" x2="259.08" y2="76.2" width="0.1524" layer="91"/>
+<label x="251.46" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -2112,6 +2197,12 @@ package type P</description>
 <pinref part="+3V4" gate="G$1" pin="+3V3"/>
 <wire x1="45.72" y1="210.82" x2="45.72" y2="215.9" width="0.1524" layer="91"/>
 <junction x="45.72" y="210.82"/>
+</segment>
+<segment>
+<pinref part="CN6" gate="G$1" pin="VDD"/>
+<wire x1="246.38" y1="81.28" x2="254" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="+3V5" gate="G$1" pin="+3V3"/>
+<wire x1="254" y1="81.28" x2="254" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
