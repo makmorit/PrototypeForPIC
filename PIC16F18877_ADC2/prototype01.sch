@@ -1636,8 +1636,6 @@ package type P</description>
 <part name="C5" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
 <part name="SW1" library="Parts" deviceset="10-XX" device=""/>
 <part name="GND1" library="Supply" deviceset="0V" device=""/>
-<part name="CN2" library="Connectors" deviceset="CONN_2PIN" device="-L" value="ADC_IN"/>
-<part name="GND2" library="Supply" deviceset="0V" device=""/>
 <part name="H1" library="Generic" deviceset="MOUNT_HOLE" device="_3.2"/>
 <part name="H2" library="Generic" deviceset="MOUNT_HOLE" device="_3.2"/>
 <part name="H3" library="Generic" deviceset="MOUNT_HOLE" device="_3.2"/>
@@ -1690,11 +1688,10 @@ package type P</description>
 <sheets>
 <sheet>
 <plain>
-<text x="177.8" y="93.98" size="1.778" layer="91">【UARTのご使用について】
+<text x="114.3" y="91.44" size="1.778" layer="91">【UART接続用コネクター】
 
 　USB-UART変換基板などを、
-　RC7/RX、RC6/TX に
-　接続します。</text>
+　こちらのコネクターに接続できます。</text>
 <text x="292.1" y="10.16" size="2.1844" layer="91">PIC16F18877 microSDサンプル
 
 小型LCD／RTCCを接続</text>
@@ -1724,11 +1721,6 @@ package type P</description>
 ＤＩＰ化キット
  [AE-MICRO-SD-DIP]
 を使用します。</text>
-<text x="127" y="93.98" size="1.778" layer="91">【ADC2のご使用について】
-
-　センサー等からの
-　アナログ出力を、
-　ANA0端子に接続します。</text>
 <text x="238.76" y="127" size="1.778" layer="91">【LED】
 　カウントダウン中は
 　LEDが点灯します。
@@ -1740,6 +1732,10 @@ package type P</description>
 180秒間の
 カウントダウンが
 開始されます。</text>
+<text x="170.18" y="91.44" size="1.778" layer="91">【外部I2Cデバイス接続用コネクター】
+
+　温度センサーなどの外部I2Cデバイスを
+　こちらのコネクターに接続できます。</text>
 </plain>
 <instances>
 <instance part="U2" gate="G$1" x="165.1" y="190.5"/>
@@ -1750,8 +1746,6 @@ package type P</description>
 <instance part="C5" gate="G$1" x="238.76" y="165.1"/>
 <instance part="SW1" gate="1" x="129.54" y="170.18"/>
 <instance part="GND1" gate="1" x="129.54" y="137.16"/>
-<instance part="CN2" gate="G$1" x="144.78" y="121.92"/>
-<instance part="GND2" gate="1" x="134.62" y="111.76"/>
 <instance part="H1" gate="G$1" x="312.42" y="38.1"/>
 <instance part="H2" gate="G$1" x="312.42" y="30.48"/>
 <instance part="H3" gate="G$1" x="350.52" y="38.1"/>
@@ -1772,8 +1766,8 @@ package type P</description>
 <instance part="R3" gate="G$1" x="281.94" y="187.96" rot="R90"/>
 <instance part="R6" gate="G$1" x="304.8" y="187.96" rot="R90"/>
 <instance part="C7" gate="G$1" x="312.42" y="165.1"/>
-<instance part="CN3" gate="G$1" x="190.5" y="124.46"/>
-<instance part="GND7" gate="1" x="185.42" y="111.76"/>
+<instance part="CN3" gate="G$1" x="132.08" y="119.38"/>
+<instance part="GND7" gate="1" x="127" y="106.68"/>
 <instance part="CN5" gate="G$1" x="320.04" y="185.42"/>
 <instance part="+3V1" gate="G$1" x="129.54" y="226.06"/>
 <instance part="+3V2" gate="G$1" x="304.8" y="139.7"/>
@@ -1797,9 +1791,9 @@ package type P</description>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="GND9" gate="1" x="327.66" y="58.42"/>
 <instance part="G1" gate="G$1" x="50.8" y="109.22" rot="R90"/>
-<instance part="CN6" gate="G$1" x="246.38" y="73.66" rot="R180"/>
-<instance part="+3V5" gate="G$1" x="254" y="93.98"/>
-<instance part="GND11" gate="1" x="254" y="58.42"/>
+<instance part="CN6" gate="G$1" x="193.04" y="114.3" rot="R180"/>
+<instance part="+3V5" gate="G$1" x="200.66" y="129.54"/>
+<instance part="GND11" gate="1" x="200.66" y="106.68"/>
 </instances>
 <busses>
 </busses>
@@ -1824,12 +1818,6 @@ package type P</description>
 <wire x1="142.24" y1="147.32" x2="142.24" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="144.78" x2="137.16" y2="144.78" width="0.1524" layer="91"/>
 <junction x="137.16" y="144.78"/>
-</segment>
-<segment>
-<pinref part="CN2" gate="G$1" pin="2"/>
-<pinref part="GND2" gate="1" pin="0V"/>
-<wire x1="142.24" y1="121.92" x2="134.62" y2="121.92" width="0.1524" layer="91"/>
-<wire x1="134.62" y1="121.92" x2="134.62" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U3" gate="G$1" pin="GND"/>
@@ -1859,8 +1847,8 @@ package type P</description>
 <segment>
 <pinref part="CN3" gate="G$1" pin="GND"/>
 <pinref part="GND7" gate="1" pin="0V"/>
-<wire x1="190.5" y1="124.46" x2="185.42" y2="124.46" width="0.1524" layer="91"/>
-<wire x1="185.42" y1="124.46" x2="185.42" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="119.38" x2="127" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="127" y1="119.38" x2="127" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND5" gate="1" pin="0V"/>
@@ -1925,8 +1913,8 @@ package type P</description>
 <segment>
 <pinref part="CN6" gate="G$1" pin="GND"/>
 <pinref part="GND11" gate="1" pin="0V"/>
-<wire x1="246.38" y1="73.66" x2="254" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="254" y1="73.66" x2="254" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="114.3" x2="200.66" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="114.3" x2="200.66" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -1967,18 +1955,6 @@ package type P</description>
 <wire x1="226.06" y1="187.96" x2="208.28" y2="187.96" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="ANA0" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="RA0/ANA0"/>
-<wire x1="165.1" y1="187.96" x2="152.4" y2="187.96" width="0.1524" layer="91"/>
-<label x="152.4" y="187.96" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="CN2" gate="G$1" pin="1"/>
-<wire x1="142.24" y1="124.46" x2="129.54" y2="124.46" width="0.1524" layer="91"/>
-<label x="129.54" y="124.46" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="SCL1" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="RC3/SCL1"/>
@@ -2001,8 +1977,8 @@ package type P</description>
 </segment>
 <segment>
 <pinref part="CN6" gate="G$1" pin="SCL"/>
-<wire x1="246.38" y1="78.74" x2="259.08" y2="78.74" width="0.1524" layer="91"/>
-<label x="251.46" y="78.74" size="1.778" layer="95"/>
+<wire x1="193.04" y1="119.38" x2="205.74" y2="119.38" width="0.1524" layer="91"/>
+<label x="198.12" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA1" class="0">
@@ -2027,8 +2003,8 @@ package type P</description>
 </segment>
 <segment>
 <pinref part="CN6" gate="G$1" pin="SDA"/>
-<wire x1="246.38" y1="76.2" x2="259.08" y2="76.2" width="0.1524" layer="91"/>
-<label x="251.46" y="76.2" size="1.778" layer="95"/>
+<wire x1="193.04" y1="116.84" x2="205.74" y2="116.84" width="0.1524" layer="91"/>
+<label x="198.12" y="116.84" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -2120,8 +2096,8 @@ package type P</description>
 <net name="UART_RX" class="0">
 <segment>
 <pinref part="CN3" gate="G$1" pin="RX"/>
-<wire x1="190.5" y1="121.92" x2="170.18" y2="121.92" width="0.1524" layer="91"/>
-<label x="170.18" y="121.92" size="1.778" layer="95"/>
+<wire x1="132.08" y1="116.84" x2="111.76" y2="116.84" width="0.1524" layer="91"/>
+<label x="111.76" y="116.84" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="RC7"/>
@@ -2132,8 +2108,8 @@ package type P</description>
 <net name="UART_TX" class="0">
 <segment>
 <pinref part="CN3" gate="G$1" pin="TX"/>
-<wire x1="190.5" y1="119.38" x2="170.18" y2="119.38" width="0.1524" layer="91"/>
-<label x="170.18" y="119.38" size="1.778" layer="95"/>
+<wire x1="132.08" y1="114.3" x2="111.76" y2="114.3" width="0.1524" layer="91"/>
+<label x="111.76" y="114.3" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="RC6"/>
@@ -2200,9 +2176,9 @@ package type P</description>
 </segment>
 <segment>
 <pinref part="CN6" gate="G$1" pin="VDD"/>
-<wire x1="246.38" y1="81.28" x2="254" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="121.92" x2="200.66" y2="121.92" width="0.1524" layer="91"/>
 <pinref part="+3V5" gate="G$1" pin="+3V3"/>
-<wire x1="254" y1="81.28" x2="254" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="121.92" x2="200.66" y2="127" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
