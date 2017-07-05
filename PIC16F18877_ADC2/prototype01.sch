@@ -1182,27 +1182,6 @@ TOROID, INDUCTOR, etc...</description>
 <text x="-2.54" y="-1.27" size="1.27" layer="21">1</text>
 <text x="14.478" y="-1.27" size="1.27" layer="21">6</text>
 </package>
-<package name="HEADER_L_2PIN">
-<wire x1="2.54" y1="0.254" x2="2.54" y2="3.048" width="0.1524" layer="21"/>
-<wire x1="0" y1="3.048" x2="2.54" y2="3.048" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="3.81" x2="1.27" y2="8.509" width="0.6604" layer="21"/>
-<wire x1="2.54" y1="0.254" x2="0" y2="0.254" width="0.1524" layer="21"/>
-<wire x1="0" y1="0.254" x2="-2.54" y2="0.254" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="0.254" x2="-2.54" y2="3.048" width="0.1524" layer="21"/>
-<wire x1="0" y1="0.254" x2="0" y2="3.048" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="3.048" x2="0" y2="3.048" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="3.81" x2="-1.27" y2="8.509" width="0.6604" layer="21"/>
-<pad name="1" x="1.27" y="-1.27" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="2" x="-1.27" y="-1.27" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<text x="1.905" y="0.762" size="1.27" layer="21" ratio="10" rot="R90">1</text>
-<text x="-0.635" y="0.762" size="1.27" layer="21" ratio="10" rot="R90">2</text>
-<rectangle x1="0.9398" y1="3.048" x2="1.6002" y2="3.81" layer="21"/>
-<rectangle x1="-1.6002" y1="3.048" x2="-0.9398" y2="3.81" layer="21"/>
-<rectangle x1="0.9398" y1="-0.4064" x2="1.6002" y2="0.254" layer="21"/>
-<rectangle x1="-1.6002" y1="-0.4064" x2="-0.9398" y2="0.254" layer="21"/>
-<text x="-3.81" y="-4.318" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.81" y="-6.35" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-</package>
 </packages>
 <symbols>
 <symbol name="PIC_CN">
@@ -1226,18 +1205,6 @@ TOROID, INDUCTOR, etc...</description>
 <pin name="AUX" x="0" y="12.7" length="middle" swaplevel="1"/>
 <text x="2.54" y="16.51" size="1.778" layer="95">&gt;NAME</text>
 </symbol>
-<symbol name="CN_CONNECTION">
-<wire x1="5.08" y1="-2.54" x2="0" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.6096" layer="94"/>
-<wire x1="2.54" y1="0" x2="3.81" y2="0" width="0.6096" layer="94"/>
-<wire x1="0" y1="5.08" x2="0" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="5.08" y1="-2.54" x2="5.08" y2="5.08" width="0.4064" layer="94"/>
-<wire x1="0" y1="5.08" x2="5.08" y2="5.08" width="0.4064" layer="94"/>
-<text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="2" x="-2.54" y="0" visible="pad" length="middle" direction="pas" swaplevel="1"/>
-<pin name="1" x="-2.54" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1"/>
-<text x="0" y="6.096" size="1.778" layer="95">&gt;NAME</text>
-</symbol>
 </symbols>
 <devicesets>
 <deviceset name="PIC_CN" prefix="CN">
@@ -1254,22 +1221,6 @@ TOROID, INDUCTOR, etc...</description>
 <connect gate="G$1" pin="VDD" pad="2"/>
 <connect gate="G$1" pin="VPP/!MCLR" pad="1"/>
 <connect gate="G$1" pin="VSS" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="CONN_2PIN" prefix="CN">
-<gates>
-<gate name="G$1" symbol="CN_CONNECTION" x="2.54" y="-2.54"/>
-</gates>
-<devices>
-<device name="-L" package="HEADER_L_2PIN">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1502,6 +1453,17 @@ package type P</description>
 <rectangle x1="20.066" y1="-0.254" x2="20.574" y2="0.254" layer="51"/>
 <text x="19.8755" y="-2.8575" size="0.7112" layer="21">D7</text>
 </package>
+<package name="HEADER_2PIN_POWER_IF">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<text x="-1.3462" y="2.4638" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
+<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
+<text x="4.1275" y="-1.27" size="1.27" layer="21">+</text>
+<text x="-4.572" y="-1.27" size="1.016" layer="21">GND</text>
+</package>
 </packages>
 <symbols>
 <symbol name="AE-AQM1602A">
@@ -1722,6 +1684,18 @@ package type P</description>
 <wire x1="3.81" y1="-10.16" x2="5.08" y2="-10.16" width="0.6096" layer="94"/>
 <pin name="RD3" x="0" y="-10.16" length="middle" swaplevel="1"/>
 <wire x1="3.81" y1="-17.78" x2="5.08" y2="-17.78" width="0.6096" layer="94"/>
+</symbol>
+<symbol name="POWER_IF">
+<wire x1="12.7" y1="-2.54" x2="0" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.6096" layer="94"/>
+<wire x1="2.54" y1="0" x2="3.81" y2="0" width="0.6096" layer="94"/>
+<wire x1="0" y1="5.08" x2="0" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="12.7" y1="-2.54" x2="12.7" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="0" y1="5.08" x2="12.7" y2="5.08" width="0.4064" layer="94"/>
+<text x="0" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="-2.54" y="0" length="middle" direction="pas" swaplevel="1"/>
+<pin name="VDD" x="-2.54" y="2.54" length="middle" direction="pas" swaplevel="1"/>
+<text x="0" y="6.096" size="1.778" layer="95">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1947,6 +1921,23 @@ package type P</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="POWER_IF" prefix="CN">
+<description>&lt;b&gt;電源供給インターフェース&lt;/b&gt;</description>
+<gates>
+<gate name="G$1" symbol="POWER_IF" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="HEADER_2PIN_POWER_IF">
+<connects>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="VDD" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1999,7 +1990,7 @@ package type P</description>
 <part name="GND8" library="Supply" deviceset="0V" device=""/>
 <part name="GND10" library="Supply" deviceset="0V" device=""/>
 <part name="P+2" library="Supply" deviceset="+12V" device="" value="6V〜12V"/>
-<part name="CN1" library="Connectors" deviceset="CONN_2PIN" device="-L" value="12V_IN"/>
+<part name="CN1" library="PartsForProto" deviceset="POWER_IF" device="" value="12V_IN"/>
 <part name="+3V4" library="Supply" deviceset="+3V3" device=""/>
 <part name="U4" library="PartsForProto" deviceset="AE-RTC-8564NB" device=""/>
 <part name="C8" library="Parts" deviceset="CAP" device="_100MIL" value="0.1uF"/>
@@ -2233,7 +2224,7 @@ package type P</description>
 <wire x1="63.5" y1="187.96" x2="63.5" y2="193.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="CN1" gate="G$1" pin="2"/>
+<pinref part="CN1" gate="G$1" pin="GND"/>
 <pinref part="GND10" gate="1" pin="0V"/>
 <wire x1="71.12" y1="152.4" x2="63.5" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="152.4" x2="63.5" y2="147.32" width="0.1524" layer="91"/>
@@ -2578,7 +2569,7 @@ package type P</description>
 <junction x="81.28" y="210.82"/>
 </segment>
 <segment>
-<pinref part="CN1" gate="G$1" pin="1"/>
+<pinref part="CN1" gate="G$1" pin="VDD"/>
 <pinref part="P+2" gate="1" pin="+12V"/>
 <wire x1="71.12" y1="154.94" x2="63.5" y2="154.94" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="154.94" x2="63.5" y2="162.56" width="0.1524" layer="91"/>
