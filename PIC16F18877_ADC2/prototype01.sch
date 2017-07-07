@@ -376,8 +376,8 @@ grid 2.54 mm(100MIL)</description>
 <wire x1="0.3302" y1="2.54" x2="0.3302" y2="1.778" width="0.3048" layer="21"/>
 <wire x1="1.27" y1="2.54" x2="0.3302" y2="2.54" width="0.1524" layer="21"/>
 <wire x1="-1.27" y1="2.54" x2="-0.3048" y2="2.54" width="0.1524" layer="21"/>
-<pad name="1" x="-1.27" y="0" drill="0.8" diameter="1.4" shape="long" rot="R90"/>
-<pad name="2" x="1.27" y="0" drill="0.8" diameter="1.4" shape="long" rot="R90"/>
+<pad name="1" x="-1.27" y="0" drill="0.8" rot="R90"/>
+<pad name="2" x="1.27" y="0" drill="0.8" rot="R90"/>
 <text x="2.6035" y="2.159" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="2.6035" y="-2.032" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
@@ -1263,38 +1263,41 @@ TOROID, INDUCTOR, etc...</description>
 </package>
 <package name="AE-MICRO-SD-DIP">
 <description>&lt;b&gt;PIN HEADER for SDCARD SLOT&lt;/b&gt;</description>
-<pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="3" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="4" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<text x="-1.27" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="16.51" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-<rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
-<pad name="5" x="10.16" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="6" x="12.7" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="7" x="15.24" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="8" x="17.78" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<rectangle x1="14.986" y1="-0.254" x2="15.494" y2="0.254" layer="51"/>
-<rectangle x1="12.446" y1="-0.254" x2="12.954" y2="0.254" layer="51"/>
-<rectangle x1="9.906" y1="-0.254" x2="10.414" y2="0.254" layer="51"/>
-<rectangle x1="17.526" y1="-0.254" x2="18.034" y2="0.254" layer="51"/>
-<pad name="9" x="20.32" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<rectangle x1="20.066" y1="-0.254" x2="20.574" y2="0.254" layer="51"/>
-<pad name="10" x="22.86" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<rectangle x1="22.606" y1="-0.254" x2="23.114" y2="0.254" layer="51"/>
-<text x="-0.1905" y="-2.8575" size="0.8128" layer="21">1</text>
-<text x="15.113" y="-2.8575" size="0.8128" layer="21">7</text>
-<text x="17.653" y="-2.8575" size="0.8128" layer="21">8</text>
-<text x="2.3495" y="-2.8575" size="0.8128" layer="21">2</text>
-<text x="4.8895" y="-2.8575" size="0.8128" layer="21">3</text>
-<text x="7.4295" y="-2.8575" size="0.8128" layer="21">4</text>
-<text x="9.9695" y="-2.8575" size="0.8128" layer="21">5</text>
-<text x="12.5095" y="-2.8575" size="0.8128" layer="21">6</text>
-<text x="20.1295" y="-2.8575" size="0.8128" layer="21">9</text>
-<text x="22.352" y="-2.8575" size="0.8128" layer="21">10</text>
+<pad name="1" x="1.27" y="1.27" drill="1.016" rot="R90"/>
+<pad name="2" x="3.81" y="1.27" drill="1.016" rot="R90"/>
+<pad name="3" x="6.35" y="1.27" drill="1.016" rot="R90"/>
+<pad name="4" x="8.89" y="1.27" drill="1.016" rot="R90"/>
+<text x="0" y="3.81" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="17.78" y="3.81" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="6.096" y1="1.016" x2="6.604" y2="1.524" layer="51"/>
+<rectangle x1="3.556" y1="1.016" x2="4.064" y2="1.524" layer="51"/>
+<rectangle x1="1.016" y1="1.016" x2="1.524" y2="1.524" layer="51"/>
+<rectangle x1="8.636" y1="1.016" x2="9.144" y2="1.524" layer="51"/>
+<pad name="5" x="11.43" y="1.27" drill="1.016" rot="R90"/>
+<pad name="6" x="13.97" y="1.27" drill="1.016" rot="R90"/>
+<pad name="7" x="16.51" y="1.27" drill="1.016" rot="R90"/>
+<pad name="8" x="19.05" y="1.27" drill="1.016" rot="R90"/>
+<rectangle x1="16.256" y1="1.016" x2="16.764" y2="1.524" layer="51"/>
+<rectangle x1="13.716" y1="1.016" x2="14.224" y2="1.524" layer="51"/>
+<rectangle x1="11.176" y1="1.016" x2="11.684" y2="1.524" layer="51"/>
+<rectangle x1="18.796" y1="1.016" x2="19.304" y2="1.524" layer="51"/>
+<pad name="9" x="21.59" y="1.27" drill="1.016" rot="R90"/>
+<rectangle x1="21.336" y1="1.016" x2="21.844" y2="1.524" layer="51"/>
+<pad name="10" x="24.13" y="1.27" drill="1.016" rot="R90"/>
+<rectangle x1="23.876" y1="1.016" x2="24.384" y2="1.524" layer="51"/>
+<text x="1.0795" y="-1.5875" size="0.8128" layer="21">1</text>
+<text x="16.383" y="-1.5875" size="0.8128" layer="21">7</text>
+<text x="18.923" y="-1.5875" size="0.8128" layer="21">8</text>
+<text x="3.6195" y="-1.5875" size="0.8128" layer="21">2</text>
+<text x="6.1595" y="-1.5875" size="0.8128" layer="21">3</text>
+<text x="8.6995" y="-1.5875" size="0.8128" layer="21">4</text>
+<text x="11.2395" y="-1.5875" size="0.8128" layer="21">5</text>
+<text x="13.7795" y="-1.5875" size="0.8128" layer="21">6</text>
+<text x="21.3995" y="-1.5875" size="0.8128" layer="21">9</text>
+<text x="23.622" y="-1.5875" size="0.8128" layer="21">10</text>
+<wire x1="0" y1="2.54" x2="0" y2="17.78" width="0.127" layer="21"/>
+<wire x1="0" y1="17.78" x2="25.4" y2="17.78" width="0.127" layer="21"/>
+<wire x1="25.4" y1="17.78" x2="25.4" y2="2.54" width="0.127" layer="21"/>
 </package>
 <package name="DIL8_AE-RTC-8564NB">
 <description>&lt;B&gt;Dual In Line&lt;/B&gt;&lt;p&gt;
