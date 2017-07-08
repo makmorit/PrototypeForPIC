@@ -1233,19 +1233,34 @@ TOROID, INDUCTOR, etc...</description>
 <library name="PartsForProto">
 <packages>
 <package name="AE-AQM1602A">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="3" x="5.08" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<pad name="4" x="7.62" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
+<description>&lt;b&gt;AE-AQM1602A(KIT)&lt;/b&gt;
+&lt;p&gt;
+Ｉ２Ｃ接続小型キャラクタＬＣＤモジュール&lt;br&gt;
+（１６ｘ２行・３．３Ｖ／５Ｖ）&lt;br&gt;
+ピッチ変換キット</description>
+<pad name="1" x="0" y="0" drill="1" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="1" rot="R90"/>
+<pad name="3" x="5.08" y="0" drill="1" rot="R90"/>
+<pad name="4" x="7.62" y="0" drill="1" rot="R90"/>
 <text x="-1.27" y="2.54" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-1.27" y="-3.81" size="1.27" layer="27">&gt;VALUE</text>
+<text x="-1.27" y="5.08" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
 <rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 <rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
-<text x="-5.08" y="-1.27" size="1.016" layer="21">GND</text>
-<text x="9.398" y="-1.27" size="1.016" layer="21">+V</text>
+<text x="-1.27" y="-2.2225" size="0.7112" layer="21">GND</text>
+<text x="1.5875" y="-2.2225" size="0.7112" layer="21">SDA</text>
+<text x="4.1275" y="-2.2225" size="0.7112" layer="21">SCL</text>
+<text x="6.858" y="-2.2225" size="0.7112" layer="21">VDD</text>
+<wire x1="36.81" y1="5.08" x2="36.81" y2="32.78" width="0.127" layer="21"/>
+<wire x1="36.81" y1="32.78" x2="-29.19" y2="32.78" width="0.127" layer="21"/>
+<wire x1="-29.19" y1="32.78" x2="-29.19" y2="5.08" width="0.127" layer="21"/>
+<wire x1="-29.19" y1="5.08" x2="-3.69" y2="5.08" width="0.127" layer="21"/>
+<wire x1="-3.69" y1="5.08" x2="11.31" y2="5.08" width="0.127" layer="21"/>
+<wire x1="11.31" y1="5.08" x2="36.81" y2="5.08" width="0.127" layer="21"/>
+<wire x1="-29.21" y1="13.08" x2="36.83" y2="13.08" width="0.127" layer="21"/>
+<wire x1="-3.69" y1="5.08" x2="-3.69" y2="-1.92" width="0.127" layer="21"/>
+<wire x1="11.31" y1="5.08" x2="11.31" y2="-1.92" width="0.127" layer="21"/>
 </package>
 <package name="UART_IF_3PIN">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
