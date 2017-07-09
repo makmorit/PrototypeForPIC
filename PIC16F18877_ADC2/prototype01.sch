@@ -240,12 +240,12 @@ DIN A3, landscape with location and doc. field</description>
 <package name="DIL40">
 <description>&lt;B&gt;Dual In Line&lt;/B&gt;&lt;p&gt;
 package type P</description>
-<wire x1="-25.4" y1="-1.27" x2="-25.4" y2="-6.223" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="-1.27" x2="-25.4" y2="-5.588" width="0.1524" layer="21"/>
 <wire x1="-25.4" y1="1.27" x2="-25.4" y2="-1.27" width="0.1524" layer="21" curve="-180"/>
-<wire x1="25.4" y1="-6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="6.223" x2="-25.4" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="6.223" x2="25.4" y2="6.223" width="0.1524" layer="21"/>
-<wire x1="-25.4" y1="-6.223" x2="25.4" y2="-6.223" width="0.1524" layer="21"/>
+<wire x1="25.4" y1="-5.588" x2="25.4" y2="5.588" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="5.588" x2="-25.4" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="5.588" x2="25.4" y2="5.588" width="0.1524" layer="21"/>
+<wire x1="-25.4" y1="-5.588" x2="25.4" y2="-5.588" width="0.1524" layer="21"/>
 <pad name="1" x="-24.13" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
 <pad name="2" x="-21.59" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
 <pad name="3" x="-19.05" y="-7.62" drill="0.8128" shape="long" rot="R90"/>
@@ -370,16 +370,16 @@ type 0207, grid 7.5 mm (300MIL)</description>
 <package name="CAP_100MIL">
 <description>&lt;b&gt;CAPACITOR&lt;/b&gt;&lt;p&gt;
 grid 2.54 mm(100MIL)</description>
-<wire x1="-0.3048" y1="3.302" x2="-0.3048" y2="2.54" width="0.3048" layer="21"/>
-<wire x1="-0.3048" y1="2.54" x2="-0.3048" y2="1.778" width="0.3048" layer="21"/>
-<wire x1="0.3302" y1="3.302" x2="0.3302" y2="2.54" width="0.3048" layer="21"/>
-<wire x1="0.3302" y1="2.54" x2="0.3302" y2="1.778" width="0.3048" layer="21"/>
-<wire x1="1.27" y1="2.54" x2="0.3302" y2="2.54" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="2.54" x2="-0.3048" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-0.3048" y1="2.3495" x2="-0.3048" y2="1.5875" width="0.3048" layer="21"/>
+<wire x1="-0.3048" y1="1.5875" x2="-0.3048" y2="0.8255" width="0.3048" layer="21"/>
+<wire x1="0.3302" y1="2.3495" x2="0.3302" y2="1.5875" width="0.3048" layer="21"/>
+<wire x1="0.3302" y1="1.5875" x2="0.3302" y2="0.8255" width="0.3048" layer="21"/>
+<wire x1="1.27" y1="1.5875" x2="0.3302" y2="1.5875" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.5875" x2="-0.3048" y2="1.5875" width="0.1524" layer="21"/>
 <pad name="1" x="-1.27" y="0" drill="0.8" rot="R90"/>
 <pad name="2" x="1.27" y="0" drill="0.8" rot="R90"/>
-<text x="2.6035" y="2.159" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="2.6035" y="-2.032" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-2.159" y="-2.286" size="1.016" layer="25" ratio="10">&gt;NAME</text>
+<text x="2.6035" y="0.8255" size="1.016" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 <package name="CAP_200MIL">
 <description>&lt;b&gt;CAPACITOR&lt;/b&gt;&lt;p&gt;
@@ -1475,12 +1475,12 @@ package type P</description>
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
 <pad name="1" x="0" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
 <pad name="2" x="2.54" y="0" drill="1" diameter="1.6" shape="long" rot="R90"/>
-<text x="-1.3462" y="2.4638" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<text x="-1.0287" y="2.1463" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.27" y="-4.7625" size="1.27" layer="27">&gt;VALUE</text>
 <rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-<text x="4.1275" y="-1.27" size="1.27" layer="21">+</text>
-<text x="-4.572" y="-1.27" size="1.016" layer="21">GND</text>
+<text x="1.5875" y="-2.8575" size="0.7112" layer="21">VDD</text>
+<text x="-1.0795" y="-2.8575" size="0.7112" layer="21">GND</text>
 </package>
 </packages>
 <symbols>
@@ -2796,12 +2796,22 @@ package type P</description>
 <wire x1="220.98" y1="58.42" x2="210.82" y2="58.42" width="0.1524" layer="91"/>
 <label x="210.82" y="58.42" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="RD0"/>
+<wire x1="165.1" y1="144.78" x2="152.4" y2="144.78" width="0.1524" layer="91"/>
+<label x="152.4" y="144.78" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="RD1" class="0">
 <segment>
 <pinref part="CN10" gate="G$1" pin="RD1"/>
 <wire x1="220.98" y1="60.96" x2="210.82" y2="60.96" width="0.1524" layer="91"/>
 <label x="210.82" y="60.96" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="RD1"/>
+<wire x1="165.1" y1="142.24" x2="152.4" y2="142.24" width="0.1524" layer="91"/>
+<label x="152.4" y="142.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RD2" class="0">
@@ -2874,20 +2884,6 @@ package type P</description>
 <pinref part="U2" gate="G$1" pin="RD7"/>
 <wire x1="208.28" y1="165.1" x2="223.52" y2="165.1" width="0.1524" layer="91"/>
 <label x="215.9" y="165.1" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$20" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="RD0"/>
-<wire x1="165.1" y1="144.78" x2="152.4" y2="144.78" width="0.1524" layer="91"/>
-<label x="152.4" y="144.78" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="RD1"/>
-<wire x1="165.1" y1="142.24" x2="152.4" y2="142.24" width="0.1524" layer="91"/>
-<label x="152.4" y="142.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$5" class="0">
