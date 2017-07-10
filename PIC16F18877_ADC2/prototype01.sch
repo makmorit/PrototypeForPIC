@@ -937,10 +937,10 @@ TOROID, INDUCTOR, etc...</description>
 <devices>
 <device name="" package="B3F-10XX">
 <connects>
-<connect gate="1" pin="P" pad="3"/>
-<connect gate="1" pin="P1" pad="4"/>
-<connect gate="1" pin="S" pad="1"/>
-<connect gate="1" pin="S1" pad="2"/>
+<connect gate="1" pin="P" pad="1"/>
+<connect gate="1" pin="P1" pad="3"/>
+<connect gate="1" pin="S" pad="2"/>
+<connect gate="1" pin="S1" pad="4"/>
 </connects>
 <technologies>
 <technology name=""/>
