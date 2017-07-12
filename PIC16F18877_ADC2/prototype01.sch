@@ -1328,7 +1328,7 @@ package type P</description>
 <text x="-1.7018" y="0" size="1.778" layer="25" ratio="10" rot="R90">&gt;NAME</text>
 <text x="0" y="2.921" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
 <text x="6.6675" y="-2.54" size="0.7112" layer="21">VSS</text>
-<text x="-0.9525" y="9.525" size="0.7112" layer="21">VSS</text>
+<text x="-0.9525" y="9.525" size="0.7112" layer="21">VDD</text>
 <text x="4.1275" y="9.525" size="0.7112" layer="21">SCL</text>
 <text x="6.6675" y="9.525" size="0.7112" layer="21">SDA</text>
 <text x="-0.9525" y="-2.54" size="0.7112" layer="21">CLE</text>
